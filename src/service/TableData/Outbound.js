@@ -1,0 +1,57 @@
+const outdata = [
+    {
+        tableName:"序列号",
+        colName:"SerialNo"
+    },
+    {
+        tableName:"品番",
+        colName:"ProductNo"
+    },
+    {
+        tableName:"印字标识",
+        colName:"Printing"
+    },
+    {
+        tableName:"先行时间",
+        colName:"LeadTime"
+    },
+    {
+        tableName:"出荷时间",
+        colName:"ShippingTime"
+    },
+    {
+        tableName:"出荷目的地",
+        colName:"Destination"
+    },
+    {
+        tableName:"目的地工区",
+        colName:"DestinationArea"
+    },
+    {
+        tableName:"受入口",
+        colName:"ReceivingPoint"
+    },
+    {
+        tableName:"背番号",
+        colName:"BackNo"
+    },
+    {
+        tableName:"订单号",
+        colName:"OrderNo"
+    },
+    {
+        tableName:"Pline号",
+        colName:"PlineNo"
+    },
+    {
+        tableName:"受领书编号",
+        colName:"ReceivingNo"
+    },
+    
+    {
+        tableName:"出荷作业者",
+        colName:"Operator"
+    }
+]
+
+export default outdata
