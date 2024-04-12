@@ -108,11 +108,12 @@ const handleButtonClick = async() => {
   // console.log( requestData.selColName.length == 0);
   if(requestData.SerialNo == "" && requestData.selColName.length == 0){
   try {
-   await ElMessageBox.confirm('是否更改时间?(时间改变后重置时间)');
+   await ElMessageBox.confirm('是否重置时间?(重置默认为当前时间减小时)');
     value2.value = [new Date(new Date() - 60 * 60 * 1000), new Date()];
   } catch (error) {
     // value2.value = [new Date(new Date() - 60 * 60 * 1000), new Date()]
-    console.log(requestData.TimeDate);
+    return;
+    // console.log(requestData.TimeDate);
   }
   
 }
@@ -183,7 +184,7 @@ watchEffect(() => {
   if (oldTableName.value != props.tableName) {
     tableData.value = [];
     oldTableName.value = props.tableName
-    // pagerConfig.currentPage = 1;
+    pagerConfig.currentPage = 1;
     input2.value = ''
     disbtn.value = true
     pagerConfig.total = 0
