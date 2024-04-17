@@ -1,4 +1,6 @@
-import publicData from '../public'
+// import publicData from '../public'
+import {exportData,parseData} from "@/service/GetDataMethod/publicMethod"
+
 import NewBasicTable from './NewBasicTable';
 const RotorTableZh = [
   {
@@ -65,10 +67,10 @@ const RotorTableZh = [
     colName: ["防错防误35计测日時"]
   }, {
     tableName: "齿轮压入１",
-    colName: publicData.parseData
+    colName: parseData
   }, {
     tableName: "齿轮压入2",
-    colName: publicData.parseData
+    colName: parseData
   }, {
     tableName: "差速器销l螺母紧固",
     colName: [
@@ -441,10 +443,10 @@ const BasicDate = [
   "CollectionDate",
   "Mg1rserial"
 ]
-const RotroList = publicData.exportData(RotorTableZh, RotorData);
+const RotroList = exportData(RotorTableZh, RotorData);
 
 const NewRotorTable = NewBasicTable.BasicDateList.concat(RotroList)
-const AllRotorTable = publicData.exportData(BasicDatezh, BasicDate).concat(NewRotorTable)
+const AllRotorTable = exportData(BasicDatezh, BasicDate).concat(NewRotorTable)
 
 export default { RotroList, RotorTableZh, AllRotorTable }
 

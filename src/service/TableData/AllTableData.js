@@ -1,8 +1,9 @@
 // import publicData from '../public'
-import NewBasicTable from './NewBasicTable'
-import NewTaTable from './NewTaTable'
-import { MotorTable,GearTable,RotorTable,NewRRColNames } from '../Import'
-
+// import NewBasicTable from './NewBasicTable'
+// import NewTaTable from './NewTaTable'
+// import { MotorTable,GearTable,RotorTable,NewRRColNames } from '../Import'
+import { motorData,rotorData,rrData,gearData,basicData,taData } from "@/service/Import/tableData";
+console.log(taData);
 const AllTable = [
     "InterNo",
     "CaseDec",
@@ -1193,15 +1194,15 @@ const AllTable = [
     "RRPokayokeDate45",
     "RRRejectTime"
 ]
-const TaTable = NewBasicTable.BasicDate.concat(NewTaTable.TATableZh)
+const TaTable = basicData.BasicDate.concat(taData.TATableZh)
 // const BasicDate = NewBasicTable.BasicDate.slice(2)
 
 const newTaData = [{ title: "TaTable", data: TaTable }]
-const motroTable = [{ title: "MotorTable",data: MotorTable.MotorZhData }]
-const GearTale = [{title:"GeraTable",data:GearTable.GearTableZh}]
-const rotorTable1 = [{ title: "RotorTable1", data: RotorTable.RotorTableZh }]
-const rotorTable2 = [{ title: "RotorTable2", data: RotorTable.RotorTableZh }]
-const rrTable = [{title:"RRTable",data:NewRRColNames.RRTableZh}]
+const motroTable = [{ title: "MotorTable",data: motorData.MotorZhData }]
+const GearTale = [{title:"GeraTable",data:gearData.GearTableZh}]
+const rotorTable1 = [{ title: "RotorTable1", data: rotorData.RotorTableZh }]
+const rotorTable2 = [{ title: "RotorTable2", data: rotorData.RotorTableZh }]
+const rrTable = [{title:"RRTable",data:rrData.RRTableZh}]
 
 const AllTableDataZh = newTaData.concat(motroTable).concat(GearTale).concat(rotorTable1).concat(rotorTable2).concat(rrTable)
 

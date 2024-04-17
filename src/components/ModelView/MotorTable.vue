@@ -25,13 +25,8 @@ import { TableConfig, realList, exportData, pagerConfig } from "@/service/GetDat
 import { ElMessageBox } from 'element-plus'
 // import newSelTemp from "../Template/newSelTemp.vue";
 import btnIPCheck from '@/components/Template/IPcheck.vue';
-import MortorTemp from "./MortorTemp.vue";
-import RotorTemp from "./RotorTemp.vue";
-import EntireTemp from "./EntireTemp.vue";
-import GearTemp from "./GearTemp.vue";
-import RRTemp from "./RRTemp.vue";
-import TaTemp from "./TaTemp.vue";
-import shipOut from "./shipOut.vue";
+import { motorTemp,gearTemp,rotorTemp,rrTemp,entireTemp,shipOut,taTemp } from "@/service/Import/tableTemp";
+motorTemp
 const props = defineProps({
   tableName: String,
 })
@@ -125,17 +120,17 @@ console.log(requestData);
 const selectedComponent = computed(() => {
   switch (props.tableName) {
     case 'MotorTable':
-      return MortorTemp;
+      return motorTemp;
     case 'RotorTable':
-      return RotorTemp;
+      return rotorTemp;
     case '全部数据':
-      return EntireTemp;
+      return entireTemp;
     case 'GearTable':
-      return GearTemp;
+      return gearTemp;
     case 'Rrtable':
-      return RRTemp;
+      return rrTemp;
     case 'Tatable':
-      return TaTemp;
+      return taTemp;
     case '出荷数据':
       return shipOut;
     default:

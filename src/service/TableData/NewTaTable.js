@@ -1,4 +1,6 @@
-import publicData from '../public'
+// import publicData from '../public'
+import {exportData,parseData,addTwoItem} from "@/service/GetDataMethod/publicMethod"
+
 import NewBasicTable from './NewBasicTable'
 const TATableZh = [
     {
@@ -53,10 +55,10 @@ const TATableZh = [
         ]
     }, {
         tableName: "Hsg圧入1",
-        colName: publicData.parseData
+        colName: parseData
     }, {
         tableName: "Hsg圧入2",
-        colName: publicData.parseData
+        colName: parseData
     }, {
         tableName: "防错防误20计测日時",
         colName: ["防错防误20计测日時"]
@@ -68,10 +70,10 @@ const TATableZh = [
         colName: ["计测日時"]
     }, {
         tableName: "HSG合体紧固①",
-        colName: publicData.addTwoItem(11, "HSG合体紧固①")
+        colName: addTwoItem(11, "HSG合体紧固①")
     }, {
         tableName: "HSG合体紧固②",
-        colName: publicData.addTwoItem(11, "HSG合体紧固②")
+        colName: addTwoItem(11, "HSG合体紧固②")
     }, {
         tableName: "防错防误27计测日時",
         colName: ["防错防误27计测日時"]
@@ -702,7 +704,7 @@ const BasicDate = [
     "CollectionDate",
     "ShipmentSerial"
 ]
-const TaTable = publicData.exportData(TATableZh, taData)
+const TaTable = exportData(TATableZh, taData)
 const NewTaTable = NewBasicTable.BasicDateList.concat(TaTable)
-const AllTatable = publicData.exportData(BasicDatezh, BasicDate).concat(NewTaTable)
+const AllTatable = exportData(BasicDatezh, BasicDate).concat(NewTaTable)
 export default { TaTable, TATableZh, AllTatable,NewTaTable }

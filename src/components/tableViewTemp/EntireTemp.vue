@@ -638,12 +638,16 @@
 import { defineProps, ref } from 'vue';
 
 
-import vw_MotorTemp from '../Template/vw_MotorTemp.vue';
-import vw_GearTable from '../Template/vw_GearTable.vue';
-import vw_Rotor1Temp from '../Template/vw_Rotor1Temp.vue';
-import vw_Rotor2Temp from '../Template/vw_Rotor2Temp.vue';
-import vw_RRTemp from '../Template/vw_RRTemp.vue';
-import { TableConfig } from '@/service/GetDataMethod/utils'
+// import vw_MotorTemp from '../Template/vw_MotorTemp.vue';
+// import vw_GearTable from '../Template/vw_GearTable.vue';
+// vw_GearTable
+// import vw_Rotor1Temp from '../Template/vw_Rotor1Temp.vue';
+// import vw_Rotor2Temp from '../Template/vw_Rotor2Temp.vue';
+// import vw_RRTemp from '../Template/vw_RRTemp.vue';
+import { TableConfig } from '@/service/GetDataMethod/utils';
+import { vw_GearTable,vw_MotorTemp,vw_Rotor1Temp,vw_Rotor2Temp,vw_RRTemp } from '@/service/Import/tableTemp';
+
+
 // import { forEach } from 'core-js/core/array';
 // import { ElMessageBox } from "element-plus"
 defineProps({

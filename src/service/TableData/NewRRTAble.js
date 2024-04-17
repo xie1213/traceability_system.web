@@ -1,4 +1,4 @@
-import publicData from '../public'
+import {exportData} from "@/service/GetDataMethod/publicMethod"
 import BasicDateList from './NewBasicTable'
 const RRTableZh = [
      {
@@ -66,10 +66,10 @@ const BasicDate = [
     "RrcoverSerial"
 ]
 
-const RRTable = publicData.exportData(RRTableZh, rrColNames)
+const RRTable = exportData(RRTableZh, rrColNames)
 
 const NewRRTable = BasicDateList.BasicDateList.concat(RRTable)
 
 
-const AllRRTable =  publicData.exportData(BasicDatezh, BasicDate).concat(NewRRTable)
+const AllRRTable =  exportData(BasicDatezh, BasicDate).concat(NewRRTable)
 export default { RRTable, RRTableZh,AllRRTable }

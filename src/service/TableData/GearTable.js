@@ -1,4 +1,5 @@
-import publicData from '../public'
+// import publicData from '../public'
+import {exportData,parseData} from "@/service/GetDataMethod/publicMethod"
 import NewBasicTable from './NewBasicTable'
 const RotorData = [
     "PokayokeDate39",
@@ -248,10 +249,10 @@ const GearTableZh = [ {
       colName: ["防错防误35计测日時"]
     }, {
       tableName: "齿轮压入１",
-      colName: publicData.parseData
+      colName: parseData
     }, {
       tableName: "齿轮压入2",
-      colName: publicData.parseData
+      colName: parseData
     }, {
       tableName: "差速器销l螺母紧固",
       colName: [
@@ -440,10 +441,10 @@ const GearTableZh = [ {
     "CollectionDate",
     "DfringSerial"
   ]
-const GearTable = publicData.exportData(GearTableZh,RotorData);
+const GearTable = exportData(GearTableZh,RotorData);
 
 const NewGearTable = NewBasicTable.BasicDateList.concat(GearTable)
-const AllGearTable = publicData.exportData(BasicDatezh, BasicDate).concat(NewGearTable)
+const AllGearTable = exportData(BasicDatezh, BasicDate).concat(NewGearTable)
 
 export default {GearTable,GearTableZh,AllGearTable,NewGearTable}
 

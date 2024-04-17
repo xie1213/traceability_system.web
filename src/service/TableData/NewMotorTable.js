@@ -1,4 +1,4 @@
-import publicData from '../public'
+import {exportData,parseData} from "@/service/GetDataMethod/publicMethod"
 import NewBasicTable from './NewBasicTable'
 const MotorZhData =
     [{
@@ -10,11 +10,11 @@ const MotorZhData =
     },
     {
         tableName: "Hsg面壳Brg压入",
-        colName: publicData.parseData
+        colName: parseData
     },
     {
         tableName: "Hsg面定位销压入",
-        colName: publicData.parseData
+        colName: parseData
     },
     {
         tableName: "防错防误3计测日時",
@@ -25,10 +25,10 @@ const MotorZhData =
     }, {
         tableName: "RR面壳体Brg压入",
         colName:
-            publicData.parseData
+            parseData
     }, {
         tableName: "RR面定位销压入",
-        colName: publicData.parseData
+        colName: parseData
     }, {
         tableName: "MG1组装・端子台紧固",
         colName: [
@@ -336,8 +336,8 @@ const BasicDate = [
 
 
 
-const MotorTable = publicData.exportData(MotorZhData, Motordata)
+const MotorTable = exportData(MotorZhData, Motordata)
 const newMotorTable =  NewBasicTable.BasicDateList.concat(MotorTable)
 
-const AllMotorTable = publicData.exportData(BasicDatezh, BasicDate).concat(newMotorTable)
+const AllMotorTable = exportData(BasicDatezh, BasicDate).concat(newMotorTable)
 export default { MotorTable, MotorZhData,AllMotorTable,newMotorTable }

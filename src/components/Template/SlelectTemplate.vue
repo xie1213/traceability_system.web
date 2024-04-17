@@ -30,6 +30,7 @@
 // import * as imports from '../../service/Import';
 import { defineProps, ref, watchEffect, defineEmits, shallowRef } from 'vue'
 import getColName from '../../service/public.js'
+
 const selectedOption = ref([])
 const input1 = ref([]);
 const input2 = ref([])

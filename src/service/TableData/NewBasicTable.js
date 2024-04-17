@@ -1,4 +1,5 @@
-import publicData from '../public'
+// import publicData from '../public'
+import {exportData} from "@/service/GetDataMethod/publicMethod"
 
 const BasicDate = [
     {
@@ -137,19 +138,7 @@ const BasicDate = [
         colName: ["修改历史记录"]
     }
 ]
-// const parseData = [
-//     "计测日时",
-//     "拐点行程",
-//     "変曲点负重",
-//     "最终行程",
-//     "最終荷负重",
-//     "拐点行程",
-//     "変曲点负重",
-//     "最终行程",
-//     "最終荷负重",
-//     "主行程",
-//     "A/B"
-// ]
+
 
 const fieidData = [
         "InterNo",
@@ -297,6 +286,6 @@ const fieidData = [
         "Reshuffle"
     ]
 
-const BasicDateList = publicData.exportData(BasicDate, fieidData)
+const BasicDateList = exportData(BasicDate, fieidData)
 export default { BasicDateList, BasicDate }
 //循环紧固角度 判定代码
