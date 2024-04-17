@@ -633,6 +633,6 @@ defineProps({
     tableData: Array,
 })
 const formatDate = ({ cellValue }) => {
-    return XEUtils.toDateString(cellValue, 'yyyy-MM-dd HH:ss:mm')
+    return XEUtils.toDateString(cellValue, 'yyyy-MM-dd HH:mm:ss')
 }
 </script>
