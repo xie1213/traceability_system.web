@@ -2,11 +2,13 @@
 import { apiClient, MotorTable, RotorTable, GearTable } from "../Import";
 import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
 import { reactive, ref } from "vue";
+
 //获取数据
 export const gridRef = ref(),
 tableData =  ref()
 
-export const realList = (requestData, dataList) => {
+//获取数据
+export const realList = (requestData) => {
   return new Promise((resolve) => {
     setTimeout(async () => {
       try {
@@ -19,13 +21,14 @@ export const realList = (requestData, dataList) => {
         );
 
         if (response.data.count > 0) {
-          dataList.value = response.data.data;
+          // dataList.value = response.data.data
+          console.log(response.data.value);
           response.duration;
           pagerConfig.total = response.data.count;
           TableConfig.loading = false;
           //gridOptions.pagerConfig.total = response.data.count; // Populate the dataList array with the retrieved data
         } else {
-          dataList.value = [];
+          // dataList.value = [];
           TableConfig.loading = false;
           ElMessage({
             type: "info",
@@ -209,7 +212,6 @@ export const gridOptions = reactive({
       pageSizes: [15, 20, 25, 30]
   }
 })
-
 
 // 加载列和数据
 export const loadColumnAndData = () => {
