@@ -18,6 +18,7 @@ export let firstList = []
 export const getSeleName = (tableName) => {
     optionList.value = selectName[tableName]
     firstList = []
+
     if (tableName != "全部履历" && tableName != "出荷履历") {
         getTableColName()
         console.log(optionList.value);
@@ -32,8 +33,4 @@ const getTableColName = () => {
         }
     })
 }
-//  const getIndex = (searchTitle)=>{
-//     optionList.value.findIndex(function(item) {
-//         return item.title === searchTitle;
-// })
-// }
+

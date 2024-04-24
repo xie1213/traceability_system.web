@@ -2,8 +2,8 @@
 import axios from 'axios'
 const apiClient = axios.create({
   // baseURL: 'http://localhost:5000/',// 测试环境
-  // baseURL: 'http://192.168.30.1:5000'
-  baseURL: 'http://172.31.13.200:5000/'
+  baseURL: 'http://192.168.30.1:5000'
+  // baseURL: 'http://172.31.13.200:5000/'
 
   //  baseURL:"abc"
 })

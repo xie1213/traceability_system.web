@@ -2,6 +2,8 @@
 import { apiClient, MotorTable, RotorTable, GearTable } from "../Import";
 import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
 import { reactive, ref } from "vue";
+import { motorData,rotorData,rrData,gearData,taData } from "@/service/Import/tableData";
+
 
 //获取数据
 export const gridRef = ref(),
@@ -16,27 +18,22 @@ export const realList = (requestData) => {
         TableConfig.loading = true;
         let response;
         response = await apiClient.post(
-          "api/DBTest/SelTablePost",
+          // "api/DBTest/SelTablePost",
+          "api/DBTest/getTableData",
           requestData
         );
-
-        if (response.data.count > 0) {
-          // dataList.value = response.data.data
-          console.log(response.data.value);
-          response.duration;
-          pagerConfig.total = response.data.count;
+        if (response.data !="空值") {
+          // pagerConfig.total = response.data.count;
           TableConfig.loading = false;
-          //gridOptions.pagerConfig.total = response.data.count; // Populate the dataList array with the retrieved data
+          // Indicates that the asynchronous operation is complete
         } else {
-          // dataList.value = [];
           TableConfig.loading = false;
           ElMessage({
             type: "info",
             message: `无数据`,
           }); // 点击确定后的回调
-          return;
         }
-        resolve(); // Indicates that the asynchronous operation is complete
+        resolve(response.data); 
       } catch (error) {
         ElMessageBox.alert(error, "错误", {
           type: "info",
@@ -50,8 +47,6 @@ export const realList = (requestData) => {
             TableConfig.loading = false;
           },
         });
-        // console.log(error);
-        // reject(error); // Handle potential error scenarios
       }
     }, 100);
   });
@@ -122,8 +117,9 @@ export const TableConfig = reactive({
   border: true,
   autoRresize: true,
   showOverflow: true,
-  showHeaderOverflow: true, //超长省略
+  // showHeaderOverflow: true, //超长省略
   height: "600",
+  headerAlign:"center",
   loading: false,
   rowConfig: {
     useKey: true,
@@ -133,12 +129,12 @@ export const TableConfig = reactive({
   },
   columnConfig: {
     resizable: true, //启用列宽调整
-    minWidth: 100,
+    minWidth: 60,
     height: 20,
     tooltip: true,
   },
   tooltipConfig: {
-    showAll: true, //所有单元格开启过长省略
+    // showAll: true, //所有单元格开启过长省略
     enterDelay: 100,
   },
   checkboxConfig: {
@@ -272,4 +268,48 @@ export const mockColumns = ()=>{
         resolve(firstRowTitles); // Resolve the promise with the data
     }, 100);
 });
+}
+
+let tableNameList = {
+  "Motor履历":motorData.AllMotorTable,
+  "Rotor履历":rotorData.AllRotorTable,
+  "Gear履历":gearData.AllGearTable,
+  "Rr履历":rrData.AllRRTable,
+  "Ta履历":taData.AllTatable,
+}
+
+//导入表配置
+export const importTableData =(tableName)=>{
+  
+  let tableImportData =  tableNameList[tableName] || null;
+  // console.log(tableName);
+  // tableImportData.tableName = tableName
+  console.log(tableImportData);
+  apiClient.post("api/Home/requestData",tableImportData)
+  .then(()=>{
+    console.log("更新成功");
+  }).catch((error)=>{
+    console.log(error);
+  })
+}
+
+export const getPageData=(e,tableName)=>{
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        //const startTime = Date.now()
+        TableConfig.loading = true
+        let response;
+        response = await apiClient.get(`api/DBTest/GetRedis?page=${e.currentPage}&limit=${e.pageSize}&tableName=${tableName}`);
+
+        //tableData.value = response.data.data; // Populate the dataList array with the retrieved data
+        //gridRef.value.reloadData(dataList.value)
+        TableConfig.loading = false
+        resolve(response.data.data)
+      } catch (error) {
+        console.error('Error fetching table data:', error);
+        reject(error); // Handle potential error scenarios
+      }
+    }, 100);
+  })
 }

@@ -1,193 +1,198 @@
 <template>
-    <div class="selCalss">
-    <el-cascader class="selName" v-model="selectedOption" :options="options" @change="handleChange" clearable :show-all-levels="false" />
-      <!-- <div style="display: inline-block;" > -->
-    <div v-if="selName==''" style="display:none"></div>
-      <div  v-else style="display: inline-block;" >
-        <TimeTemplate @childEvent="GetTime" v-if="selName.includes('Date') || selName.includes('Time')"/>
-        <div v-else >
-          <span style="margin-left:20px;">{{selectName == '出荷数据'?selectedLabel:'上限'}}:</span>
-          <el-input v-model="input1" :disabled=isdis @change="handleChangeClick" clearable size="large"
-            placeholder="Please Input"  class="selinput" />
-          <span  v-if="selectName !== '出荷数据'">下限:</span>
-          <el-input  v-if="selectName !== '出荷数据'" v-model="input2" :disabled=isdis @change="handleChangeClick" clearable size="large"
-            placeholder="Please Input" class="selinput"  />
-        </div>
+  <div style="width: 240px; display: flex;">
+
+    <div v-if="tableName != '出荷履历'" style="flex-direction: column;">
+      <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
+      <el-select v-model="firstValue" clearable placeholder="Select" style="width: 150px">
+        <el-option v-for="(item, index) in firstList" :key="index" :label="item" :value="item"
+          @click="handleItemClick(index)" />
+      </el-select>
+      <div v-if="tableName == '全部履历'" style="padding-left: 22px; width: 180px;">
+        <span style="font-size: 14px;">选择</span>
+        <el-cascader v-model="selectedOption" :options="options" @change="handleChange" style="width: 150px" clearable
+          :show-all-levels="false" />
+      </div>
+      <div v-else style="padding-left: 22px; width: 180px;">
+        <span style="font-size: 14px;">选择</span>
+        <el-select v-model="twoValue" clearable placeholder="Select" style="width: 150px">
+          <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" :value="item.val" />
+        </el-select>
       </div>
     </div>
-      
-    </template>
-    
-    <script setup>
-    // import * as imports from '../../service/Import';
-    import { defineProps, ref, watchEffect, defineEmits, shallowRef } from 'vue'
-    // import getColName from '../../service/public.js'
-    import TimeTemplate from './TimeTemplate.vue'
-    import {GetTableColName} from "@/service/GetDataMethod/utils"
+    <div v-else style="padding-left: 23px;">
+      <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
+      <el-select v-model="shipValue" clearable placeholder="Select" style="width: 150px">
+        <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
+      </el-select>
+    </div>
+    <div v-if="!twoValue.includes('Date')" style=" flex-direction: row; padding-left: 22px; width: 240px;">
+    <span style="font-size: 14px;">上限</span>      
+      <el-input v-model="topLimit" style="width: 150px" :pattern="serialNumberPattern" @input="topLimitInput"
+        placeholder="Please input" />
 
-    const selectedOption = ref([])
-    const input1 = ref([]);
-    const input2 = ref([])
-    const colSelName = ref([])
-    const selName = ref("");
-    const input3 = ref([])
-    const options = ref({})
-    const isdis = ref(true),
-    selectedLabel =ref('')
-    // const timeDate = ref([])
-    const props = defineProps({
-      selectName: String,
-    });
-    
-    let selData = []
-    const emit = defineEmits(['selColName'])
-    
-    const handleChange = () => {
-      input1.value = "",
-        input2.value = "",
-        input3.value = "",
-        selName.value =""
-      if (selectedOption.value !== null) {
-        if (props.selectName =="全部数据") {
-          selName.value = selectedOption.value[2]
-        }else if (props.selectName == "出荷数据"){
-           selName.value = selectedOption.value[0]
-           
-          selectedLabel.value = options.value.find(option => option.value === selName.value)?.label || ''
-          // console.log(selectedLabel);
-        }
-        else{
-           selName.value = selectedOption.value[1]
-        }
-        isdis.value = false
-        if (selName.value.includes('Date')) {
-          selData.push(selName.value, TimeDate.value[0], TimeDate.value[1]);
-          emit('selColName', selData)
-          
-        }
-      }
-    }
-    // const selData = ref([]);
-    
-    const TimeDate = ref("")
-    const GetTime = (item) => {
-      TimeDate.value = item
-      //IsBtn = true
-    }
-    const handleChangeClick = () => {
-    
-      if (input1.value != "" && input2.value != "") {
-        selData.push(selName.value, input1.value, input2.value)
-    
-        emit('selColName', selData)
-      }
-    }
-    
-    const getBasicTable = (colSelName)=>{
-        // console.log(colSelName);
-        options.value = colSelName.map(data => {
-            // console.log(data.title);
-            // console.log(data.val);
-            data.val.map(val=>{
-                console.log(val.col,val.val);
-            })
-            // return {
-            //   value: data.title,
-            //   label: data.title,
-            //   children: data.val.map(val => {
-            //     return {
-            //       value: val.val,
-            //       label: val.col
-            //     }
-            //   })
-            // }
-          })
-    }   
-    
-    //判断原来数据是否改变
-    const oldSelName = shallowRef(props.tableName);
-    
-    watchEffect(() => {
-      if (oldSelName.value != props.selectName) {
-        input1.value = "",
-        input2.value = "",
-        selName.value = "",
-        selectedOption.value = ""
-        //getColName.GetTableColName(props.selectName)
-        colSelName.value = GetTableColName(props.selectName);
-        // console.log(colSelName.value);
+    <span style="font-size: 14px;">下限</span>
+        
+        <el-input v-model="lowerLimit" style="width: 150px" :pattern="serialNumberPattern" @input="lowerLimitInput"
+          placeholder="Please input" />
+    </div>
+  </div>
 
-        if (colSelName.value!=null) {
-            
-            getBasicTable(colSelName.value)
-        }
-        // options = colSelName.
 
-    //     if (props.selectName == '全部数据') {
-    //       options.value = colSelName.value.map(data => {
-    //         return {
-    //           value: data.title,
-    //           label: data.title,
-    //           children: data.data.map(item => {
-    //             return {
-    //               value: item.title,
-    //               label: item.title,
-    //               children: item.val.map(x => {
-    //                 return {
-    //                   value: x.val,
-    //                   label: x.col
-    //                 }
-    //               })
-    //             }
-    //           })
-    //         }
-    //       })
-    //     }else if (props.selectName == "出荷数据") {
-    //       options.value = colSelName.value.map(x=>{
-    //         return{
-    //           value:x.colName,
-    //           label:x.tableName
-    //         }
-    //       })
-    
-    //     }
-    //     else {
-    //       options.value = colSelName.value.map(data => {
-    //         return {
-    //           value: data.title,
-    //           label: data.title,
-    //           children: data.val.map(val => {
-    //             return {
-    //               value: val.val,
-    //               label: val.col
-    //             }
-    //           })
-    //         }
-    //       })
-    // console.log(options);
-    //     }
-    
-      }
-       
-    }); // immediate: true 表示立即执行一次
-    
-    </script>
-      <style>
-      .selCalss{
-        display: inline-block;
-      }.selName{
-        width:150px
-      }.selinput{
-        width: 120px;
-      }
-    @media (min-width: 600px) and (max-width: 1024px) {
-      .selName  {
-        max-width: 60px;
-      }
-      .selinput  {
-        max-width: 60px;
-        /* display: inline-block; */
-      }
-      }
-    
-      </style>
+  <!-- <div style="width: 240px; display: inline;">
+    <div v-if="!twoValue.includes('Date')" style="display: inline;padding: 5px 0 0 15px;">
+      <div>
+        <span style="font-size: 14px;">上限</span>
+        <el-input v-model="topLimit" style="width: 150px" :pattern="serialNumberPattern" @input="topLimitInput"
+          placeholder="Please input" />
+      </div>
+      <div>
+        <span style="font-size: 14px;">下限</span>
+        <el-input v-model="lowerLimit" style="width: 150px" :pattern="serialNumberPattern" @input="lowerLimitInput"
+          placeholder="Please input" />
+      </div>
+    </div>
+    <div v-else style="width: 400px;padding: 5px 0 0 15px;">
+      <div class="demo-date-picker" style="display: inline; padding: 5px;">
+        <el-date-picker style="width: 160px;" v-model="selStartDay" type="date" placeholder="Pick a day"
+          format="YYYY/MM/DD" value-format="YYYY-MM-DD">
+          <template #default="cell">
+            <div class="cell" :class="{ current: cell.isCurrent }">
+              <span class="text">{{ cell.text }}</span>
+            </div>
+          </template>
+</el-date-picker>
+</div>
+<el-time-picker v-model="selEndTime" style="width:155px" />
+<div class="demo-date-picker" style="display: inline;padding-left: 5px;">
+  <el-date-picker style="width: 160px;" v-model="selEndDay" type="date" placeholder="Pick a day" format="YYYY/MM/DD"
+    value-format="YYYY-MM-DD">
+    <template #default="cell">
+            <div class="cell" :class="{ current: cell.isCurrent }">
+              <span class="text">{{ cell.text }}</span>
+            </div>
+          </template>
+  </el-date-picker>
+</div>
+<el-time-picker v-model="selStartTime" style="width:160px;padding-left: 5px;" />
+</div>
+
+</div> -->
+
+
+</template>
+
+<script setup>
+
+//#region  下拉框代码
+import { ref, defineProps, watchEffect, shallowRef } from 'vue'
+import { motorData, rotorData, rrData, gearData, taData, allTableData, shipmentData } from "@/service/Import/tableData";
+
+const isSelectChecked = ref(false)
+
+//第一列选择数据
+const firstValue = ref("")
+
+//第一列数组
+const firstList = ref([])
+
+//第二个选择框数据
+const twoValue = ref("")
+const twoList = ref([])
+
+//如果是全部数据
+const selectedOption = ref([])
+const options = ref([])
+
+//基础数据
+const optionList = ref([])
+
+//出荷选项
+const shipValue = ref("");
+const props = defineProps({
+  tableName: String
+})
+
+const selectName = {
+  "Motor履历": motorData.AllMotorTable,
+  "Rotor履历": rotorData.AllRotorTable,
+  "Gear履历": gearData.AllGearTable,
+  "Rr履历": rrData.AllRRTable,
+  "Ta履历": taData.AllTatable,
+  "全部履历": allTableData.table,
+  "出荷履历": shipmentData
+}
+
+//是否勾选
+function selectChange(e) {
+  console.log(e);
+}
+
+//获取
+function getFirstColName() {
+
+  optionList.value = selectName[props.tableName]
+  firstList.value = props.tableName == "出荷履历" ? optionList.value : getTableColName();
+  // console.log(optionList);
+}
+
+//获取第一列
+function getTableColName() {
+  // let  firstList = []
+  return optionList.value.map(data => {
+    if (data.title != "特定列") {
+      return data.title;
+    }
+  }).filter(title => title !== undefined); // 过滤掉 undefined 的项
+}
+
+//点击选择事件
+const handleItemClick = (index) => {
+  twoValue.value = ""
+  if (props.tableName == "全部履历") {
+    //根据选择列加载对应选项
+    twoList.value = optionList.value[index].data;
+    options.value = twoList.value.map(firstSel => ({
+      value: firstSel.title,
+      label: firstSel.title,
+      children: firstSel.val.map(twoSel => ({
+        value: twoSel.val,
+        label: twoSel.col,
+      }))
+    }));
+  }
+  else {
+    twoList.value = index >= 0 ? optionList.value[index + 1].val : []
+  }
+}
+
+//全部下拉选择
+function handleChange() {
+  console.log(selectedOption.value);
+}
+
+function clearItem() {
+  twoValue.value = ""
+  twoList.value = []
+  options.value = [],
+    selectedOption.value = ""
+}
+//旧表名与新表名
+const oldTableName = shallowRef(props.tableName);
+
+watchEffect(() => {
+  if (oldTableName.value != props.tableName) {
+    firstList.value = ""
+    twoList.value = ""
+  }
+  if (firstValue.value == "") {
+    console.log("清除");
+    clearItem()
+  }
+  console.log(shipValue.value);
+  getFirstColName()
+})
+// const oldSelectName = shallowRef(firstValue.value);
+console.log(twoList.value);
+//#endregion
+
+</script>
