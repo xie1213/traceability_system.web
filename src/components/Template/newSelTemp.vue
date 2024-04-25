@@ -1,91 +1,83 @@
 <template>
-  <div style="width: 240px; display: flex;">
-
+  <div style="display: flex; border: 1px red solid;">
+    <!-- 不等于出荷表 -->
     <div v-if="tableName != '出荷履历'" style="flex-direction: column;">
       <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
       <el-select v-model="firstValue" clearable placeholder="Select" style="width: 150px">
         <el-option v-for="(item, index) in firstList" :key="index" :label="item" :value="item"
           @click="handleItemClick(index)" />
       </el-select>
+      <!-- 全部选择 -->
+      <!-- {{ firstValue }} -->
       <div v-if="tableName == '全部履历'" style="padding-left: 22px; width: 180px;">
         <span style="font-size: 14px;">选择</span>
         <el-cascader v-model="selectedOption" :options="options" @change="handleChange" style="width: 150px" clearable
           :show-all-levels="false" />
       </div>
+      <!-- 其他表的选择 -->
       <div v-else style="padding-left: 22px; width: 180px;">
         <span style="font-size: 14px;">选择</span>
-        <el-select v-model="twoValue" clearable placeholder="Select" style="width: 150px">
+        <el-select v-model="selRequestData.selectName" clearable placeholder="Select" style="width: 150px">
           <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" :value="item.val" />
         </el-select>
       </div>
     </div>
+    <!-- 出荷表得选择 -->
     <div v-else style="padding-left: 23px;">
       <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
-      <el-select v-model="shipValue" clearable placeholder="Select" style="width: 150px">
-        <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
-      </el-select>
+      <div>
+        <el-select v-model="shipValue" clearable placeholder="Select" style="width: 150px">
+          <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
+        </el-select>
+      </div>
+
     </div>
-    <div v-if="!twoValue.includes('Date')" style=" flex-direction: row; padding-left: 22px; width: 240px;">
-    <span style="font-size: 14px;">上限</span>      
-      <el-input v-model="topLimit" style="width: 150px" :pattern="serialNumberPattern" @input="topLimitInput"
+
+    <!-- 上下限制 -->
+    <div v-if="!selRequestData.selectName.includes('Date')" style="padding-left: 22px; width: 180px;">
+      <span style="font-size: 14px;">上限</span>
+      <el-input v-model="selRequestData.topLimit" style="width: 150px" @input="topLimitInput"
         placeholder="Please input" />
-
-    <span style="font-size: 14px;">下限</span>
-        
-        <el-input v-model="lowerLimit" style="width: 150px" :pattern="serialNumberPattern" @input="lowerLimitInput"
-          placeholder="Please input" />
+      <span style="font-size: 14px;">下限</span>
+      <el-input v-model="selRequestData.lowerLimit" style="width: 150px" @input="lowerLimitInput"
+        placeholder="Please input" />
     </div>
-  </div>
-
-
-  <!-- <div style="width: 240px; display: inline;">
-    <div v-if="!twoValue.includes('Date')" style="display: inline;padding: 5px 0 0 15px;">
-      <div>
-        <span style="font-size: 14px;">上限</span>
-        <el-input v-model="topLimit" style="width: 150px" :pattern="serialNumberPattern" @input="topLimitInput"
-          placeholder="Please input" />
-      </div>
-      <div>
-        <span style="font-size: 14px;">下限</span>
-        <el-input v-model="lowerLimit" style="width: 150px" :pattern="serialNumberPattern" @input="lowerLimitInput"
-          placeholder="Please input" />
-      </div>
-    </div>
-    <div v-else style="width: 400px;padding: 5px 0 0 15px;">
+    <!-- 时间控件 -->
+    <div v-else style="width: 395px;padding: 5px 0 0 15px;">
       <div class="demo-date-picker" style="display: inline; padding: 5px;">
-        <el-date-picker style="width: 160px;" v-model="selStartDay" type="date" placeholder="Pick a day"
+        <span style="font-size: 14px;">开始时间: </span>
+        <el-date-picker style="width: 155px;" v-model="selStartDay" type="date" placeholder="Pick a day"
           format="YYYY/MM/DD" value-format="YYYY-MM-DD">
           <template #default="cell">
             <div class="cell" :class="{ current: cell.isCurrent }">
               <span class="text">{{ cell.text }}</span>
             </div>
           </template>
-</el-date-picker>
-</div>
-<el-time-picker v-model="selEndTime" style="width:155px" />
-<div class="demo-date-picker" style="display: inline;padding-left: 5px;">
-  <el-date-picker style="width: 160px;" v-model="selEndDay" type="date" placeholder="Pick a day" format="YYYY/MM/DD"
-    value-format="YYYY-MM-DD">
-    <template #default="cell">
+        </el-date-picker>
+      </div>
+      <el-time-picker v-model="selEndTime" style="width:155px" />
+      <div class="demo-date-picker" style="display: inline;padding-left: 6px;">
+        <span style="font-size: 14px;">结束时间: </span>
+        <el-date-picker style="width: 155px;" v-model="selEndDay" type="date" placeholder="Pick a day"
+          format="YYYY/MM/DD" value-format="YYYY-MM-DD">
+          <template #default="cell">
             <div class="cell" :class="{ current: cell.isCurrent }">
               <span class="text">{{ cell.text }}</span>
             </div>
           </template>
-  </el-date-picker>
-</div>
-<el-time-picker v-model="selStartTime" style="width:160px;padding-left: 5px;" />
-</div>
-
-</div> -->
-
-
+        </el-date-picker>
+      </div>
+      <el-time-picker v-model="selStartTime" style="width:160px;padding-left: 5px;" />
+    </div>
+  </div>
 </template>
 
 <script setup>
 
 //#region  下拉框代码
-import { ref, defineProps, watchEffect, shallowRef } from 'vue'
+import { ref, defineProps, watchEffect, shallowRef, reactive, defineEmits } from 'vue'
 import { motorData, rotorData, rrData, gearData, taData, allTableData, shipmentData } from "@/service/Import/tableData";
+import { ElMessage } from 'element-plus'
 
 const isSelectChecked = ref(false)
 
@@ -96,22 +88,44 @@ const firstValue = ref("")
 const firstList = ref([])
 
 //第二个选择框数据
-const twoValue = ref("")
 const twoList = ref([])
-
+// const shipValue = ref("")
 //如果是全部数据
 const selectedOption = ref([])
 const options = ref([])
 
-//基础数据
-const optionList = ref([])
+const optionList = ref([]) //基础数据 
 
-//出荷选项
-const shipValue = ref("");
+
+const shipValue = ref("");  //出荷数据
+
+// const emit = defineEmits(['selColName'])  //向父组件传值
+
+const serialNumberPattern = ref(/^[A-Za-z0-9 ]+[A-Za-z0-9 ]*$/); //正则验证
+
+
+//时间格式化
+const selStartDay = ref(new Date().toISOString().slice(0, 10)),
+  selEndDay = ref(new Date().toISOString().slice(0, 10)),
+  selStartTime = ref(new Date()),
+  selEndTime = ref(new Date(new Date() - 60 * 60 * 1000));
+
+//传给父组件得实体
+const selRequestData = reactive({
+  selectName: "",
+  topLimit: "",
+  lowerLimit: "",
+  selStartTime: "",
+  selEndTime: ""
+})
+
+//接受表名
 const props = defineProps({
   tableName: String
 })
 
+const emit = defineEmits(['selColName'])
+// const uni.emit(eventName, {})
 const selectName = {
   "Motor履历": motorData.AllMotorTable,
   "Rotor履历": rotorData.AllRotorTable,
@@ -122,17 +136,43 @@ const selectName = {
   "出荷履历": shipmentData
 }
 
+//出荷下拉
+// function shipChecked(e) {
+//   // console.log(e);
+//   selRequestData.selectName = e
+//   console.log(`出荷${selRequestData.selectName}`);
+// }
+
 //是否勾选
 function selectChange(e) {
-  console.log(e);
+  let sendToBack = {}
+  console.log(selRequestData);
+  getRequsetTime();
+  if (!e) {
+    firstValue.value = ""
+  } else {
+    Object.entries(selRequestData).forEach(([key, value]) => {
+      if (value !== "") {
+        sendToBack[key] = value;
+      }
+      emit('selColName', sendToBack)
+
+    });
+  }
+  //判断是否为空值
+
+  console.log(sendToBack);
+  // emit('selColName', selData)
 }
 
-//获取
+//获取原始下拉数据
 function getFirstColName() {
 
   optionList.value = selectName[props.tableName]
+
   firstList.value = props.tableName == "出荷履历" ? optionList.value : getTableColName();
-  // console.log(optionList);
+  // console.log(optionList.value);
+
 }
 
 //获取第一列
@@ -147,7 +187,7 @@ function getTableColName() {
 
 //点击选择事件
 const handleItemClick = (index) => {
-  twoValue.value = ""
+  selRequestData.selectName = ""
   if (props.tableName == "全部履历") {
     //根据选择列加载对应选项
     twoList.value = optionList.value[index].data;
@@ -165,34 +205,186 @@ const handleItemClick = (index) => {
   }
 }
 
-//全部下拉选择
-function handleChange() {
-  console.log(selectedOption.value);
+
+//清除数据
+function clearItem() {
+  Object.keys(selRequestData).forEach(key => {
+    selRequestData[key] = "";
+  });
 }
 
-function clearItem() {
-  twoValue.value = ""
-  twoList.value = []
-  options.value = [],
-    selectedOption.value = ""
+//上限输入验证
+function topLimitInput(e) {
+  selRequestData.topLimit = verifyInput(e)
+  console.log(`上限${selRequestData.topLimit}`);
+  // validateInput(e, topLimit)
 }
+
+//下限输入验证
+function lowerLimitInput(e) {
+  selRequestData.lowerLimit = verifyInput(e)
+  console.log(`下限${selRequestData.lowerLimit}`);
+}
+//判断输入是否符合格式
+
+let lastValidInput = '';
+// let  lastValidInput = ""
+function verifyInput(value) {
+  if (textChecked()) {
+    return ""
+  }
+  if (!serialNumberPattern.value.test(value)) {
+    ElMessage({
+      message: '输入内容不合法',
+      type: 'error',
+    });
+    return lastValidInput
+  } else {
+    lastValidInput = value
+    return value
+  }
+
+}
+
+//检查条件是否选择
+function textChecked() {
+  // let checkedText = firstValue.value === "" || selRequestData.selectName === ""
+
+  let checkedText;
+  if (props.tableName == "出荷履历") {
+    checkedText = selRequestData.selectName === "";
+  } else if (props.tableName == "全部履历") {
+    checkedText = firstValue.value === "" || selectedOption.value == null;
+  }
+  else {
+    checkedText = firstValue.value === "" || selRequestData.selectName === "";
+  }
+  if (checkedText) {
+    ElMessage({
+      message: '请选择条件',
+      type: 'warning',
+    });
+  }
+  return checkedText;
+
+}
+
+//#region 时间转换
+//时间转换
+const getTimeString = (date) => {
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
+};
+
+const formattedStartTime = getTimeString(selStartTime.value)
+const formattedEndTime = getTimeString(selEndTime.value)
+
+//获取时间
+function getRequsetTime() {
+  if (selRequestData.selectName.includes('Date')) {
+    selRequestData.selStartTime = `${selStartDay.value} ${formattedEndTime}`;
+    selRequestData.selEndTime = `${selEndDay.value} ${formattedStartTime}`;
+  }
+}
+
+//时间限制
+function verifyTime() {
+  let dateTime = new Date().toISOString().slice(0, 10)
+  console.log(dateTime);
+  let message = "";
+  if (selStartDay.value > dateTime) {
+    selStartDay.value = dateTime
+    message = "开始"
+  }
+  if (selEndDay.value > dateTime) {
+    selEndDay.value = dateTime
+    message = "结束"
+  }
+  if (message !== "") {
+    ElMessage({
+      message: `${message}时间超过今天,已重置`,
+      type: 'warning',
+    });
+  }
+}
+//#endregion
+
+//全部下拉
+function handleChange(e) {
+  selRequestData.selectName = e[1]
+}
+
+
+
+
 //旧表名与新表名
 const oldTableName = shallowRef(props.tableName);
+getFirstColName()
 
 watchEffect(() => {
   if (oldTableName.value != props.tableName) {
-    firstList.value = ""
-    twoList.value = ""
+    // firstList.value = ""
+    // twoList.value = ""
+    getFirstColName()
+
+    // firstValue.value = ""
+    selectChange(false)
+    oldTableName.value = props.tableName
   }
   if (firstValue.value == "") {
-    console.log("清除");
+    // console.log("清除");
     clearItem()
   }
-  console.log(shipValue.value);
-  getFirstColName()
+  if (props.tableName == "出荷履历") {
+    selRequestData.selectName = shipValue.value
+  }
+  // console.log(shipValue.value);
+  // verifyTime()
+  if (selRequestData.selectName.includes("Date")) {
+    console.log("时间");
+    verifyTime()
+  }
 })
 // const oldSelectName = shallowRef(firstValue.value);
 console.log(twoList.value);
 //#endregion
 
 </script>
+
+<style scoped>
+.cell {
+  height: 30px;
+  padding: 3px 0;
+  box-sizing: border-box;
+}
+
+.cell .text {
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: 0 auto;
+  line-height: 24px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+}
+
+.cell.current .text {
+  background: #626aef;
+  color: #fff;
+}
+
+.cell .holiday {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--el-color-danger);
+  border-radius: 50%;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>

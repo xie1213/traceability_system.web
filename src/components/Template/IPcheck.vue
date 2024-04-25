@@ -30,7 +30,7 @@ async function getPingStatus() {
     pingStatusClass.value = 'danger';
   }
 }
-const intervalId = setInterval(getPingStatus, 3000); // 每50秒发送一次请求
+const intervalId = setInterval(getPingStatus, 50000); // 每50秒发送一次请求
 
 onBeforeUnmount(() => {
   clearInterval(intervalId);
