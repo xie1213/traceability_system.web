@@ -33,75 +33,27 @@
             </div>
         </div>
         <div>
-            <div>
-                <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
-                <el-select v-model="firstValue" clearable placeholder="Select" style="width: 150px">
-                    <el-option v-for="(item, index) in firstList" :key="index" :label="item" :value="item"
-                        @click="handleItemClick(index)" />
-                </el-select>
-            </div>
-            <div style="padding-left: 22px;">
-                <span style="font-size: 14px;">选择</span>
-                <el-select v-model="twoValue" clearable placeholder="Select" style="width: 150px">
-                    <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" :value="item.val" />
-                </el-select>
-            </div>
-        </div>
+            <NewSelTemp :tableName="tableName" @selColName="getSelName" />
 
-        <div v-if="!twoValue.includes('Date')" style="display: inline;padding: 5px 0 0 15px;">
-            <div>
-                <span style="font-size: 14px;">上限</span>
-                <el-input v-model="topLimit" style="width: 150px" :pattern="serialNumberPattern" @input="topLimitInput"
-                    placeholder="Please input" />
-            </div>
-            <div>
-                <span style="font-size: 14px;">下限</span>
-                <el-input v-model="lowerLimit" style="width: 150px" :pattern="serialNumberPattern"
-                    @input="lowerLimitInput" placeholder="Please input" />
-            </div>
-        </div>
-        <div v-else style="width: 400px;padding: 5px 0 0 15px;">
-            <div class="demo-date-picker" style="display: inline; padding: 5px;">
-                <el-date-picker style="width: 160px;" v-model="selStartDay" type="date" placeholder="Pick a day"
-                    format="YYYY/MM/DD" value-format="YYYY-MM-DD">
-                    <template #default="cell">
-                        <div class="cell" :class="{ current: cell.isCurrent }">
-                            <span class="text">{{ cell.text }}</span>
-                        </div>
-                    </template>
-                </el-date-picker>
-            </div>
-            <el-time-picker v-model="selEndTime" style="width:155px" />
-            <div class="demo-date-picker" style="display: inline;padding-left: 5px;">
-                <el-date-picker style="width: 160px;" v-model="selEndDay" type="date" placeholder="Pick a day"
-                    format="YYYY/MM/DD" value-format="YYYY-MM-DD">
-                    <template #default="cell">
-                        <div class="cell" :class="{ current: cell.isCurrent }">
-                            <span class="text">{{ cell.text }}</span>
-                        </div>
-                    </template>
-                </el-date-picker>
-            </div>
-            <el-time-picker v-model="selStartTime" style="width:160px;padding-left: 5px;" />
         </div>
         <el-button style="margin-top: 7px;margin-left:15px;height: 60px; width: 120px;" @click="searchCliced"
             type="primary">搜索</el-button>
-        <el-button style="margin-top: 14px;margin-left:15px;height: 40px; width: 120px;" @click="exportDataBtn(tableName)"
-            :disabled="disbtn" type="primary">导出</el-button>
+        <el-button style="margin-top: 14px;margin-left:15px;height: 40px; width: 120px;"
+            @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
 
         <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
-
     <component :is="selectedComponent" :tableData="tableData" />
     <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
-import { optionList, getSeleName, firstList } from "@/service/GetDataMethod/getTaleColName"
+import { getSeleName } from "@/service/GetDataMethod/getTaleColName"
 import { ElMessage } from 'element-plus'
 import { realList, exportData, importTableData, pagerConfig, getPageData } from "@/service/GetDataMethod/utils"
 import { motorTemp, rotorTemp, gearTemp, rrTemp, taTemp, shipOut, entireTemp } from "@/service/Import/tableTemp"
+import NewSelTemp from '../Template/newSelTemp.vue';
 
 const props = defineProps({
     tableName: String,
@@ -152,8 +104,8 @@ const isSerialChecked = ref(false);
 
 //序列号值及序列号验证
 const serialNumber = ref("");
-const topLimit = ref();
-const lowerLimit = ref();
+// const topLimit = ref();
+// const lowerLimit = ref();
 const serialNumberPattern = ref(/^[A-Za-z0-9]+[A-Za-z0-9]*$/);
 
 // 检查输入是否合法的函数
@@ -176,84 +128,15 @@ const serialInput = (value) => {
 
 };
 
-
-//#endregion
-
-//#region  下拉框代码
-
-const isSelectChecked = ref(false)
-const firstValue = ref("")
-const twoValue = ref("")
-const twoList = ref([])
-
-const selStartDay = ref(new Date().toISOString().slice(0, 10)),
-    selEndDay = ref(new Date().toISOString().slice(0, 10)),
-    selStartTime = ref(new Date()),
-    selEndTime = ref(new Date(new Date() - 60 * 60 * 1000));
-const formatSeltartTime = getTimeString(startTime.value)
-const formatSelEndTime = getTimeString(endTime.value)
-//获取时间参数
-const getSelectTime = () => {
-    if (isSelectChecked.value) {
-        request.selStartTime = `${selStartDay.value} ${formatSelEndTime}`;
-        request.selEndTime = `${selEndDay.value} ${formatSeltartTime}`
-    } else {
-
-        request.selStartTime = ""
-        request.selEndTime = ""
-    }
-}
-
-
-// 上限
-const topLimitInput = (value) => {
-    validateInput(value, topLimit);
-    if (twoValue.value === '') {
-        ElMessage({
-            message: '请选择条件',
-            type: 'warning',
-        });
-        topLimit.value = ""
-    }
-};
-
-//下限
-const lowerLimitInput = (value) => {
-    validateInput(value, lowerLimit);
-
-    if (twoValue.value === '') {
-        ElMessage({
-            message: '请选择条件',
-            type: 'warning',
-        });
-        lowerLimit.value = ""
-    }
-};
-
-//根据索引获取第二个下拉框
-getSeleName(props.tableName)
-const handleItemClick = (index) => {
-    twoValue.value = ""
-    twoList.value = index >= 0 ? optionList.value[index + 1].val : []
-}
-
-//下拉框选中的方法
-const selectChange = (e) => {
-    console.log(request);
-    if (e == false) {
-        firstValue.value = ""
-        twoValue.value = ""
-        twoList.value = []
-        topLimit.value = ""
-        lowerLimit.value = ""
-    }
+function getSelName(e){
+    console.log(e);
 }
 
 const oldTableName = shallowRef(props.tableName);
 
-// const oldSelectName = shallowRef(firstValue.value);
+// // const oldSelectName = shallowRef(firstValue.value);
 
-//#endregion
+// //#endregion
 
 //#region  表格渲染
 const tableComponents = {
@@ -322,12 +205,12 @@ const getTableData = (sendToBack) => {
 }
 
 //#endregion
-const exportDataBtn=()=>{
-   let startExportTime =   formatDateToCustomString(request.startDateTime)
-   let endExportTime = formatDateToCustomString(request.endDateTime)
-   console.log(startExportTime);
-   let exportTableName = `${props.tableName}_${startExportTime}-${endExportTime}`
-   
+const exportDataBtn = () => {
+    let startExportTime = formatDateToCustomString(request.startDateTime)
+    let endExportTime = formatDateToCustomString(request.endDateTime)
+    console.log(startExportTime);
+    let exportTableName = `${props.tableName}_${startExportTime}-${endExportTime}`
+
     exportData(exportTableName)
 }
 
@@ -347,12 +230,12 @@ function formatDateToCustomString(inputDate) {
 //是否给参数赋值
 const isChecked = () => {
     //下限
-    request.lowerLimit = isSelectChecked.value ? lowerLimit.value : ""
+    // request.lowerLimit = isSelectChecked.value ? lowerLimit.value : ""
     //上限
-    request.topLimit = isSelectChecked.value ? topLimit.value : ""
+    // request.topLimit = isSelectChecked.value ? topLimit.value : ""
 
     //列名
-    request.selectName = isSelectChecked.value ? twoValue.value : ""
+    // request.selectName = isSelectChecked.value ? twoValue.value : ""
 
     //序列号
     request.serialDateNumber = isSerialChecked.value ? serialNumber.value : ""
@@ -364,10 +247,10 @@ const isChecked = () => {
     request.endDateTime = isTimeChecked.value ? `${endDay.value} ${formattedStartTime}` : "";
 
     //下拉开始时间
-    request.selStartTime = isSelectChecked.value ? `${selStartDay.value} ${formattedEndTime}` : "";
+    // request.selStartTime = isSelectChecked.value ? `${selStartDay.value} ${formattedEndTime}` : "";
 
     //下拉结束时间
-    request.selEndTime = isSelectChecked.value ? `${selEndTime.value} ${formatSeltartTime}` : "";
+    // request.selEndTime = isSelectChecked.value ? `${selEndTime.value} ${formatSeltartTime}` : "";
 
 }
 
@@ -383,10 +266,10 @@ watchEffect(() => {
 
     //判断表名是否更新
     if (oldTableName.value != props.tableName) {
-        isSelectChecked.value = false
+        // isSelectChecked.value = false
         isSerialChecked.value = false
 
-        selectChange(false);
+        // selectChange(false);
         serialChange(false)
         getSeleName(props.tableName)
 
@@ -398,17 +281,17 @@ watchEffect(() => {
         oldTableName.value = props.tableName
     }
     //监听第一个下拉框是否选中
-    if (firstValue.value === "") {
-        twoValue.value = ""
-        twoList.value = []
-        topLimit.value = ""
-        lowerLimit.value = ""
-    }
-    if (twoValue.value.includes("Date")) {
-        console.log("时间");
-        getSelectTime()
+    // if (firstValue.value === "") {
+    //     twoValue.value = ""
+    //     twoList.value = []
+    //     topLimit.value = ""
+    //     lowerLimit.value = ""
+    // }
+    // if (twoValue.value.includes("Date")) {
+    //     console.log("时间");
+    //     getSelectTime()
 
-    }
+    // }
     isChecked()
 
     // getIndex();

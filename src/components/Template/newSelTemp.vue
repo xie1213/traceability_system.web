@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; border: 1px red solid;">
+  <div style="display: flex;">
     <!-- 不等于出荷表 -->
     <div v-if="tableName != '出荷履历'" style="flex-direction: column;">
       <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
