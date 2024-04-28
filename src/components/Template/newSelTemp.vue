@@ -2,7 +2,9 @@
   <div style="display: flex;">
     <!-- 不等于出荷表 -->
     <div v-if="tableName != '出荷履历'" style="flex-direction: column;">
-      <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
+
+      <el-checkbox v-model="isSelectChecked" >项目</el-checkbox>
+
       <el-select v-model="firstValue" clearable placeholder="Select" style="width: 150px">
         <el-option v-for="(item, index) in firstList" :key="index" :label="item" :value="item"
           @click="handleItemClick(index)" />
@@ -24,7 +26,7 @@
     </div>
     <!-- 出荷表得选择 -->
     <div v-else style="padding-left: 23px;">
-      <el-checkbox v-model="isSelectChecked" @change="selectChange">项目</el-checkbox>
+      <el-checkbox v-model="isSelectChecked" >项目</el-checkbox>
       <div>
         <el-select v-model="shipValue" clearable placeholder="Select" style="width: 150px">
           <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
@@ -96,12 +98,11 @@ const options = ref([])
 
 const optionList = ref([]) //基础数据 
 
-
 const shipValue = ref("");  //出荷数据
 
 // const emit = defineEmits(['selColName'])  //向父组件传值
 
-const serialNumberPattern = ref(/^[A-Za-z0-9 ]+[A-Za-z0-9 ]*$/); //正则验证
+const serialNumberPattern = ref(/^[A-Za-z0-9\b ]+[A-Za-z0-9\b ]*$/); //正则验证
 
 
 //时间格式化
@@ -125,7 +126,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['selColName'])
-// const uni.emit(eventName, {})
 const selectName = {
   "Motor履历": motorData.AllMotorTable,
   "Rotor履历": rotorData.AllRotorTable,
@@ -134,35 +134,6 @@ const selectName = {
   "Ta履历": taData.AllTatable,
   "全部履历": allTableData.table,
   "出荷履历": shipmentData
-}
-
-//出荷下拉
-// function shipChecked(e) {
-//   // console.log(e);
-//   selRequestData.selectName = e
-//   console.log(`出荷${selRequestData.selectName}`);
-// }
-
-//是否勾选
-function selectChange(e) {
-  let sendToBack = {}
-  console.log(selRequestData);
-  getRequsetTime();
-  if (!e) {
-    firstValue.value = ""
-  } else {
-    Object.entries(selRequestData).forEach(([key, value]) => {
-      if (value !== "") {
-        sendToBack[key] = value;
-      }
-      emit('selColName', sendToBack)
-
-    });
-  }
-  //判断是否为空值
-
-  console.log(sendToBack);
-  // emit('selColName', selData)
 }
 
 //获取原始下拉数据
@@ -216,40 +187,44 @@ function clearItem() {
 //上限输入验证
 function topLimitInput(e) {
   selRequestData.topLimit = verifyInput(e)
-  console.log(`上限${selRequestData.topLimit}`);
-  // validateInput(e, topLimit)
 }
 
 //下限输入验证
 function lowerLimitInput(e) {
   selRequestData.lowerLimit = verifyInput(e)
-  console.log(`下限${selRequestData.lowerLimit}`);
 }
 //判断输入是否符合格式
 
-let lastValidInput = '';
 // let  lastValidInput = ""
 function verifyInput(value) {
+let lastValidInput = '';
+
   if (textChecked()) {
     return ""
+  }
+
+  if (value === "") {
+    return "";
   }
   if (!serialNumberPattern.value.test(value)) {
     ElMessage({
       message: '输入内容不合法',
       type: 'error',
     });
+    console.log(lastValidInput);
+    // if (lastValidInput.length ==1) {
+    //   lastValidInput =""
+    // }
     return lastValidInput
   } else {
     lastValidInput = value
     return value
   }
-
 }
 
 //检查条件是否选择
 function textChecked() {
   // let checkedText = firstValue.value === "" || selRequestData.selectName === ""
-
   let checkedText;
   if (props.tableName == "出荷履历") {
     checkedText = selRequestData.selectName === "";
@@ -282,12 +257,14 @@ const formattedStartTime = getTimeString(selStartTime.value)
 const formattedEndTime = getTimeString(selEndTime.value)
 
 //获取时间
-function getRequsetTime() {
-  if (selRequestData.selectName.includes('Date')) {
-    selRequestData.selStartTime = `${selStartDay.value} ${formattedEndTime}`;
-    selRequestData.selEndTime = `${selEndDay.value} ${formattedStartTime}`;
-  }
-}
+// function getRequsetTime() {
+//   if (selRequestData.selectName.includes('Date')) {
+//     console.log("时间");
+//     console.log(selStartDay.value);
+//     selRequestData.selStartTime = `${selStartDay.value} ${formattedEndTime}`;
+//     selRequestData.selEndTime = `${selEndDay.value} ${formattedStartTime}`;
+//   }
+// }
 
 //时间限制
 function verifyTime() {
@@ -303,10 +280,8 @@ function verifyTime() {
     message = "结束"
   }
   if (message !== "") {
-    ElMessage({
-      message: `${message}时间超过今天,已重置`,
-      type: 'warning',
-    });
+    let TimeMessage = `${message}时间超过今天,已重置`
+    allterMessage(TimeMessage,"warning")
   }
 }
 //#endregion
@@ -316,8 +291,46 @@ function handleChange(e) {
   selRequestData.selectName = e[1]
 }
 
+function getCheacked() {
+  let sendToBack = {}
+  // let isEmit = false
+  let { selectName, topLimit, lowerLimit } = selRequestData;
+  //判断是否为空值
+  if (!selectName.includes("Date")) {
+
+    if (topLimit === "") {
+      allterMessage("上限值为空", "error")
+    }
+
+    if (lowerLimit === "") {
+      allterMessage("下限值为空", "error")
+    }
+  }
+  if (selectName === "") {
+    allterMessage("条件未选择", "error")
+  }
 
 
+  Object.entries(selRequestData).forEach(([key, value]) => {
+    if (value !== "") {
+      sendToBack[key] = value;
+    }
+  });
+  console.log(sendToBack);
+
+  emit('selColName', sendToBack)
+}
+
+//提示消息
+function allterMessage(message, type) {
+  if (message === "") {
+    return;
+  }
+  ElMessage({
+    message: message,
+    type: type,
+  });
+}
 
 //旧表名与新表名
 const oldTableName = shallowRef(props.tableName);
@@ -325,31 +338,35 @@ getFirstColName()
 
 watchEffect(() => {
   if (oldTableName.value != props.tableName) {
-    // firstList.value = ""
-    // twoList.value = ""
     getFirstColName()
-
-    // firstValue.value = ""
-    selectChange(false)
+    // selectChange(false)
     oldTableName.value = props.tableName
   }
   if (firstValue.value == "") {
-    // console.log("清除");
     clearItem()
   }
   if (props.tableName == "出荷履历") {
     selRequestData.selectName = shipValue.value
   }
-  // console.log(shipValue.value);
-  // verifyTime()
+
   if (selRequestData.selectName.includes("Date")) {
-    console.log("时间");
+    // console.log("时间");
     verifyTime()
+    
+    selRequestData.startDateTime =`${selStartDay.value} ${formattedEndTime}`;
+    selRequestData.endDateTime =`${selEndDay.value} ${formattedStartTime}`;
   }
+  // selRequestData.checked = isSelectChecked.value
+  if (isSelectChecked.value == true) {
+    getCheacked()
+  }
+ 
+
+    //结束时间
+    
+  // selectChange()
+  // getCheacked();
 })
-// const oldSelectName = shallowRef(firstValue.value);
-console.log(twoList.value);
-//#endregion
 
 </script>
 

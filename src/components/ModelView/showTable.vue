@@ -34,7 +34,6 @@
         </div>
         <div>
             <NewSelTemp :tableName="tableName" @selColName="getSelName" />
-
         </div>
         <el-button style="margin-top: 7px;margin-left:15px;height: 60px; width: 120px;" @click="searchCliced"
             type="primary">搜索</el-button>
@@ -63,11 +62,7 @@ const request = reactive({
     startDateTime: "",
     endDateTime: "",
     serialDateNumber: "",
-    selectName: "",
-    selectTop: "",
-    selectLower: "",
-    selStartTime: "",
-    selEndTime: ""
+    selectFactor:[]
 })
 //#region  时间代码
 
@@ -104,8 +99,6 @@ const isSerialChecked = ref(false);
 
 //序列号值及序列号验证
 const serialNumber = ref("");
-// const topLimit = ref();
-// const lowerLimit = ref();
 const serialNumberPattern = ref(/^[A-Za-z0-9]+[A-Za-z0-9]*$/);
 
 // 检查输入是否合法的函数
@@ -127,10 +120,6 @@ const serialInput = (value) => {
     validateInput(value, serialNumber);
 
 };
-
-function getSelName(e){
-    console.log(e);
-}
 
 const oldTableName = shallowRef(props.tableName);
 
@@ -172,6 +161,13 @@ const searchCliced = () => {
             sendToBack[key] = value;
         }
     });
+    if (isSerialChecked.value && request.serialDateNumber =="") {
+        ElMessage({
+            message: '序列号勾选但没有输入',
+            type: 'error',
+        });
+        return;
+    }
     if (Object.keys(sendToBack).length === 0) {
         ElMessage({
             message: '请至少选择一个条件',
@@ -229,14 +225,6 @@ function formatDateToCustomString(inputDate) {
 
 //是否给参数赋值
 const isChecked = () => {
-    //下限
-    // request.lowerLimit = isSelectChecked.value ? lowerLimit.value : ""
-    //上限
-    // request.topLimit = isSelectChecked.value ? topLimit.value : ""
-
-    //列名
-    // request.selectName = isSelectChecked.value ? twoValue.value : ""
-
     //序列号
     request.serialDateNumber = isSerialChecked.value ? serialNumber.value : ""
 
@@ -246,12 +234,6 @@ const isChecked = () => {
     //结束时间
     request.endDateTime = isTimeChecked.value ? `${endDay.value} ${formattedStartTime}` : "";
 
-    //下拉开始时间
-    // request.selStartTime = isSelectChecked.value ? `${selStartDay.value} ${formattedEndTime}` : "";
-
-    //下拉结束时间
-    // request.selEndTime = isSelectChecked.value ? `${selEndTime.value} ${formatSeltartTime}` : "";
-
 }
 
 const handlePageChange = (e) => {
@@ -260,16 +242,27 @@ const handlePageChange = (e) => {
         tableData.value = data
     })
 }
+
+//下拉框条件查询
+function getSelName(e) {
+    let arr = [];
+
+    // 遍历对象的属性，并将它们添加到数组中
+    Object.keys(e).map(key => {
+        arr.push(e[key]);
+    });
+    if (arr.length==3) {
+        request.selectFactor = arr
+    }
+    console.log(request.selectFactor);
+}
 //动态监控"
 watchEffect(() => {
-
-
     //判断表名是否更新
     if (oldTableName.value != props.tableName) {
         // isSelectChecked.value = false
         isSerialChecked.value = false
 
-        // selectChange(false);
         serialChange(false)
         getSeleName(props.tableName)
 
@@ -280,20 +273,9 @@ watchEffect(() => {
 
         oldTableName.value = props.tableName
     }
-    //监听第一个下拉框是否选中
-    // if (firstValue.value === "") {
-    //     twoValue.value = ""
-    //     twoList.value = []
-    //     topLimit.value = ""
-    //     lowerLimit.value = ""
-    // }
-    // if (twoValue.value.includes("Date")) {
-    //     console.log("时间");
-    //     getSelectTime()
 
-    // }
     isChecked()
-
+    // getSelName();
     // getIndex();
 })
 
