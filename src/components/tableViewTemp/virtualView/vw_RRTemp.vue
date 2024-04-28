@@ -1,53 +1,31 @@
 <template>
     <vxe-colgroup title="RRTable">
-        <vxe-colgroup title="防错防误39计测日時">
-            <vxe-column field="RRPokayokeDate39" title="防错防误39计测日時" />
-        </vxe-colgroup>
+        <PokayokeDate :colName="'防错防误39计测日時'" :value="'PokayokeDate39'" />
+            <PokayokeDate :colName="'防错防误40计测日時'" :value="'PokayokeDate40'" />
 
-        <vxe-colgroup title="防错防误40计测日時">
-            <vxe-column field="RRPokayokeDate40" title="防错防误40计测日時" />
-        </vxe-colgroup>
+            <vxe-colgroup title="RrBrg圧入">
+                <vxe-column field="HsgBrgMeasDate" width="100px" title="RrBrg圧入计测日时" sortable></vxe-column>
+                <vxe-column field="HsgBrgInflectPtStroke" width="100px" title="RrBrg圧入拐点行程1" sortable></vxe-column>
+                <vxe-column field="HsgBrgInflectPtLoad" width="100px" title="RrBrg圧入拐点负重1" sortable></vxe-column>
+                <vxe-column field="HsgBrgFinalStroke" width="100px" title="RrBrg圧入最终行程1" sortable></vxe-column>
+                <vxe-column field="HsgBrgFinalLoad" width="100px" title="RrBrg圧入最终负重1" sortable></vxe-column>
+                <vxe-column field="HsgBrgInflectPtStrokeSec" width="100px" title="RrBrg圧入拐点行程2" sortable></vxe-column>
+                <vxe-column field="HsgBrgInflectPtLoadSec" width="100px" title="RrBrg圧入拐点负重2" sortable></vxe-column>
+                <vxe-column field="HsgBrgFinalStrokeSec" width="100px" title="RrBrg圧入最终行程2" sortable></vxe-column>
+                <vxe-column field="HsgBrgFinalLoadSec" width="100px" title="RrBrg圧入最终负重2" sortable></vxe-column>
+                <vxe-column field="HsgBrgMaasterStroke" width="100px" title="RrBrg圧入主行程" sortable></vxe-column>
+            </vxe-colgroup>
 
-        <vxe-colgroup title="RrBrg圧入">
-            <vxe-column field="RRHsgBrgMdate" title="计测日时" />
-            <vxe-column field="RRHsgBrgStroke" title="拐点行程1" />
-            <vxe-column field="RRHsgBrgLoad" title="拐点负重1" />
-            <vxe-column field="RRHsgBrgFinalStroke" title="最终行程1" />
-            <vxe-column field="RRHsgBrgFinalLoad" title="最终负重1" />
-            <vxe-column field="RRHsgBrgStrokeSec" title="拐点行程2" />
-            <vxe-column field="RRHsgBrgLoadSec" title="拐点负重2" />
-            <vxe-column field="RRHsgBrgFinalStrokeSec" title="最终行程2" />
-            <vxe-column field="RRHsgBrgFinalLoadSec" title="最终负重2" />
-            <vxe-column field="RRHsgBrgMainStroke" title="主行程" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误41计测日時">
-            <vxe-column field="RRPokayokeDate41" title="防错防误41计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误42计测日時">
-            <vxe-column field="RRPokayokeDate42" title="防错防误42计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误43计测日時">
-            <vxe-column field="RRPokayokeDate43" title="防错防误43计测日時" />
-
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误44计测日時">
-            <vxe-column field="RRPokayokeDate44" title="防错防误44计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="反転機">
-            <vxe-column field="RRUpenderDate" title="反転機计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误45计测日時">
-            <vxe-column field="RRPokayokeDate45" title="防错防误45计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="拒绝">
-            <vxe-column field="RRRejectTime" title="拒绝计测日時" />
-        </vxe-colgroup>
+            <PokayokeDate :colName="'防错防误41计测日時'" :value="'PokayokeDate41'" />
+            <PokayokeDate :colName="'防错防误42计测日時'" :value="'PokayokeDate42'" />
+            <PokayokeDate :colName="'防错防误43计测日時'" :value="'PokayokeDate43'" />
+            <PokayokeDate :colName="'防错防误44计测日時'" :value="'PokayokeDate44'" />
+            <PokayokeDate :colName="'反転機计测日時'" :value="'UpenderDate'" />
+            <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
+            <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTime'" />
     </vxe-colgroup>
 </template>
+<script setup>
+import PokayokeDate from '@/components/tableViewTemp/PokayokeDate'
+
+</script>

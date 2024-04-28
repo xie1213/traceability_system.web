@@ -1,295 +1,250 @@
 <template>
     <vxe-colgroup title="RotorTable1">
-        <vxe-colgroup title="防错防误39计测日時">
-            <vxe-column field="Ro1PokayokeDate39" title="防错防误39计测日時" />
-        </vxe-colgroup>
+        <PokayokeDate :colName="'防错防误39计测日時'" :value="'PokayokeDate39'" />
+      <PokayokeDate :colName="'防错防误40计测日時'" :value="'PokayokeDate40'" />
 
-        <vxe-colgroup title="防错防误40计测日時">
-            <vxe-column field="Ro1PokayokeDate40" title="防错防误40计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="RrBrg圧入">
+        <vxe-column field="Ro1HsgBrgMeasDate" width="100px" title="RrBrg圧入计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgInflectPtStroke" width="100px" title="RrBrg圧入拐点行程1" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgInflectPtLoad" width="100px" title="RrBrg圧入拐点负重1" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgFinalStroke" width="100px" title="RrBrg圧入最终行程1" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgFinalLoad" width="100px" title="RrBrg圧入最终负重1" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgInflectPtStrokeSec" width="100px" title="RrBrg圧入拐点行程2" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgInflectPtLoadSec" width="100px" title="RrBrg圧入拐点负重2" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgFinalStrokeSec" width="100px" title="RrBrg圧入最终行程2" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgFinalLoadSec" width="100px" title="RrBrg圧入最终负重2" sortable></vxe-column>
+        <vxe-column field="Ro1HsgBrgMaasterStroke" width="100px" title="RrBrg圧入主行程" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="RrBrg圧入">
-            <vxe-column field="Ro1HsgBrgMeasDate" title="RrBrg圧入计测日时" />
-            <vxe-column field="Ro1HsgBrgInflectPtStroke" title="RrBrg圧入拐点行程1" />
-            <vxe-column field="Ro1HsgBrgInflectPtLoad" title="RrBrg圧入拐点负重1" />
-            <vxe-column field="Ro1HsgBrgFinalStroke" title="RrBrg圧入最终行程1" />
-            <vxe-column field="Ro1HsgBrgFinalLoad" title="RrBrg圧入最终负重1" />
-            <vxe-column field="Ro1HsgBrgInflectPtStrokeSec" title="RrBrg圧入拐点行程2" />
-            <vxe-column field="Ro1HsgBrgInflectPtLoadSec" title="RrBrg圧入拐点负重2" />
-            <vxe-column field="Ro1HsgBrgFinalStrokeSec" title="RrBrg圧入最终行程2" />
-            <vxe-column field="Ro1HsgBrgFinalLoadSec" title="RrBrg圧入最终负重2" />
-            <vxe-column field="Ro1HsgBrgMaasterStroke" title="RrBrg圧入主行程" />
-        </vxe-colgroup>
+      <PokayokeDate :colName="'防错防误41计测日時'" :value="'PokayokeDate41'" />
+      <PokayokeDate :colName="'防错防误42计测日時'" :value="'PokayokeDate42'" />
+      <PokayokeDate :colName="'防错防误43计测日時'" :value="'PokayokeDate43'" />
+      <PokayokeDate :colName="'防错防误44计测日時'" :value="'PokayokeDate44'" />
+      <PokayokeDate :colName="'翻转机'" :value="'UpenderDate'" />
+      <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
+      <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTime'" />
+      <PokayokeDate :colName="'防错防误33计测日時'" :value="'PokayokeDate33'" />
 
-        <vxe-colgroup title="防错防误41计测日時">
-            <vxe-column field="Ro1PokayokeDate41" title="防错防误41计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="差速器装配">
+        <vxe-column field="Ro1DgameasDate" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1Dgapos3Axis" width="80px" title="推进位置3轴" sortable></vxe-column>
+        <vxe-column field="Ro1Dgaload3Axis" width="95px" title="负重（电流值）3轴" sortable></vxe-column>
+        <vxe-column field="Ro1Dgapos4Axis" width="80px" title="推进位置4轴" sortable></vxe-column>
+        <vxe-column field="Ro1Dgaload4Axis" width="95px" title="负重（电流值）4轴" sortable></vxe-column>
+      </vxe-colgroup>
+      <PokayokeDate :colName="'防错防误34计测日時'" :value="'PokayokeDate34'" />
 
-        <vxe-colgroup title="防错防误42计测日時">
-            <vxe-column field="Ro1PokayokeDate42" title="防错防误42计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="差动齿轮测量">
+        <vxe-column field="Ro1DgmmeasTime" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1Dgmdagjudge" width="85px" title="作齿轮判定" sortable></vxe-column>
+        <vxe-column field="Ro1DgmlhRh" title="変位量" sortable></vxe-column>
+        <vxe-column field="Ro1DgmmaxTorque" width="70px" title="上限扭矩" sortable></vxe-column>
+        <vxe-column field="Ro1DgmminTorque" width="70px" title="下限扭矩" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误43计测日時">
-            <vxe-column field="Ro1PokayokeDate43" title="防错防误43计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="差速器销铆接">
+        <vxe-column field="Ro1DprmeasTime" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1Dprfrs" width="70px" title="最终行程" sortable></vxe-column>
+        <vxe-column field="Ro1Dprfrl" width="85px" title="铆接最终负重" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误44计测日時">
-            <vxe-column field="Ro1PokayokeDate44" title="防错防误44计测日時" />
-        </vxe-colgroup>
+      <PokayokeDate :colName="'防错防误35计测日時'" :value="'PokayokeDate35'" />
 
-        <vxe-colgroup title="翻转机">
-            <vxe-column field="Ro1UpenderDate" title="翻转机计测日時" />
-        </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误45计测日時">
-            <vxe-column field="Ro1PokayokeDate45" title="防错防误45计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="齿轮压入1">
+        <vxe-column field="Ro1GearMeasDate" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1GearStroke" width="70px" title="拐点行程" sortable></vxe-column>
+        <vxe-column field="Ro1GearLoad" width="75px" title="変曲点负重" sortable></vxe-column>
+        <vxe-column field="Ro1GearFinalStroke" width="70px" title="最终行程" sortable></vxe-column>
+        <vxe-column field="Ro1GearFinalLoad" width="75px" title="最終荷负重" sortable></vxe-column>
+        <vxe-column field="Ro1GearStrokeSec" width="70px" title="拐点行程" sortable></vxe-column>
+        <vxe-column field="Ro1GearLoadSec" width="75px" title="変曲点负重" sortable></vxe-column>
+        <vxe-column field="Ro1GearFinalStrokeSec" width="70px" title="最终行程" sortable></vxe-column>
+        <vxe-column field="Ro1GearFinalLoadSec" width="70px" title="最終荷负重" sortable></vxe-column>
+        <vxe-column field="Ro1GearMainStroke" title="主行程" sortable></vxe-column>
+        <vxe-column field="Ro1GearAbvalue" width="70px" title="A/B" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="拒绝">
-            <vxe-column field="Ro1RejectTime" title="拒绝计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="齿轮压入2">
+        <vxe-column field=Gear2Date width="165px" title=计测日时 sortable></vxe-column>
+        <vxe-column field=Gear2Stroke width="70px" title=拐点行程 sortable></vxe-column>
+        <vxe-column field=Gear2Load width="75px" title=変曲点负重 sortable></vxe-column>
+        <vxe-column field=Gear2FinalStroke width="70px" title=最终行程 sortable></vxe-column>
+        <vxe-column field=Gear2FinalLoad width="75px" title=最終荷负重 sortable></vxe-column>
+        <vxe-column field=Gear2StrokeSec width="70px" title=拐点行程 sortable></vxe-column>
+        <vxe-column field=Gear2LoadSec width="75px" title=変曲点负重 sortable></vxe-column>
+        <vxe-column field=Gear2FinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
+        <vxe-column field=Gear2FinalLoadSec width="75px" title=最終荷负重 sortable></vxe-column>
+        <vxe-column field=Gear2MainStroke title=主行程 sortable></vxe-column>
+        <vxe-column field=Gear2Abvalue width="70px" title=A/B sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误33计测日時">
-            <vxe-column field="Ro1PokayokeDate33" title="防错防误33计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="差速器销l螺母紧固">
+        <vxe-column field=DpntDate width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field=DpntTorqueAxis1 width="80px" title="紧固扭矩1軸" sortable></vxe-column>
+        <vxe-column field=DpntAngleAxis1 width="80px" title="紧固角度1軸" sortable></vxe-column>
+        <vxe-column field=DpntJudgment width="70px" title="判定代码" sortable></vxe-column>
+        <vxe-column field=DpntSeating width="80px" title="着座扭矩1軸" sortable></vxe-column>
+        <vxe-column field=DpntDrop width="80px" title="下降角度1軸" sortable></vxe-column>
+        <vxe-column field=DpntSlack width="100px" title="松弛监视器扭矩1軸" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="差速器装配">
-            <vxe-column field="Ro1DgameasDate" title="计测日时" />
-            <vxe-column field="Ro1Dgapos3Axis" title="推进位置3轴" />
-            <vxe-column field="Ro1Dgaload3Axis" title="负重（电流值）3轴" />
-            <vxe-column field="Ro1Dgapos4Axis" title="推进位置4轴" />
-            <vxe-column field="Ro1Dgaload4Axis" title="负重（电流值）4轴" />
-        </vxe-colgroup>
+      <vxe-colgroup title="差速器销螺母铆接">
+        <vxe-column field=DpnfMeasDate width="165px" title=计测日时 sortable></vxe-column>
+        <vxe-column field=DpnfFinalStroke width="70px" title=最终行程 sortable></vxe-column>
+        <vxe-column field=DpnfFinalLoad width="70px" title=最终负重 sortable></vxe-column>
+        <vxe-column field=DpnfMainStroke title=主行程 sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误34计测日時">
-            <vxe-column field="Ro1PokayokeDate34" title="防错防误34计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="DF BRG＋环圧入">
+        <vxe-column field=Dfbrgdate width="165px" title=计测日时 sortable></vxe-column>
+        <vxe-column field=Dfbrgstroke width="70px" title=拐点行程 sortable></vxe-column>
+        <vxe-column field=Dfbrgload width="70px" title=拐点负重 sortable></vxe-column>
+        <vxe-column field=DfbrgfinalStroke width="70px" title=最终行程 sortable></vxe-column>
+        <vxe-column field=DfbrgfinalLoad width="70px" title=最终负重 sortable></vxe-column>
+        <vxe-column field=DfbrgstrokeSec width="70px" title=拐点行程 sortable></vxe-column>
+        <vxe-column field=DfbrgloadSec width="70px" title=拐点负重 sortable></vxe-column>
+        <vxe-column field=DfbrgfinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
+        <vxe-column field=DfbrgfinalLoadSec width="70px" title=最终负重 sortable></vxe-column>
+        <vxe-column field=DfbrgmainStroke title=主行程 sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="差动齿轮测量">
-            <vxe-column field="Ro1DgmmeasTime" title="计测日时" />
-            <vxe-column field="Ro1Dgmdagjudge" title="作齿轮判定" />
-            <vxe-column field="Ro1DgmlhRh" title="変位量" />
-            <vxe-column field="Ro1DgmmaxTorque" title="上限扭矩" />
-            <vxe-column field="Ro1DgmminTorque" title="下限扭矩" />
-        </vxe-colgroup>
+      <vxe-colgroup title="DF紧固1">
+        <vxe-column field="Ro1Df1date" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis1' width="80px" title="紧固角度 1軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis1' width="85px" title='第1軸 判定代码' sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis2' width="85px" title="第２軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis3' width="80px" title="紧固角度 3軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis3' width="85px" title="第３軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis4' width="80px" title="紧固角度 4軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis4' width="85px" title="第4軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis5' width="80px" title="紧固角度 5軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis5' width="85px" title="第5軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df1angleAxis6' width="80px" title="紧固角度 6軸" sortable></vxe-column>
+        <vxe-column field='Ro1Df1codeAxis6' width="85px" title="第6軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df1abvalue' width="70px" title="A/B" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="差速器销铆接">
-            <vxe-column field="Ro1DprmeasTime" title="计测日时" />
-            <vxe-column field="Ro1Dprfrs" title="最终行程" />
-            <vxe-column field="Ro1Dprfrl" title="铆接最终负重" />
-        </vxe-colgroup>
+      <vxe-colgroup title="DF紧固2">
+        <vxe-column field="Ro1Df2date" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Ro1Df2angleAxis1" width="80px" title="紧固角度 1軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis1" width="85px" title="第1軸 判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Df2angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis2" width="85px" title="第２軸 判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Df2angleAxis3" width="80px" title="紧固角度 3軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis3" width="85px" title='第３軸 判定代码' sortable></vxe-column>
+        <vxe-column field="Ro1Df2angleAxis4" width="80px" title="紧固角度 4軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis4" width="85px" title="第4軸 判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Df2angleAxis5" width="80px" title="紧固角度 5軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis5" width="85px" title="第5軸 判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Df2angleAxis6" width="80px" title="紧固角度 6軸" sortable></vxe-column>
+        <vxe-column field="Ro1Df2codeAxis6" width="85px" title="第6軸 判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Df2abvalue" width="70px" title="A/B" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误35计测日時">
-            <vxe-column field="Ro1PokayokeDate35" title="防错防误35计测日時" />
-        </vxe-colgroup>
+      <PokayokeDate :colName="'DF反転计测日時'" :value="'DfreverseDate'" />
+      <PokayokeDate :colName="'防错防误36计测日時'" :value="'PokayokeDate36'" />
+      <PokayokeDate :colName="'防错防误37计测日時'" :value="'PokayokeDate37'" />
+      <PokayokeDate :colName="'防错防误38计测日時'" :value="'PokayokeDate38'" />
 
-        <vxe-colgroup title="齿轮压入1">
-            <vxe-column field="Ro1GearMeasDate" title="计测日时" />
-            <vxe-column field="Ro1GearStroke" title="拐点行程" />
-            <vxe-column field="Ro1GearLoad" title="変曲点负重" />
-            <vxe-column field="Ro1GearFinalStroke" title="最终行程" />
-            <vxe-column field="Ro1GearFinalLoad" title="最終荷负重" />
-            <vxe-column field="Ro1GearStrokeSec" title="拐点行程" />
-            <vxe-column field="Ro1GearLoadSec" title="変曲点负重" />
-            <vxe-column field="Ro1GearFinalStrokeSec" title="最终行程" />
-            <vxe-column field="Ro1GearFinalLoadSec" title="最終荷负重" />
-            <vxe-column field="Ro1GearMainStroke" title="主行程" />
-            <vxe-column field="Ro1GearAbvalue" title="A/B" />
-        </vxe-colgroup>
+      <vxe-colgroup title="MG1磁化">
+        <vxe-column field='Ro1Mg1workTemp' width="80px" title="MG1工件温度" sortable></vxe-column>
+        <vxe-column field="Ro1Mg1fluxValue" width="80px" title="MG1通量值" sortable></vxe-column>
+        <vxe-column field="Ro1Mg1dec" width="70px" title="MG1判定" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="齿轮压入2">
-            <vxe-column field='Ro1Gear2Date' title='计测日时'></vxe-column>
-            <vxe-column field='Ro1Gear2Stroke' title='拐点行程'></vxe-column>
-            <vxe-column field='Ro1Gear2Load' title='変曲点负重'></vxe-column>
-            <vxe-column field='Ro1Gear2FinalStroke' title='最终行程'></vxe-column>
-            <vxe-column field='Ro1Gear2FinalLoad' title='最終荷负重'></vxe-column>
-            <vxe-column field='Ro1Gear2StrokeSec' title='拐点行程'></vxe-column>
-            <vxe-column field='Ro1Gear2LoadSec' title='変曲点负重'></vxe-column>
-            <vxe-column field='Ro1Gear2FinalStrokeSec' title='最终行程'></vxe-column>
-            <vxe-column field='Ro1Gear2FinalLoadSec' title='最終荷负重'></vxe-column>
-            <vxe-column field='Ro1Gear2MainStroke' title='主行程'></vxe-column>
-            <vxe-column field="Ro1Gear2Abvalue" title="A/B" />
-        </vxe-colgroup>
+      <vxe-colgroup title="MG2磁化">
+        <vxe-column field="Ro1Mg2workTemp" width="80px" title="MG2工件温度" sortable></vxe-column>
+        <vxe-column field="Ro1Mg2fluxValue"  width="80px" title="MG2通量值" sortable></vxe-column>
+        <vxe-column field="Ro1Mg2dec" width="70px" title="MG2判定" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="差速器销l螺母紧固">
-            <vxe-column field='Ro1DpntDate' title="计测日时" />
-            <vxe-column field='Ro1DpntTorqueAxis1' title="紧固扭矩1軸" />
-            <vxe-column field='Ro1DpntAngleAxis1' title="紧固角度1軸" />
-            <vxe-column field='Ro1DpntJudgment' title="判定代码" />
-            <vxe-column field='Ro1DpntSeating' title="着座扭矩1軸" />
-            <vxe-column field='Ro1DpntDrop' title="下降角度1軸" />
-            <vxe-column field='Ro1DpntSlack' title="松弛监视器扭矩1軸" />
-        </vxe-colgroup>
+      <PokayokeDate :colName="'轴移載计测日時'" :value="'Asldate'" />
+      <PokayokeDate :colName="'铁芯移載计测日時'" :value="'Ictldate'" />
 
-        <vxe-colgroup title="差速器销螺母铆接">
-            <vxe-column field='Ro1DpnfMeasDate' title='计测日时'></vxe-column>
-            <vxe-column field='Ro1DpnfFinalStroke' title='最终行程'></vxe-column>
-            <vxe-column field='Ro1DpnfFinalLoad' title='最终负重'></vxe-column>
-            <vxe-column field='Ro1DpnfMainStroke' title='主行程'></vxe-column>
-        </vxe-colgroup>
+      <vxe-colgroup title="转子铁芯序列">
+        <vxe-column field="Ro1Rcserial" width="80px" title="转子铁芯序列" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="DF BRG＋环圧入">
-            <vxe-column field="Ro1Dfbrgdate" title="计测日时" />
-            <vxe-column field="Ro1Dfbrgstroke" title='拐点行程'></vxe-column>
-            <vxe-column field="Ro1" title='拐点负重'></vxe-column>
-            <vxe-column field="Ro1DfbrgfinalStroke" title='最终行程'></vxe-column>
-            <vxe-column field="Ro1DfbrgfinalLoad" title='最终负重'></vxe-column>
-            <vxe-column field="Ro1DfbrgstrokeSec" title='拐点行程'></vxe-column>
-            <vxe-column field="Ro1DfbrgloadSec" title='拐点负重'></vxe-column>
-            <vxe-column field="Ro1DfbrgfinalStrokeSec" title='最终行程'></vxe-column>
-            <vxe-column field="Ro1DfbrgfinalLoadSec" title='最终负重'></vxe-column>
-            <vxe-column field="Ro1DfbrgmainStroke" title='主行程'></vxe-column>
-        </vxe-colgroup>
+      <vxe-colgroup title="轴序列">
+        <vxe-column field="Ro1AxisSerial" title="轴序列" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="DF紧固１">
-            <vxe-column field="Ro1Df1date" title="计测日时" />
-            <vxe-column field="Ro1Df1angleAxis1" title="紧固角度 1軸" />
-            <vxe-column field="Ro1Df1codeAxis1" title="第1軸 判定代码" />
-            <vxe-column field="Ro1Df1angleAxis2" title="紧固角度 2軸" />
-            <vxe-column field="Ro1Df1codeAxis2" title="第２軸 判定代码" />
-            <vxe-column field="Ro1Df1angleAxis3" title="紧固角度 3軸" />
-            <vxe-column field="Ro1Df1codeAxis3" title="第３軸 判定代码" />
-            <vxe-column field="Ro1Df1angleAxis4" title="紧固角度 4軸" />
-            <vxe-column field="Ro1Df1codeAxis4" title="第4軸 判定代码" />
-            <vxe-column field="Ro1Df1angleAxis5" title="紧固角度 5軸" />
-            <vxe-column field="Ro1Df1codeAxis5" title="第5軸 判定代码" />
-            <vxe-column field="Ro1Df1angleAxis6" title="紧固角度 6軸" />
-            <vxe-column field="Ro1Df1codeAxis6" title="第6軸 判定代码" />
-            <vxe-column field="Ro1Df1abvalue" title="A/B" />
-        </vxe-colgroup>
+      <vxe-colgroup title="铁芯加熱">
+        <vxe-column field="Ro1ProcDate" width="165px" title="加工開始日時" sortable></vxe-column>
+        <vxe-column field="Ro1IsRcheat" width="80px" title="铁芯加熱有無" sortable></vxe-column>
+        <vxe-column field="Ro1HeatSt"  title="加熱ST" sortable></vxe-column>
+        <vxe-column field="Ro1HeatProcedure"  width="70px" title="加热程序" sortable></vxe-column>
+        <vxe-column field="Ro1RoomTemp"  width="85px" title="室温（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1AxisTemp" width="85px" title="轴温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1CoreBefore"  width="110px" title="加熱前铁芯温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1CoreAfter"  width="120px" title="加熱完了時铁芯温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1Ihbefore"  width="120px" title="加熱前IH盘管温度（℃）" sortable></vxe-column>
+        <vxe-column field='Ro1Ihafter'  width="120px" title="加熱後IH盘管温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1Cdtemp"  width="100px" title="冷却空气温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1HeatTime"  width="90px" title="加熱通電時間(秒)" sortable></vxe-column>
+        <vxe-column field="Ro1HeatOutput"  width="80px" title="加熱输出(％）" sortable></vxe-column>
+        <vxe-column field='Ro1HeatEndTime'  width="80px" title="加熱完了日時" sortable></vxe-column>
+        <vxe-column field='Ro1JudgmentCode' width="70px" title='判定代码' sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="DF紧固2">
-            <vxe-column field="Ro1Df2date" title="计测日时" />
-            <vxe-column field="Ro1Df2angleAxis1" title="紧固角度 1軸" />
-            <vxe-column field="Ro1Df2codeAxis1" title="第1軸 判定代码" />
-            <vxe-column field="Ro1Df2angleAxis2" title="紧固角度 2軸" />
-            <vxe-column field="Ro1Df2codeAxis2" title="第２軸 判定代码" />
-            <vxe-column field="Ro1Df2angleAxis3" title="紧固角度 3軸" />
-            <vxe-column field="Ro1Df2codeAxis3" title="第３軸 判定代码" />
-            <vxe-column field="Ro1Df2angleAxis4" title="紧固角度 4軸" />
-            <vxe-column field="Ro1Df2codeAxis4" title="第4軸 判定代码" />
-            <vxe-column field="Ro1Df2angleAxis5" title="紧固角度 5軸" />
-            <vxe-column field="Ro1Df2codeAxis5" title="第5軸 判定代码" />
-            <vxe-column field="Ro1Df2angleAxis6" title="紧固角度 6軸" />
-            <vxe-column field="Ro1Df2codeAxis6" title="第6軸 判定代码" />
-            <vxe-column field="Ro1Df2abvalue" title="A/B" />
-        </vxe-colgroup>
+      <vxe-colgroup title="轴圧入">
+        <vxe-column field="Ro1Apidate" width="165px" title="计测日時" sortable></vxe-column>
+        <vxe-column field="Ro1Apistroke" width="70px" title="拐点行程" sortable></vxe-column>
+        <vxe-column field="Ro1Apiload"  width="70px" title="拐点负重" sortable></vxe-column>
+        <vxe-column field="Ro1ApifinalStroke"  width="80px" title="圧入最终行程" sortable></vxe-column>
+        <vxe-column field="Ro1ApimainStroke" title="主行程" sortable></vxe-column>
+        <vxe-column field="Ro1ApicoreTemp"  width="110px" title="圧入時铁芯温度（℃）" sortable></vxe-column>
+        <vxe-column field="Ro1Apisttime"  width="100px" title="圧入ST滞在時間(s)" sortable></vxe-column>
+        <vxe-column field="Ro1ApiinitTilt"  width="90px" title="初始倾斜(kN/mm)" sortable></vxe-column>
+        <vxe-column field="Ro1Apipos"  width="100px" title="偏离检测位置(mm)" sortable></vxe-column>
+        <vxe-column field="Ro1ApideviationLoad"  width="100px" title="偏离检负重(kN)" sortable></vxe-column>
+        <vxe-column field="Ro1Apicode"  width="70px" title="判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Apimachine" title="圧入機" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="DF反転">
-            <vxe-column field="Ro1DfreverseDate" title="DF反転计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="l螺母紧固">
+        <vxe-column field='Ro1Ntdate' width="165px" title=计测日時 sortable></vxe-column>
+        <vxe-column field='Ro1NttorqueAxis1' width="80px" title="紧固扭矩1軸" sortable></vxe-column>
+        <vxe-column field='Ro1NtangleAxis1' width="80px" title="紧固角度1軸" sortable></vxe-column>
+        <vxe-column field='Ro1Ntcode' width="70px" title="判定代码" sortable></vxe-column>
+        <vxe-column field='Ro1Nthistory' width="70px" title="抽样履历" sortable></vxe-column>
+        <vxe-column field='Ro1Ntseating1' width="80px" title="着座扭矩1軸" sortable></vxe-column>
+        <vxe-column field='Ro1Ntdrop1' width="80px" title="下降角度1軸" sortable></vxe-column>
+        <vxe-column field='Ro1Ntslack1' width="90px" title="松监视器扭矩1軸" sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误36计测日時">
-            <vxe-column field="Ro1PokayokeDate36" title="防错防误36计测日時" />
-        </vxe-colgroup>
+      <vxe-colgroup title="铆接圧入">
+        <vxe-column field='Ro1Rapdate' width="165px" title="计测日時" sortable></vxe-column>
+        <vxe-column field='Ro1Rapbefore' width="95px"  title="铆接行程（0前）" sortable></vxe-column>
+        <vxe-column field='Ro1Rapafter' width="95px" title="铆接行程（0後）" sortable></vxe-column>
+        <vxe-column field='Ro1Rapload' width="70px" title="铆接荷重" sortable></vxe-column>
+        <vxe-column field='Ro1RapmainStroke' title='主行程' sortable></vxe-column>
+        <vxe-column field='Ro1Rapcode' width="70px" title='判定代码' sortable></vxe-column>
+        <vxe-column field='Ro1RapwashSensor' width="90px" title='垫圈检测传感器値' sortable></vxe-column>
+        <vxe-column field='Ro1RapwashMain' width="80px" title='垫圈检测主値' sortable></vxe-column>
+        <vxe-column field='Ro1RapwashPos' width="80px" title='垫圈确认位置' sortable></vxe-column>
+        <vxe-column field='Ro1Rapstroke' width="70px" title='拐点行程' sortable></vxe-column>
+        <vxe-column field='Ro1RaploadSec' width="70px" title='拐点负重' sortable></vxe-column>
+        <vxe-column field='Ro1RapfinalStroke' width="80px" title='圧入最终行程' sortable></vxe-column>
+        <vxe-column field='Ro1Rapmain2Stroke' title='主行程' sortable></vxe-column>
+        <vxe-column field='Ro1Rapcode2' width="70px" title='判定代码' sortable></vxe-column>
+      </vxe-colgroup>
 
-        <vxe-colgroup title="防错防误37计测日時">
-            <vxe-column field="Ro1PokayokeDate37" title="防错防误37计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="防错防误38计测日時">
-            <vxe-column field="Ro1PokayokeDate38" title="防错防误38计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="MG1磁化">
-            <vxe-column field="Ro1Mg1workTemp" title="MG1工件温度" />
-            <vxe-column field="Ro1Mg1fluxValue" title="MG1通量值" />
-            <vxe-column field="Ro1Mg1dec" title="MG1判定" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="MG2磁化">
-            <vxe-column field="Ro1Mg2workTemp" title="MG2工件温度" />
-            <vxe-column field="Ro1Mg2fluxValue" title="MG2通量值" />
-            <vxe-column field="Ro1Mg2dec" title="MG2判定" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="轴移載计测日時">
-            <vxe-column field="Ro1Asldate" title="轴移載计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="铁芯移載计测日時">
-            <vxe-column field="Ro1Ictldate" title="铁芯移載计测日時" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="转子铁芯序列">
-            <vxe-column field="Ro1Rcserial" title="转子铁芯序列" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="轴序列">
-            <vxe-column field="Ro1AxisSerial" title="轴序列" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="铁芯加熱">
-            <vxe-column field="Ro1ProcDate" title="加工開始日時" />
-            <vxe-column field="Ro1IsRcheat" title="铁芯加熱有無" />
-            <vxe-column field="Ro1HeatSt" title="加熱ST" />
-            <vxe-column field="Ro1HeatProcedure" title="加热程序" />
-            <vxe-column field="Ro1RoomTemp" title="室温（℃）" />
-            <vxe-column field="Ro1AxisTemp" title="轴温度（℃）" />
-            <vxe-column field="Ro1CoreBefore" title="加熱前铁芯温度（℃）" />
-            <vxe-column field="Ro1CoreAfter" title="加熱完了時铁芯温度（℃）" />
-            <vxe-column field="Ro1Ihbefore" title="加熱前IH盘管温度（℃）" />
-            <vxe-column field="Ro1Ihafter" title="加熱後IH盘管温度（℃）" />
-            <vxe-column field="Ro1Cdtemp" title="冷却空气温度（℃）" />
-            <vxe-column field="Ro1HeatTime" title="加熱通電時間(秒)" />
-            <vxe-column field="Ro1HeatOutput" title="加熱输出(％）" />
-            <vxe-column field="Ro1HeatEndTime" title="加熱完了日時" />
-
-        </vxe-colgroup>
-
-        <vxe-colgroup title="轴圧入">
-            <vxe-column field="Ro1Apidate" title="计测日時" />
-            <vxe-column field="Ro1Apistroke" title="拐点行程" />
-            <vxe-column field="Ro1Apiload" title="拐点负重" />
-            <vxe-column field="Ro1ApifinalStroke" title="圧入最终行程" />
-            <vxe-column field="Ro1ApimainStroke" title="主行程" />
-            <vxe-column field="Ro1ApicoreTemp" title="圧入時铁芯温度（℃）" />
-            <vxe-column field="Ro1Apisttime" title="圧入ST滞在時間(s)" />
-            <vxe-column field="Ro1ApiinitTilt" title="初始倾斜(kN/mm)" />
-            <vxe-column field="Ro1Apipos" title="偏离检测位置(mm)" />
-            <vxe-column field="Ro1ApideviationLoad" title="偏离检负重(kN)" />
-            <vxe-column field="Ro1Apicode" title="判定代码" />
-            <vxe-column field="Ro1Apimachine" title="圧入機" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="l螺母紧固">
-            <vxe-column field="Ro1Ntdate" title=计测日時></vxe-column>
-            <vxe-column field="Ro1NttorqueAxis1" title="紧固扭矩1軸" />
-            <vxe-column field="Ro1NtangleAxis1" title="紧固角度1軸" />
-            <vxe-column field="Ro1Ntcode" title="判定代码" />
-            <vxe-column field="Ro1Nthistory" title="抽样履历" />
-            <vxe-column field="Ro1Ntseating1" title="着座扭矩1軸" />
-            <vxe-column field="Ro1Ntdrop1" title="下降角度1軸" />
-            <vxe-column field="Ro1Ntslack1" title="松监视器扭矩1軸" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="铆接圧入">
-            <vxe-column field="Ro1Rapdate" title="计测日時" />
-            <vxe-column field="Ro1Rapbefore" title="铆接行程（0前）" />
-            <vxe-column field="Ro1Rapafter" title="铆接行程（0後）" />
-            <vxe-column field="Ro1Rapload" title="铆接荷重" />
-            <vxe-column field="Ro1RapmainStroke" title="主行程" />
-            <vxe-column field="Ro1Rapcode" title="判定代码" />
-            <vxe-column field="Ro1RapwashSensor" title="垫圈检测传感器値" />
-            <vxe-column field="Ro1RapwashMain" title="垫圈检测主値" />
-            <vxe-column field="Ro1RapwashPos" title="垫圈确认位置" />
-            <vxe-column field="Ro1Rapstroke" title="拐点行程" />
-            <vxe-column field="Ro1RaploadSec" title="拐点负重" />
-            <vxe-column field="Ro1RapfinalStroke" title="圧入最终行程" />
-            <vxe-column field="Ro1Rapmain2Stroke" title="主行程" />
-            <vxe-column field="Ro1Rapcode2" title="判定代码" />
-        </vxe-colgroup>
-
-        <vxe-colgroup title="旋转变压器圧入">
-            <vxe-column field="Ro1RtpstartDate" title="加工開始日時" />
-            <vxe-column field="Ro1Rtpstroke" title="拐点行程" />
-            <vxe-column field="Ro1Rtpload" title="拐点负重" />
-            <vxe-column field="Ro1RtpfinalStroke" title="圧入最终行程" />
-            <vxe-column field="Ro1RtpmainStroke" title="主行程" />
-            <vxe-column field="Ro1Rtpcode" title="判定代码" />
-            <vxe-column field="Ro1Rtphistory" title="抽样履历" />
-            <vxe-column field="Ro1Detection1" title="ｾﾝｻ位相間違い検出位置①" />
-            <vxe-column field="Ro1Detection2" title="ｾﾝｻ位相間違い検出位置②" />
-        </vxe-colgroup>
+      <vxe-colgroup title="旋转变压器圧入">
+        <vxe-column field="Ro1RtpstartDate" width="165px" title="加工開始日時" sortable></vxe-column>
+        <vxe-column field="Ro1Rtpstroke" width="70px" title="拐点行程" sortable></vxe-column>
+        <vxe-column field="Ro1Rtpload"  width="70px" title="拐点负重" sortable></vxe-column>
+        <vxe-column field="Ro1RtpfinalStroke"  width="80px" title="圧入最终行程" sortable></vxe-column>
+        <vxe-column field="Ro1RtpmainStroke" title="主行程" sortable></vxe-column>
+        <vxe-column field="Ro1Rtpcode"  width="70px" title="判定代码" sortable></vxe-column>
+        <vxe-column field="Ro1Rtphistory"  width="70px" title="抽样履历" sortable></vxe-column>
+        <vxe-column field="Ro1Detection1"  width="120px" title="ｾﾝｻ位相間違い検出位置①" sortable></vxe-column>
+        <vxe-column field="Ro1Detection2"  width="120px" title="ｾﾝｻ位相間違い検出位置②" sortable></vxe-column>
+      </vxe-colgroup>
     </vxe-colgroup>
 </template>
+<script setup>
+import PokayokeDate from '@/components/tableViewTemp/PokayokeDate'
+</script>

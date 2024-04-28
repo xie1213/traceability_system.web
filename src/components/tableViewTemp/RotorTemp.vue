@@ -41,9 +41,7 @@
       </vxe-colgroup>
 
       <BasicTemp />
-      <!-- <vxe-colgroup title="防错防误39计测日時">
-        <vxe-column field="PokayokeDate39" title="防错防误39计测日時" sortable ></vxe-column>
-      </vxe-colgroup> -->
+      
       <PokayokeDate :colName="'防错防误39计测日時'" :value="'PokayokeDate39'" />
       <PokayokeDate :colName="'防错防误40计测日時'" :value="'PokayokeDate40'" />
 
@@ -230,6 +228,7 @@
         <vxe-column field="HeatTime"  width="90px" title="加熱通電時間(秒)" sortable></vxe-column>
         <vxe-column field="HeatOutput"  width="80px" title="加熱输出(％）" sortable></vxe-column>
         <vxe-column field='HeatEndTime'  width="80px" title="加熱完了日時" sortable></vxe-column>
+        <vxe-column field='JudgmentCode' width="70px" title='判定代码' sortable></vxe-column>
       </vxe-colgroup>
 
       <vxe-colgroup title="轴圧入">

@@ -82,7 +82,7 @@
   </vxe-colgroup>
 
   <vxe-colgroup title="齿轮子工序履历">
-    <vxe-column field="Dmread" width="80px" title="DM读入" sortable />
+    <vxe-column field="Dmread" width="70px" title="DM读入" sortable />
     <vxe-column field="GearPressIn1" width="80px" title="齿轮压入１" sortable />
     <vxe-column field="GearPressIn2" width="80px" title="齿轮压入２" sortable />
     <vxe-column field="Slnffastening" width="100px" title="Co从动螺母紧固" sortable />
