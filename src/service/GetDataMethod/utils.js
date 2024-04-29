@@ -2,19 +2,19 @@
 import { apiClient, MotorTable, RotorTable, GearTable } from "../Import";
 import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
 import { reactive, ref } from "vue";
-import { motorData,rotorData,rrData,gearData,taData } from "@/service/Import/tableData";
+import { motorData, rotorData, rrData, gearData, taData } from "@/service/Import/tableData";
 
 
 //获取数据
 export const gridRef = ref(),
-tableData =  ref()
+  tableData = ref()
 
 //获取数据
 export const realList = (requestData) => {
   return new Promise((resolve) => {
     setTimeout(async () => {
       try {
-        
+
         TableConfig.loading = true;
         let response;
         response = await apiClient.post(
@@ -22,7 +22,7 @@ export const realList = (requestData) => {
           "api/DBTest/getTableData",
           requestData
         );
-        if (response.data !="空值") {
+        if (response.data != "空值") {
           // pagerConfig.total = response.data.count;
           TableConfig.loading = false;
           // Indicates that the asynchronous operation is complete
@@ -33,7 +33,7 @@ export const realList = (requestData) => {
             message: `无数据`,
           }); // 点击确定后的回调
         }
-        resolve(response.data); 
+        resolve(response.data);
       } catch (error) {
         ElMessageBox.alert(error, "错误", {
           type: "info",
@@ -41,7 +41,7 @@ export const realList = (requestData) => {
           callback: () => {
             ElMessage({
               type: "error",
-              message:error,
+              message: error,
             }); // 点击确定后的回调
 
             TableConfig.loading = false;
@@ -54,7 +54,6 @@ export const realList = (requestData) => {
 
 //导出数据
 export const exportData = async (tableName) => {
-
   try {
     ElMessageBox.confirm("确定导出吗")
       .then(async () => {
@@ -63,7 +62,7 @@ export const exportData = async (tableName) => {
           text: "正在导出...",
         });
         const response = await apiClient.get(
-          `api/DBTest/GetExport?tableName=${tableName}`,
+          `api/Excel/ExportData?tableName=${tableName}`,
           {
             responseType: "blob", // Set the responseType to 'blob' for binary data
           }
@@ -84,7 +83,7 @@ export const exportData = async (tableName) => {
         document.body.removeChild(link);
         loadings.close();
       })
-      .catch(() => {});
+      .catch(() => { });
   } catch (error) {
     console.error("导出失败:", error);
     // Handle the error and provide feedback to the user
@@ -92,7 +91,7 @@ export const exportData = async (tableName) => {
 };
 
 //获取下拉列表
-export const  GetTableColName = (tableName) => {
+export const GetTableColName = (tableName) => {
   //let firstName;
   if (tableName !== null) {
     switch (tableName) {
@@ -119,7 +118,7 @@ export const TableConfig = reactive({
   showOverflow: true,
   // showHeaderOverflow: true, //超长省略
   height: "600",
-  headerAlign:"center",
+  headerAlign: "center",
   loading: false,
   rowConfig: {
     useKey: true,
@@ -152,15 +151,15 @@ export const TableConfig = reactive({
 });
 
 //分页配置
-export const pagerConfig= reactive({
-    autoHidden:true,
-    currentPage: 1,
-    pageSize: 25,
-    total: 0,
-    align: "center",
-    background: true,
-    pageSizes: [15, 20, 25, 30],
-    layouts:['PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'Sizes', 'FullJump', 'Total']
+export const pagerConfig = reactive({
+  autoHidden: true,
+  currentPage: 1,
+  pageSize: 25,
+  total: 0,
+  align: "center",
+  background: true,
+  pageSizes: [15, 20, 25, 30],
+  layouts: ['PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'Sizes', 'FullJump', 'Total']
 })
 
 //表格配置
@@ -173,39 +172,39 @@ export const gridOptions = reactive({
   height: 'auto',
   loading: false,
   rowConfig: {
-      useKey: true,
-      isHover: true,
-      isCurrent: true,
-      height: 20
+    useKey: true,
+    isHover: true,
+    isCurrent: true,
+    height: 20
   },
   columnConfig: {
-      resizable: true,
-      minWidth: 120,
-      height: 20,
-      tooltip:true
+    resizable: true,
+    minWidth: 120,
+    height: 20,
+    tooltip: true
   },
-  tooltipConfig:{
-      showAll:true,
-      enterDelay:100
+  tooltipConfig: {
+    showAll: true,
+    enterDelay: 100
   },
   checkboxConfig: {
-      labelField: 'nickname'
+    labelField: 'nickname'
   },
   scrollY: {
-      enabled: true,
-      gt: 350
+    enabled: true,
+    gt: 350
   },
   scrollX: {
-      enabled: true,
-      gt: 350
+    enabled: true,
+    gt: 350
   },
   pagerConfig: {
-      currentPage: 1,
-      pageSize: 25,
-      total: 0,
-      align: 'center',
-      background: true,
-      pageSizes: [15, 20, 25, 30]
+    currentPage: 1,
+    pageSize: 25,
+    total: 0,
+    align: 'center',
+    background: true,
+    pageSizes: [15, 20, 25, 30]
   }
 })
 
@@ -213,87 +212,87 @@ export const gridOptions = reactive({
 export const loadColumnAndData = () => {
   gridOptions.loading = true
   Promise.all([
-      mockColumns(),
-      // realList()
+    mockColumns(),
+    // realList()
   ]).then(rest => {
     // console.log(rest[0]);
-      const columns = rest[0]
-      // const data = rest[1]
-      // const startTime = Date.now()
-      const $grid = gridRef.value
-      // 使用函数式加载
-      if ($grid) {
-          Promise.all([
-              $grid.reloadColumn(columns), // 传递第一行标题作为列配置
-              // $grid.reloadColumn(columns.firstRow), // Reload columns
-              // $grid.reloadData(dataList.value) // Reload data
-              // console.log(columns)
-          ]).then(() => {
-              //VXETable.modal.message({ content: `用时 ${Date.now() - startTime}毫秒`, status: 'info' })
-              gridOptions.loading = false
-          })
-      } else {
-          gridOptions.loading = false
-      }
+    const columns = rest[0]
+    // const data = rest[1]
+    // const startTime = Date.now()
+    const $grid = gridRef.value
+    // 使用函数式加载
+    if ($grid) {
+      Promise.all([
+        $grid.reloadColumn(columns), // 传递第一行标题作为列配置
+        // $grid.reloadColumn(columns.firstRow), // Reload columns
+        // $grid.reloadData(dataList.value) // Reload data
+        // console.log(columns)
+      ]).then(() => {
+        //VXETable.modal.message({ content: `用时 ${Date.now() - startTime}毫秒`, status: 'info' })
+        gridOptions.loading = false
+      })
+    } else {
+      gridOptions.loading = false
+    }
   })
 }
 
 
-export const mockColumns = ()=>{
-   return new Promise(resolve => {
+export const mockColumns = () => {
+  return new Promise(resolve => {
     setTimeout(() => {
-        const firstRowTitles = [];
-        for (let i = 0; i < tableData.value.length; i++) {
-            const title = tableData.value[i].title;
-            const subTitles = tableData.value[i].val.map(x => {
-                return {
-                    title: x.col,
-                    field: x.val,
-                    width: 120,
-                    height: 10,
-                    sortable: true,
-                    // fixed: getFixedStatus(x.col).fixed,
-                    // formatter: x.val === "CollectionDate" ? formatDate : undefined
-                };
-            });
-            firstRowTitles.push({
-                field: title,
-                title: title,
-                children: subTitles,
-                width: 120, // This line seems to be mistyped. I'm assuming you meant 'width' instead of 'while'.
-                height: 10,
-                fixed: title === '特定列' ? 'left' : undefined
-            });
-        }
-        resolve(firstRowTitles); // Resolve the promise with the data
+      const firstRowTitles = [];
+      for (let i = 0; i < tableData.value.length; i++) {
+        const title = tableData.value[i].title;
+        const subTitles = tableData.value[i].val.map(x => {
+          return {
+            title: x.col,
+            field: x.val,
+            width: 120,
+            height: 10,
+            sortable: true,
+            // fixed: getFixedStatus(x.col).fixed,
+            // formatter: x.val === "CollectionDate" ? formatDate : undefined
+          };
+        });
+        firstRowTitles.push({
+          field: title,
+          title: title,
+          children: subTitles,
+          width: 120, // This line seems to be mistyped. I'm assuming you meant 'width' instead of 'while'.
+          height: 10,
+          fixed: title === '特定列' ? 'left' : undefined
+        });
+      }
+      resolve(firstRowTitles); // Resolve the promise with the data
     }, 100);
-});
+  });
 }
 
 let tableNameList = {
-  "Motor履历":motorData.AllMotorTable,
-  "Rotor履历":rotorData.AllRotorTable,
-  "Gear履历":gearData.AllGearTable,
-  "Rr履历":rrData.AllRRTable,
-  "Ta履历":taData.AllTatable,
+  "Motor履历": motorData.AllMotorTable,
+  "Rotor履历": rotorData.AllRotorTable,
+  "Gear履历": gearData.AllGearTable,
+  "Rr履历": rrData.AllRRTable,
+  "Ta履历": taData.AllTatable,
 }
 
 //导入表配置
-export const importTableData =(tableName)=>{
-  
-  let tableImportData =  tableNameList[tableName] || null;
+export const importTableData = (tableName) => {
+
+  let tableImportData = tableNameList[tableName] || null;
   // console.log(tableName);
   // tableImportData.tableName = tableName
   console.log(tableImportData);
-  apiClient.post("api/Home/requestData",tableImportData)
-  .then(()=>{
-    console.log("更新成功");
-  }).catch((error)=>{
-    console.log(error);
-  })
+  apiClient.post("api/Home/requestData", tableImportData)
+    .then(() => {
+      console.log("更新成功");
+    }).catch((error) => {
+      console.log(error);
+    })
 }
 
-export const getPageData=(e,tableName)=>{
+export const getPageData = (e, tableName) => {
   return new Promise((resolve, reject) => {
     setTimeout(async () => {
       try {
@@ -312,4 +311,12 @@ export const getPageData=(e,tableName)=>{
       }
     }, 100);
   })
+}
+
+//消息提示
+export function alertMess(message, type) {
+  ElMessage({
+    message: message,
+    type: type
+  });
 }

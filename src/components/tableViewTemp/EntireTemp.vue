@@ -401,7 +401,6 @@
             <PokayokeDate :colName="'外観検査计测日時'" :value="'InspectionDate'" />
             <PokayokeDate :colName="'防错防误32计测日時'" :value="'PokayokeDate32'" />
             <PokayokeDate :colName="'HSG セット计测日時'" :value="'HsgSetDate'" />
-            <PokayokeDate :colName="'防错防误30计测日時'" :value="'PokayokeDate30'" />
 
             <vxe-colgroup title="D托盘重量">
                 <vxe-column field="DtrayWeight" width="70px" title="托盘 No" sortable></vxe-column>
@@ -429,6 +428,7 @@ import PokayokeDate from './PokayokeDate.vue';
 // import vw_RRTemp from '../Template/vw_RRTemp.vue';
 import { TableConfig } from '@/service/GetDataMethod/utils';
 import { vw_GearTable,vw_MotorTemp,vw_Rotor1Temp,vw_Rotor2Temp,vw_RRTemp } from '@/service/Import/tableTemp';
+import XEUtils from 'xe-utils'
 
 
 // import { forEach } from 'core-js/core/array';
@@ -540,5 +540,8 @@ const cancelMoth = (valueList) => {
     })
 }
 
+const formatDate = ({ cellValue }) => {
+  return XEUtils.toDateString(cellValue, 'yyyy-MM-dd HH:mm:ss')
+}
 
 </script>

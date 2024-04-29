@@ -49,8 +49,7 @@
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
 import { getSeleName } from "@/service/GetDataMethod/getTaleColName"
-import { ElMessage } from 'element-plus'
-import { realList, exportData, importTableData, pagerConfig, getPageData } from "@/service/GetDataMethod/utils"
+import { realList, exportData, importTableData, pagerConfig, getPageData,alertMess } from "@/service/GetDataMethod/utils"
 import { motorTemp, rotorTemp, gearTemp, rrTemp, taTemp, shipOut, entireTemp } from "@/service/Import/tableTemp"
 import NewSelTemp from '../Template/newSelTemp.vue';
 
@@ -155,24 +154,25 @@ const disbtn = ref(true)
 
 const searchCliced = () => {
     let sendToBack = {}
+    let len = 0
     //判断是否为空值
     Object.entries(request).forEach(([key, value]) => {
-        if (value !== "") {
+        if (key == "selectFactor") {
+            console.log(value);
+            len =  Object.keys(value).length
+        }
+        let isValue = key == "selectFactor" ? len == 3 : value !==""
+        // console.log(isvalue);
+        if (isValue) {
             sendToBack[key] = value;
         }
-    });
-    if (isSerialChecked.value && request.serialDateNumber =="") {
-        ElMessage({
-            message: '序列号勾选但没有输入',
-            type: 'error',
-        });
+        if (isSerialChecked.value &&  key == "serialDateNumber" && value === "") {
+            alertMess("序列号勾选但没有输入","error")
         return;
-    }
+        }
+    });
     if (Object.keys(sendToBack).length === 0) {
-        ElMessage({
-            message: '请至少选择一个条件',
-            type: 'error',
-        });
+        alertMess("请至少选择一个条件","error")
         return;
     }
     sendToBack.tableName = props.tableName
@@ -245,16 +245,15 @@ const handlePageChange = (e) => {
 
 //下拉框条件查询
 function getSelName(e) {
-    let arr = [];
-
-    // 遍历对象的属性，并将它们添加到数组中
-    Object.keys(e).map(key => {
-        arr.push(e[key]);
-    });
-    if (arr.length==3) {
-        request.selectFactor = arr
+    // console.log(e);
+    let len = Object.keys(e).length
+    if (len === 0) {
+        // console.log("空值");
+        request.selectFactor = {}
+        return;
+    }else if (len==3) {
+        request.selectFactor = e
     }
-    console.log(request.selectFactor);
 }
 //动态监控"
 watchEffect(() => {

@@ -177,12 +177,12 @@ const handleItemClick = (index) => {
 }
 
 
-//清除数据
-function clearItem() {
-  Object.keys(selRequestData).forEach(key => {
-    selRequestData[key] = "";
-  });
-}
+// //清除数据
+// function clearItem() {
+//   Object.keys(selRequestData).forEach(key => {
+//     selRequestData[key] = "";
+//   });
+// }
 
 //上限输入验证
 function topLimitInput(e) {
@@ -339,12 +339,13 @@ getFirstColName()
 watchEffect(() => {
   if (oldTableName.value != props.tableName) {
     getFirstColName()
+    isSelectChecked.value = false
     // selectChange(false)
     oldTableName.value = props.tableName
   }
-  if (firstValue.value == "") {
-    clearItem()
-  }
+  // if (firstValue.value == "") {
+  //   clearItem()
+  // }
   if (props.tableName == "出荷履历") {
     selRequestData.selectName = shipValue.value
   }
@@ -359,6 +360,10 @@ watchEffect(() => {
   // selRequestData.checked = isSelectChecked.value
   if (isSelectChecked.value == true) {
     getCheacked()
+  }else{
+    console.log("传值");
+    emit('selColName', {})
+
   }
  
 
