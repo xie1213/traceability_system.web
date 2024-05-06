@@ -73,7 +73,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="MG1组装・端子台紧固">
-        <vxe-column field="MoMg1date" width="165px" title="计测日时" sortable />
+        <vxe-column field="MoMg1Date" width="165px" title="计测日时" sortable />
         <vxe-column field="MoMg1torqAngleAxis1" width="80px" title="紧固角度1轴" sortable />
         <vxe-column field="MoMg1codeAxis1" width="85px" title="第1轴判定代码" sortable />
         <vxe-column field="MoMg1torqAngleAxis2" width="80px" title="紧固角度2轴" sortable />
@@ -83,7 +83,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="MG2组装・端子台紧固">
-        <vxe-column field="MoMg2date"  width="165px" title="计测日时" sortable />
+        <vxe-column field="MoMg2Date"  width="165px" title="计测日时" sortable />
         <vxe-column field="MoMg2torqAngleAxis1"  width="80px" title="紧固角度1轴" sortable />
         <vxe-column field="MoMg2codeAxis1" width="85px" title="第1轴判定代码" sortable />
         <vxe-column field="MoMg2torqAngleAxis2"  width="80px" title="紧固角度2轴" sortable />

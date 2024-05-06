@@ -40,7 +40,7 @@
         <el-button style="margin-top: 14px;margin-left:15px;height: 40px; width: 120px;"
             @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
 
-        <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
+        <el-button style="margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
     <component :is="selectedComponent" :tableData="tableData" />

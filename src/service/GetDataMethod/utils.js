@@ -2,7 +2,7 @@
 import { apiClient, MotorTable, RotorTable, GearTable } from "../Import";
 import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
 import { reactive, ref } from "vue";
-import { motorData, rotorData, rrData, gearData, taData } from "@/service/Import/tableData";
+import { motorData, rotorData, rrData, gearData, taData,allTableData,shipmentData } from "@/service/Import/tableData";
 
 
 //获取数据
@@ -275,6 +275,8 @@ let tableNameList = {
   "Gear履历": gearData.AllGearTable,
   "Rr履历": rrData.AllRRTable,
   "Ta履历": taData.AllTatable,
+  "全部履历":allTableData.table,
+  "出荷履历":shipmentData
 }
 
 //导入表配置

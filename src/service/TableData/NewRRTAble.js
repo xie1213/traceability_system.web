@@ -53,7 +53,7 @@ const rrColNames = [
         "PokayokeDate44",
         "UpenderDate",
         "PokayokeDate45",
-        "RejectTime"
+        "RejectTimeDate"
       ]
 const BasicDatezh = [
     {

@@ -62,7 +62,7 @@
             <PokayokeDate :colName="'防错防误44计测日時'" :value="'PokayokeDate44'" />
             <PokayokeDate :colName="'反転機计测日時'" :value="'UpenderDate'" />
             <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
-            <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTime'" />
+            <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTimeDate'" />
         </vxe-table>
     </div>
 

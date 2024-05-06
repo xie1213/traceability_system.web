@@ -64,7 +64,7 @@
       <PokayokeDate :colName="'防错防误44计测日時'" :value="'PokayokeDate44'" />
       <PokayokeDate :colName="'翻转机'" :value="'UpenderDate'" />
       <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
-      <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTime'" />
+      <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTimeDate'" />
       <PokayokeDate :colName="'防错防误33计测日時'" :value="'PokayokeDate33'" />
 
       <vxe-colgroup title="差速器装配">
@@ -77,7 +77,7 @@
       <PokayokeDate :colName="'防错防误34计测日時'" :value="'PokayokeDate34'" />
 
       <vxe-colgroup title="差动齿轮测量">
-        <vxe-column field="DgmmeasTime" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="DgmmeasTimeDate" width="165px" title="计测日时" sortable></vxe-column>
         <vxe-column field="Dgmdagjudge" width="85px" title="作齿轮判定" sortable></vxe-column>
         <vxe-column field="DgmlhRh" title="変位量" sortable></vxe-column>
         <vxe-column field="DgmmaxTorque" width="70px" title="上限扭矩" sortable></vxe-column>
@@ -85,7 +85,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="差速器销铆接">
-        <vxe-column field="DprmeasTime" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="DprmeasTimeDate" width="165px" title="计测日时" sortable></vxe-column>
         <vxe-column field="Dprfrs" width="70px" title="最终行程" sortable></vxe-column>
         <vxe-column field="Dprfrl" width="85px" title="铆接最终负重" sortable></vxe-column>
       </vxe-colgroup>
@@ -139,7 +139,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="DF BRG＋环圧入">
-        <vxe-column field=Dfbrgdate width="165px" title=计测日时 sortable></vxe-column>
+        <vxe-column field=DfbrgDate width="165px" title=计测日时 sortable></vxe-column>
         <vxe-column field=Dfbrgstroke width="70px" title=拐点行程 sortable></vxe-column>
         <vxe-column field=Dfbrgload width="70px" title=拐点负重 sortable></vxe-column>
         <vxe-column field=DfbrgfinalStroke width="70px" title=最终行程 sortable></vxe-column>
@@ -152,7 +152,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="DF紧固1">
-        <vxe-column field="Df1date" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Df1Date" width="165px" title="计测日时" sortable></vxe-column>
         <vxe-column field='Df1angleAxis1' width="80px" title="紧固角度 1軸" sortable></vxe-column>
         <vxe-column field='Df1codeAxis1' width="85px" title='第1軸 判定代码' sortable></vxe-column>
         <vxe-column field='Df1angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
@@ -169,7 +169,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="DF紧固2">
-        <vxe-column field="Df2date" width="165px" title="计测日时" sortable></vxe-column>
+        <vxe-column field="Df2Date" width="165px" title="计测日时" sortable></vxe-column>
         <vxe-column field="Df2angleAxis1" width="80px" title="紧固角度 1軸" sortable></vxe-column>
         <vxe-column field="Df2codeAxis1" width="85px" title="第1軸 判定代码" sortable></vxe-column>
         <vxe-column field='Df2angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
@@ -202,8 +202,8 @@
         <vxe-column field="Mg2dec" width="70px" title="MG2判定" sortable></vxe-column>
       </vxe-colgroup>
 
-      <PokayokeDate :colName="'轴移載计测日時'" :value="'Asldate'" />
-      <PokayokeDate :colName="'铁芯移載计测日時'" :value="'Ictldate'" />
+      <PokayokeDate :colName="'轴移載计测日時'" :value="'AslDate'" />
+      <PokayokeDate :colName="'铁芯移載计测日時'" :value="'IctlDate'" />
 
       <vxe-colgroup title="转子铁芯序列">
         <vxe-column field="Rcserial" width="80px" title="转子铁芯序列" sortable></vxe-column>
@@ -232,7 +232,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="轴圧入">
-        <vxe-column field="Apidate" width="165px" title="计测日時" sortable></vxe-column>
+        <vxe-column field="ApiDate" width="165px" title="计测日時" sortable></vxe-column>
         <vxe-column field="Apistroke" width="70px" title="拐点行程" sortable></vxe-column>
         <vxe-column field="Apiload"  width="70px" title="拐点负重" sortable></vxe-column>
         <vxe-column field="ApifinalStroke"  width="80px" title="圧入最终行程" sortable></vxe-column>
@@ -247,7 +247,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="l螺母紧固">
-        <vxe-column field='Ntdate' width="165px" title=计测日時 sortable></vxe-column>
+        <vxe-column field='NtDate' width="165px" title=计测日時 sortable></vxe-column>
         <vxe-column field='NttorqueAxis1' width="80px" title="紧固扭矩1軸" sortable></vxe-column>
         <vxe-column field='NtangleAxis1' width="80px" title="紧固角度1軸" sortable></vxe-column>
         <vxe-column field='Ntcode' width="70px" title="判定代码" sortable></vxe-column>
@@ -258,7 +258,7 @@
       </vxe-colgroup>
 
       <vxe-colgroup title="铆接圧入">
-        <vxe-column field='Rapdate' width="165px" title="计测日時" sortable></vxe-column>
+        <vxe-column field='RapDate' width="165px" title="计测日時" sortable></vxe-column>
         <vxe-column field='Rapbefore' width="95px"  title="铆接行程（0前）" sortable></vxe-column>
         <vxe-column field='Rapafter' width="95px" title="铆接行程（0後）" sortable></vxe-column>
         <vxe-column field='Rapload' width="70px" title="铆接荷重" sortable></vxe-column>

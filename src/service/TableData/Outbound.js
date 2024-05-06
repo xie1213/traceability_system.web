@@ -13,11 +13,11 @@ const outdata = [
     },
     {
         tableName:"先行时间",
-        colName:"LeadTime"
+        colName:"LeadTimeDate"
     },
     {
         tableName:"出荷时间",
-        colName:"ShippingTime"
+        colName:"ShippingTimeDate"
     },
     {
         tableName:"出荷目的地",

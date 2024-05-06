@@ -15,14 +15,14 @@
                 <vxe-column field="GeHsgBrgFinalLoadSec" width="100px" title="RrBrg圧入最终负重2" sortable></vxe-column>
                 <vxe-column field="GeHsgBrgMaasterStroke" width="100px" title="RrBrg圧入主行程" sortable></vxe-column>
             </vxe-colgroup>
-            <PokayokeDate :colName="'防错防误41计测日時'" :value="'PokayokeDate41'" />
-            <PokayokeDate :colName="'防错防误42计测日時'" :value="'PokayokeDate42'" />
-            <PokayokeDate :colName="'防错防误43计测日時'" :value="'PokayokeDate43'" />
-            <PokayokeDate :colName="'防错防误44计测日時'" :value="'PokayokeDate44'" />
-            <PokayokeDate :colName="'翻转机'" :value="'UpenderDate'" />
-            <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
-            <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTime'" />
-            <PokayokeDate :colName="'防错防误33计测日時'" :value="'PokayokeDate33'" />
+            <PokayokeDate :colName="'防错防误41计测日時'" :value="'GePokayokeDate41'" />
+            <PokayokeDate :colName="'防错防误42计测日時'" :value="'GePokayokeDate42'" />
+            <PokayokeDate :colName="'防错防误43计测日時'" :value="'GePokayokeDate43'" />
+            <PokayokeDate :colName="'防错防误44计测日時'" :value="'GePokayokeDate44'" />
+            <PokayokeDate :colName="'翻转机'" :value="'GeUpenderDate'" />
+            <PokayokeDate :colName="'防错防误45计测日時'" :value="'GePokayokeDate45'" />
+            <PokayokeDate :colName="'拒绝计测日時'" :value="'GeRejectTimeDate'" />
+            <PokayokeDate :colName="'防错防误33计测日時'" :value="'GePokayokeDate33'" />
 
             <vxe-colgroup title="差速器装配">
                 <vxe-column field="GeDgameasDate" width="165px" title="计测日时" sortable></vxe-column>
@@ -66,51 +66,51 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="齿轮压入2">
-                <vxe-column field=Gear2Date width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=Gear2Stroke width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Gear2Load width="75px" title=変曲点负重 sortable></vxe-column>
-                <vxe-column field=Gear2FinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=Gear2FinalLoad width="75px" title=最終荷负重 sortable></vxe-column>
-                <vxe-column field=Gear2StrokeSec width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Gear2LoadSec width="75px" title=変曲点负重 sortable></vxe-column>
-                <vxe-column field=Gear2FinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=Gear2FinalLoadSec width="75px" title=最終荷负重 sortable></vxe-column>
-                <vxe-column field=Gear2MainStroke title=主行程 sortable></vxe-column>
-                <vxe-column field=Gear2Abvalue width="70px" title=A/B sortable></vxe-column>
+                <vxe-column field="GeGear2Date" width="165px" title=计测日时 sortable></vxe-column>
+                <vxe-column field="GeGear2Stroke" width="70px" title=拐点行程 sortable></vxe-column>
+                <vxe-column field="GeGear2Load" width="75px" title=変曲点负重 sortable></vxe-column>
+                <vxe-column field="GeGear2FinalStroke" width="70px" title=最终行程 sortable></vxe-column>
+                <vxe-column field="GeGear2FinalLoad" width="75px" title=最終荷负重 sortable></vxe-column>
+                <vxe-column field="GeGear2StrokeSec" width="70px" title=拐点行程 sortable></vxe-column>
+                <vxe-column field="GeGear2LoadSec" width="75px" title=変曲点负重 sortable></vxe-column>
+                <vxe-column field="GeGear2FinalStrokeSec" width="70px" title=最终行程 sortable></vxe-column>
+                <vxe-column field="GeGear2FinalLoadSec" width="75px" title=最終荷负重 sortable></vxe-column>
+                <vxe-column field="GeGear2MainStroke" title=主行程 sortable></vxe-column>
+                <vxe-column field="GeGear2Abvalue" width="70px" title=A/B sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="差速器销l螺母紧固">
-                <vxe-column field=DpntDate width="165px" title="计测日时" sortable></vxe-column>
-                <vxe-column field=DpntTorqueAxis1 width="80px" title="紧固扭矩1軸" sortable></vxe-column>
-                <vxe-column field=DpntAngleAxis1 width="80px" title="紧固角度1軸" sortable></vxe-column>
-                <vxe-column field=DpntJudgment width="70px" title="判定代码" sortable></vxe-column>
-                <vxe-column field=DpntSeating width="80px" title="着座扭矩1軸" sortable></vxe-column>
-                <vxe-column field=DpntDrop width="80px" title="下降角度1軸" sortable></vxe-column>
-                <vxe-column field=DpntSlack width="100px" title="松弛监视器扭矩1軸" sortable></vxe-column>
+                <vxe-column field="GeDpntDate" width="165px" title="计测日时" sortable></vxe-column>
+                <vxe-column field="GeDpntTorqueAxis1" width="80px" title="紧固扭矩1軸" sortable></vxe-column>
+                <vxe-column field="GeDpntAngleAxis1" width="80px" title="紧固角度1軸" sortable></vxe-column>
+                <vxe-column field="GeDpntJudgment" width="70px" title="判定代码" sortable></vxe-column>
+                <vxe-column field="GeDpntSeating" width="80px" title="着座扭矩1軸" sortable></vxe-column>
+                <vxe-column field="GeDpntDrop" width="80px" title="下降角度1軸" sortable></vxe-column>
+                <vxe-column field="GeDpntSlack" width="100px" title="松弛监视器扭矩1軸" sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="差速器销螺母铆接">
-                <vxe-column field=DpnfMeasDate width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=DpnfFinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DpnfFinalLoad width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DpnfMainStroke title=主行程 sortable></vxe-column>
+                <vxe-column field="GeDpnfMeasDate" width="165px" title=计测日时 sortable></vxe-column>
+                <vxe-column field="GeDpnfFinalStroke" width="70px" title=最终行程 sortable></vxe-column>
+                <vxe-column field="GeDpnfFinalLoad" width="70px" title=最终负重 sortable></vxe-column>
+                <vxe-column field="GeDpnfMainStroke" title=主行程 sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="DF BRG＋环圧入">
-                <vxe-column field=Dfbrgdate width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=Dfbrgstroke width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Dfbrgload width="70px" title=拐点负重 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalLoad width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DfbrgstrokeSec width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=DfbrgloadSec width="70px" title=拐点负重 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalLoadSec width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DfbrgmainStroke title=主行程 sortable></vxe-column>
+                <vxe-column field="GeDfbrgDate" width="165px" title=计测日时 sortable></vxe-column>
+                <vxe-column field="GeDfbrgstroke" width="70px" title=拐点行程 sortable></vxe-column>
+                <vxe-column field="GeDfbrgload" width="70px" title=拐点负重 sortable></vxe-column>
+                <vxe-column field="GeDfbrgfinalStroke" width="70px" title=最终行程 sortable></vxe-column>
+                <vxe-column field="GeDfbrgfinalLoad" width="70px" title=最终负重 sortable></vxe-column>
+                <vxe-column field="GeDfbrgstrokeSec" width="70px" title=拐点行程 sortable></vxe-column>
+                <vxe-column field="GeDfbrgloadSec" width="70px" title=拐点负重 sortable></vxe-column>
+                <vxe-column field="GeDfbrgfinalStrokeSec" width="70px" title=最终行程 sortable></vxe-column>
+                <vxe-column field="GeDfbrgfinalLoadSec" width="70px" title=最终负重 sortable></vxe-column>
+                <vxe-column field="GeDfbrgmainStroke" title=主行程 sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="DF紧固1">
-                <vxe-column field="GeDf1date" width="165px" title="计测日时" sortable></vxe-column>
+                <vxe-column field="GeDf1Date" width="165px" title="计测日时" sortable></vxe-column>
                 <vxe-column field='GeDf1angleAxis1' width="80px" title="紧固角度 1軸" sortable></vxe-column>
                 <vxe-column field='GeDf1codeAxis1' width="85px" title='第1軸 判定代码' sortable></vxe-column>
                 <vxe-column field='GeDf1angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
@@ -127,7 +127,7 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="DF紧固2">
-                <vxe-column field="GeDf2date" width="165px" title="计测日时" sortable></vxe-column>
+                <vxe-column field="GeDf2Date" width="165px" title="计测日时" sortable></vxe-column>
                 <vxe-column field="GeDf2angleAxis1" width="80px" title="紧固角度 1軸" sortable></vxe-column>
                 <vxe-column field="GeDf2codeAxis1" width="85px" title="第1軸 判定代码" sortable></vxe-column>
                 <vxe-column field='GeDf2angleAxis2' width="80px" title="紧固角度 2軸" sortable></vxe-column>
@@ -148,11 +148,11 @@
                 <vxe-column field="GePinposition" width="80px" title="ピン検査位置" sortable></vxe-column>
             </vxe-colgroup>
 
-            <PokayokeDate :colName="'防错防误36计测日時'" :value="'PokayokeDate36'" />
+            <PokayokeDate :colName="'防错防误36计测日時'" :value="'GePokayokeDate36'" />
 
-            <PokayokeDate :colName="'防错防误37计测日時'" :value="'PokayokeDate37'" />
+            <PokayokeDate :colName="'防错防误37计测日時'" :value="'GePokayokeDate37'" />
 
-            <PokayokeDate :colName="'防错防误38计测日時'" :value="'PokayokeDate38'" />
+            <PokayokeDate :colName="'防错防误38计测日時'" :value="'GePokayokeDate38'" />
 
             <vxe-colgroup title="MG1磁化">
                 <vxe-column field='GeMg1workTemp' width="80px" title="MG1工件温度" sortable></vxe-column>
@@ -166,8 +166,8 @@
                 <vxe-column field="GeMg2dec" width="70px" title="MG2判定" sortable></vxe-column>
             </vxe-colgroup>
 
-            <PokayokeDate :colName="'轴移載计测日時'" :value="'Asldate'" />
-            <PokayokeDate :colName="'铁芯移載计测日時'" :value="'Ictldate'" />
+            <PokayokeDate :colName="'轴移載计测日時'" :value="'AslDate'" />
+            <PokayokeDate :colName="'铁芯移載计测日時'" :value="'IctlDate'" />
 
             <vxe-colgroup title="转子铁芯序列">
                 <vxe-column field="GeRcserial" width="80px" title="转子铁芯序列" sortable></vxe-column>
@@ -196,7 +196,7 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="轴圧入">
-                <vxe-column field="GeApidate" width="165px" title="计测日時" sortable></vxe-column>
+                <vxe-column field="GeApiDate" width="165px" title="计测日時" sortable></vxe-column>
                 <vxe-column field="GeApistroke" width="70px" title="拐点行程" sortable></vxe-column>
                 <vxe-column field="GeApiload" width="70px" title="拐点负重" sortable></vxe-column>
                 <vxe-column field="GeApifinalStroke" width="80px" title="圧入最终行程" sortable></vxe-column>
@@ -211,7 +211,7 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="l螺母紧固">
-                <vxe-column field='GeNtdate' width="165px" title=计测日時 sortable></vxe-column>
+                <vxe-column field='GeNtDate' width="165px" title=计测日時 sortable></vxe-column>
                 <vxe-column field='GeNttorqueAxis1' width="80px" title="紧固扭矩1軸" sortable></vxe-column>
                 <vxe-column field='GeNtangleAxis1' width="80px" title="紧固角度1軸" sortable></vxe-column>
                 <vxe-column field='GeNtcode' width="70px" title="判定代码" sortable></vxe-column>
@@ -222,7 +222,7 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="铆接圧入">
-                <vxe-column field='GeRapdate' width="165px" title="计测日時" sortable></vxe-column>
+                <vxe-column field='GeRapDate' width="165px" title="计测日時" sortable></vxe-column>
                 <vxe-column field='GeRapbefore' width="95px" title="铆接行程（0前）" sortable></vxe-column>
                 <vxe-column field='GeRapafter' width="95px" title="铆接行程（0後）" sortable></vxe-column>
                 <vxe-column field='GeRapload' width="70px" title="铆接荷重" sortable></vxe-column>

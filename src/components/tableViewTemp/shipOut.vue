@@ -5,8 +5,8 @@
             <vxe-column field="SerialNo" title="序列号" sortable />
             <vxe-column field="ProductNo" title="品番" sortable />
             <vxe-column field="Printing" title="印字标识" sortable />
-            <vxe-column field="LeadTime" title="先行时间" sortable :formatter="formatDate" />
-            <vxe-column field="ShippingTime" title="出荷时间" sortable :formatter="formatDate" />
+            <vxe-column field="LeadTimeDate" title="先行时间" sortable :formatter="formatDate" />
+            <vxe-column field="ShippingTimeDate" title="出荷时间" sortable :formatter="formatDate" />
             <vxe-column field="Destination" title="出荷目的地" sortable />
             <vxe-column field="DestinationArea" title="目的地工区" sortable />
             <vxe-column field="ReceivingPoint" title="受入口" sortable />

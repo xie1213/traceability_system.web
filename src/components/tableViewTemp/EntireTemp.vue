@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 800px">
+    <div >
         <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange" style="display: inline;">
             <el-checkbox v-for="city in columns" :key="city" :label="city" :value="city">{{ city }}</el-checkbox>
         </el-checkbox-group>
@@ -34,7 +34,7 @@
             <BasicTemp />
             <PokayokeDate :colName="'防错防误15计测日時'" :value="'PokayokeDate15'" />
             <PokayokeDate :colName="'防错防误16计测日時'" :value="'PokayokeDate16'" />
-            <PokayokeDate :colName="'ラベル発券计测日时'" :value="'TagMeas'" />
+            <PokayokeDate :colName="'ラベル発券计测日时'" :value="'TagMeasDate'" />
             <PokayokeDate :colName="'防错防误18计测日時'" :value="'PokayokeDate18'" />
             <PokayokeDate :colName="'防错防误19计测日時'" :value="'PokayokeDate19'" />
 
@@ -102,7 +102,7 @@
             <PokayokeDate :colName="'防错防误20计测日時'" :value="'PokayokeDate20'" />
 
             <vxe-colgroup title="HSG FIGP">
-                <vxe-column field='HsgFigpdate' width="175px" title="HSG FIGP计测日時" sortable></vxe-column>
+                <vxe-column field='HsgFigpDate' width="175px" title="HSG FIGP计测日時" sortable></vxe-column>
                 <vxe-column field='HsgFigpportrait' width="80px" title='画像判定結果' sortable></vxe-column>
             </vxe-colgroup>
 
@@ -395,7 +395,7 @@
             <PokayokeDate :colName="'防错防误26计测日時'" :value="'PokayokeDate26'" />
             <PokayokeDate :colName="'防错防误28计测日時'" :value="'PokayokeDate28'" />
             <PokayokeDate :colName="'防错防误29计测日時'" :value="'PokayokeDate29'" />
-            <PokayokeDate :colName="'刻印计测日時'" :value="'EngravingData'" />
+            <PokayokeDate :colName="'刻印计测日時'" :value="'EngravingDate'" />
             <PokayokeDate :colName="'防错防误30计测日時'" :value="'PokayokeDate30'" />
             <PokayokeDate :colName="'防错防误31计测日時'" :value="'PokayokeDate31'" />
             <PokayokeDate :colName="'外観検査计测日時'" :value="'InspectionDate'" />
