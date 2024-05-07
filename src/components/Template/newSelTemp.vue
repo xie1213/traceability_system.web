@@ -20,7 +20,7 @@
       <div v-else style="padding-left: 22px; width: 180px;">
         <span style="font-size: 14px;">选择</span>
         <el-select v-model="selRequestData.selectName" clearable placeholder="Select" style="width: 150px">
-          <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" :value="item.val" />
+          <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" @click="getTwoSelName(item)" :value="item.val" />
         </el-select>
       </div>
     </div>
@@ -102,7 +102,10 @@ const shipValue = ref("");  //出荷数据
 
 // const emit = defineEmits(['selColName'])  //向父组件传值
 
-const serialNumberPattern = ref(/^[A-Za-z0-9\b ]+[A-Za-z0-9\b ]*$/); //正则验证
+// const serialNumberPattern = ref(/^[A-Za-z0-9\b# ]+[A-Za-z0-9\b# ]*$/); //正则验证
+
+const serialNumberPattern = ref(/^[A-Za-z0-9#\s]+$/); //正则验证
+
 
 
 //时间格式化
@@ -176,17 +179,11 @@ const handleItemClick = (index) => {
   }
 }
 
-
-// //清除数据
-// function clearItem() {
-//   Object.keys(selRequestData).forEach(key => {
-//     selRequestData[key] = "";
-//   });
-// }
-
 //上限输入验证
 function topLimitInput(e) {
-  selRequestData.topLimit = verifyInput(e)
+  let topLimit = verifyInput(e)
+  //console.log(parseInt(topLimit) < parseInt(selRequestData.lowerLimit));
+  selRequestData.topLimit = topLimit
 }
 
 //下限输入验证
@@ -202,7 +199,6 @@ let lastValidInput = '';
   if (textChecked()) {
     return ""
   }
-
   if (value === "") {
     return "";
   }
@@ -211,10 +207,6 @@ let lastValidInput = '';
       message: '输入内容不合法',
       type: 'error',
     });
-    console.log(lastValidInput);
-    // if (lastValidInput.length ==1) {
-    //   lastValidInput =""
-    // }
     return lastValidInput
   } else {
     lastValidInput = value
@@ -256,16 +248,6 @@ const getTimeString = (date) => {
 const formattedStartTime = getTimeString(selStartTime.value)
 const formattedEndTime = getTimeString(selEndTime.value)
 
-//获取时间
-// function getRequsetTime() {
-//   if (selRequestData.selectName.includes('Date')) {
-//     console.log("时间");
-//     console.log(selStartDay.value);
-//     selRequestData.selStartTime = `${selStartDay.value} ${formattedEndTime}`;
-//     selRequestData.selEndTime = `${selEndDay.value} ${formattedStartTime}`;
-//   }
-// }
-
 //时间限制
 function verifyTime() {
   let dateTime = new Date().toISOString().slice(0, 10)
@@ -288,6 +270,8 @@ function verifyTime() {
 
 //全部下拉
 function handleChange(e) {
+  console.log(e);
+  console.log("下拉");
   selRequestData.selectName = e[1]
 }
 
@@ -297,14 +281,9 @@ function getCheacked() {
   let { selectName, topLimit, lowerLimit } = selRequestData;
   //判断是否为空值
   if (!selectName.includes("Date")) {
-
-    if (topLimit === "") {
-      allterMessage("上限值为空", "error")
-    }
-
-    if (lowerLimit === "") {
-      allterMessage("下限值为空", "error")
-    }
+    parseInt(topLimit)
+    console.log( `上限${parseInt(topLimit)}`);
+    console.log(parseInt(lowerLimit));
   }
   if (selectName === "") {
     allterMessage("条件未选择", "error")
@@ -316,7 +295,8 @@ function getCheacked() {
       sendToBack[key] = value;
     }
   });
-  console.log(sendToBack);
+
+  
 
   emit('selColName', sendToBack)
 }
@@ -331,12 +311,18 @@ function allterMessage(message, type) {
     type: type,
   });
 }
+function getTwoSelName(e){
+  console.log("下拉");
+  console.log(e);
+  selRequestData.selectNameZh = e["col"]
+}
 
 //旧表名与新表名
 const oldTableName = shallowRef(props.tableName);
 getFirstColName()
 
 watchEffect(() => {
+  let { selectName, topLimit, lowerLimit } = selRequestData;
   if (oldTableName.value != props.tableName) {
     getFirstColName()
     isSelectChecked.value = false
@@ -347,10 +333,10 @@ watchEffect(() => {
   //   clearItem()
   // }
   if (props.tableName == "出荷履历") {
-    selRequestData.selectName = shipValue.value
+    selectName = shipValue.value
   }
 
-  if (selRequestData.selectName.includes("Date")) {
+  if (selectName.includes("Date")) {
     // console.log("时间");
     verifyTime()
     
@@ -358,19 +344,14 @@ watchEffect(() => {
     selRequestData.endDateTime =`${selEndDay.value} ${formattedStartTime}`;
   }
   // selRequestData.checked = isSelectChecked.value
-  if (isSelectChecked.value == true) {
+  if (isSelectChecked.value) {
     getCheacked()
   }else{
-    console.log("传值");
     emit('selColName', {})
-
   }
- 
-
-    //结束时间
-    
-  // selectChange()
-  // getCheacked();
+  if (parseInt(topLimit)< parseInt(lowerLimit)) {
+    allterMessage("下限大于上限", "error")
+  }
 })
 
 </script>

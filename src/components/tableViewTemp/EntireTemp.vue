@@ -12,23 +12,42 @@
                     :formatter="formatDate" />
                 <vxe-column field="ShipmentSerial" width="150px" title="出荷序列" fixed="left" sortable />
             </vxe-colgroup>
+           
+
             <vxe-colgroup title="Tatable">
+                <vxe-colgroup title="基本信息">
+                <vxe-column field="InterNo" width="61px" title="接口No" sortable />
+                <vxe-column field="CaseDec" width="62px" title="箱体识别" sortable />
+                <vxe-column field="RrCoverDec" width="63px" title="Rr盖判别" sortable />
+                <vxe-column field="ParkingDec" width="62px" title="停车识别" sortable />
+                <vxe-column field="GearDec" width="62px" title="齿轮识别" sortable />
+                <vxe-column field="DefLingDec" width="62px" title="变形判别" sortable />
+                <vxe-column field="HsgDec" width="62px" title="Hsg识别" sortable />
+                <vxe-column field="MG1StatorDec" width="80px" title="MG1定子判別" sortable />
+                <vxe-column field="MG2StatorDec" width="80px" title="MG2定子判別" sortable />
+                <vxe-column field="MG1RotorDec" width="80px" title="MG1转子判別" sortable />
+                <vxe-column field="MG2RotorDec" width="80px" title="MG2转子判別" sortable />
+                <vxe-column field="LineDec" width="62px" title="线体判別" sortable />
+                <vxe-column field="Dfcase" width="62px" title="DF箱体" sortable />
+                <vxe-column field="OilPump" width="70px" title="油泵" sortable />
+            </vxe-colgroup>
+
                 <vxe-colgroup title="序列">
                 <vxe-column field="CaseSerial" width="145px" title="CASE序列" sortable />
                 <vxe-column field="HsgSerial" width="145px" title="HSG序列" sortable />
-                <vxe-column field="Mg1sserial" width="145px" title="MG1定子序列" sortable></vxe-column>
-                <vxe-column field="Mg2sserial" width="145px" title="MG2定子序列" sortable></vxe-column>
-                <vxe-column field="Mg1rserial" width="145px" title="MG1转子序列" sortable />
-                <vxe-column field="Mg2rserial" width="145px" title="MG2转子序列" sortable />
+                <vxe-column field="MG1SSerial" width="145px" title="MG1定子序列" sortable></vxe-column>
+                <vxe-column field="MG2SSerial" width="145px" title="MG2定子序列" sortable></vxe-column>
+                <vxe-column field="MG1RSerial" width="145px" title="MG1转子序列" sortable />
+                <vxe-column field="MG2RSerial" width="145px" title="MG2转子序列" sortable />
                 <vxe-column field="CoDriveSerial" width="155px" title="计数器驱动器序列" sortable />
                 <vxe-column field="MoDriveSerial" width="145px" title="MG2修正序列" sortable />
                 <vxe-column field="DrivenSerial" width="145px" title="受驱动序列" sortable />
                 <vxe-column field="DorpinSerial" width="145px" title="差速器销序列" sortable />
-                <vxe-column field="DfringSerial" width="145px" title="齿圈序列" sortable />
-                <vxe-column field="DfcaseSerial" width="145px" title="差速器箱序列" sortable />
-                <vxe-column field="RrcoverSerial" width="155px" title="Rr盖序列" sortable />
+                <vxe-column field="DFRingSerial" width="145px" title="齿圈序列" sortable />
+                <vxe-column field="DFCaseSerial" width="145px" title="差速器箱序列" sortable />
+                <vxe-column field="RRCoverSerial" width="155px" title="Rr盖序列" sortable />
                 <!-- <vxe-column field="ShipmentSerial" width="155px" title="出货序列" sortable /> -->
-                <vxe-column field="RropSerial" width="145px" title="Rr油泵序列" sortable />
+                <vxe-column field="RRopSerial" width="145px" title="Rr油泵序列" sortable />
             </vxe-colgroup>
 
             <BasicTemp />
@@ -403,7 +422,8 @@
             <PokayokeDate :colName="'HSG セット计测日時'" :value="'HsgSetDate'" />
 
             <vxe-colgroup title="D托盘重量">
-                <vxe-column field="DtrayWeight" width="70px" title="托盘 No" sortable></vxe-column>
+                <vxe-column field="Tray" width="70px" title="托盘 No" sortable></vxe-column>
+                <vxe-column field="Weight" width="70px" title="重量" sortable></vxe-column>
             </vxe-colgroup>
             </vxe-colgroup>
             <vw_MotorTemp v-if="showMotor"></vw_MotorTemp>

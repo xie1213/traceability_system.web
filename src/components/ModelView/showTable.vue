@@ -26,7 +26,7 @@
             <el-time-picker v-model="startTime" style="width:160px" />
         </div>
         <div style="display: inline;width: 200px;">
-            <el-checkbox v-model="isSerialChecked" @change="serialChange">产品键</el-checkbox>
+            <el-checkbox v-model="isSerialChecked" @change="serialChange">产品序列</el-checkbox>
             <div style="padding-top: 3px;">
                 <el-input v-model="serialNumber" style="width: 160px" :pattern="serialNumberPattern"
                     @input="serialInput" placeholder="Please input" />
@@ -40,7 +40,7 @@
         <el-button style="margin-top: 14px;margin-left:15px;height: 40px; width: 120px;"
             @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
 
-        <el-button style="margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
+        <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
     <component :is="selectedComponent" :tableData="tableData" />
@@ -49,7 +49,7 @@
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
 import { getSeleName } from "@/service/GetDataMethod/getTaleColName"
-import { realList, exportData, importTableData, pagerConfig, getPageData,alertMess } from "@/service/GetDataMethod/utils"
+import { realList,exportData, importTableData, pagerConfig, getPageData, alertMess } from "@/service/GetDataMethod/utils"
 import { motorTemp, rotorTemp, gearTemp, rrTemp, taTemp, shipOut, entireTemp } from "@/service/Import/tableTemp"
 import NewSelTemp from '../Template/newSelTemp.vue';
 
@@ -61,7 +61,7 @@ const request = reactive({
     startDateTime: "",
     endDateTime: "",
     serialDateNumber: "",
-    selectFactor:[]
+    selectFactor: []
 })
 //#region  时间代码
 
@@ -98,7 +98,7 @@ const isSerialChecked = ref(false);
 
 //序列号值及序列号验证
 const serialNumber = ref("");
-const serialNumberPattern = ref(/^[A-Za-z0-9]+[A-Za-z0-9]*$/);
+const serialNumberPattern = ref(/^[A-Za-z0-9#\s]+$/);
 
 // 检查输入是否合法的函数
 const validateInput = (value, targetRef) => {
@@ -148,35 +148,41 @@ const selectedComponent = computed(() => {
 
 //#endregion
 
+
+
+
 //#region 搜索
 //按钮是否隐藏
 const disbtn = ref(true)
-
+const exportName = ref("")
 const searchCliced = () => {
     let sendToBack = {}
     let len = 0
     //判断是否为空值
     Object.entries(request).forEach(([key, value]) => {
+        console.log(key);
         if (key == "selectFactor") {
-            console.log(value);
-            len =  Object.keys(value).length
+            len = Object.keys(value).length
+            console.log(len);
         }
-        let isValue = key == "selectFactor" ? len == 3 : value !==""
+        let isValue = key == "selectFactor" ? len != 0 : value !== ""
         // console.log(isvalue);
         if (isValue) {
+            
             sendToBack[key] = value;
         }
-        if (isSerialChecked.value &&  key == "serialDateNumber" && value === "") {
-            alertMess("序列号勾选但没有输入","error")
-        return;
+        if (isSerialChecked.value && key == "serialDateNumber" && value === "") {
+            alertMess("序列号勾选但没有输入", "error")
+            return;
         }
     });
     if (Object.keys(sendToBack).length === 0) {
-        alertMess("请至少选择一个条件","error")
+        alertMess("请至少选择一个条件", "error")
         return;
     }
     sendToBack.tableName = props.tableName
     console.log(sendToBack);
+    exportName.value =  getExportName(sendToBack)
     getTableData(sendToBack)
 }
 const getTableData = (sendToBack) => {
@@ -200,14 +206,42 @@ const getTableData = (sendToBack) => {
         })
 }
 
+//获取导出得名字
+function getExportName(sendToBack){
+    const {startDateTime,endDateTime,serialDateNumber,selectFactor} = sendToBack
+    let exportTableName = `${props.tableName}`
+
+    //获取时间
+    if (startDateTime!=undefined && endDateTime!=undefined) {
+        let startExportTime = formatDateToCustomString(startDateTime)
+        let endExportTime = formatDateToCustomString(endDateTime)
+        exportTableName += `_${startExportTime}-${endExportTime}`
+    }
+    
+    //获取序列号
+    if(serialDateNumber != undefined){
+        exportTableName += `_${request.serialDateNumber}`
+    }
+
+    if (Object.keys(selectFactor).length >0) {
+        const { selectNameZh, topLimit, lowerLimit } = selectFactor;
+        exportTableName += `_${selectNameZh}`
+       
+       if (topLimit == undefined) {
+           exportTableName += `-${lowerLimit}`
+       }else if (lowerLimit == undefined) {
+           exportTableName += `-${topLimit}`
+       }else{
+           exportTableName +=`-${topLimit}-${lowerLimit}`
+       }
+
+    }
+    return exportTableName;
+}
+
 //#endregion
 const exportDataBtn = () => {
-    let startExportTime = formatDateToCustomString(request.startDateTime)
-    let endExportTime = formatDateToCustomString(request.endDateTime)
-    console.log(startExportTime);
-    let exportTableName = `${props.tableName}_${startExportTime}-${endExportTime}`
-
-    exportData(exportTableName)
+     exportData(exportName.value)
 }
 
 function formatDateToCustomString(inputDate) {
@@ -251,7 +285,7 @@ function getSelName(e) {
         // console.log("空值");
         request.selectFactor = {}
         return;
-    }else if (len==3) {
+    } else{
         request.selectFactor = e
     }
 }

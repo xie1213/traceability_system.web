@@ -10,6 +10,5 @@ const props =  defineProps({
     colName:String,
     value:String
 })
-console.log("页面测试");
 console.log(props);
 </script>
