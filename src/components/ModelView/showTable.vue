@@ -160,7 +160,6 @@ const searchCliced = () => {
     let len = 0
     //判断是否为空值
     Object.entries(request).forEach(([key, value]) => {
-        console.log(key);
         if (key == "selectFactor") {
             len = Object.keys(value).length
             console.log(len);
@@ -181,7 +180,6 @@ const searchCliced = () => {
         return;
     }
     sendToBack.tableName = props.tableName
-    console.log(sendToBack);
     exportName.value =  getExportName(sendToBack)
     getTableData(sendToBack)
 }
@@ -216,14 +214,16 @@ function getExportName(sendToBack){
         let startExportTime = formatDateToCustomString(startDateTime)
         let endExportTime = formatDateToCustomString(endDateTime)
         exportTableName += `_${startExportTime}-${endExportTime}`
+        console.log("时间"+exportTableName);
     }
     
     //获取序列号
     if(serialDateNumber != undefined){
         exportTableName += `_${request.serialDateNumber}`
+        console.log("序列号");
     }
-
-    if (Object.keys(selectFactor).length >0) {
+    console.log(selectFactor);
+    if (selectFactor != undefined) {
         const { selectNameZh, topLimit, lowerLimit } = selectFactor;
         exportTableName += `_${selectNameZh}`
        

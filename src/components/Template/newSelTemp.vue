@@ -3,9 +3,9 @@
     <!-- 不等于出荷表 -->
     <div v-if="tableName != '出荷履历'" style="flex-direction: column;">
 
-      <el-checkbox v-model="isSelectChecked" >项目</el-checkbox>
+      <el-checkbox v-model="isSelectChecked">项目</el-checkbox>
 
-      <el-select v-model="firstValue" clearable placeholder="Select" style="width: 150px">
+      <el-select v-model="firstValue" @clear="clearFirstItem" clearable placeholder="Select" style="width: 150px">
         <el-option v-for="(item, index) in firstList" :key="index" :label="item" :value="item"
           @click="handleItemClick(index)" />
       </el-select>
@@ -20,13 +20,14 @@
       <div v-else style="padding-left: 22px; width: 180px;">
         <span style="font-size: 14px;">选择</span>
         <el-select v-model="selRequestData.selectName" clearable placeholder="Select" style="width: 150px">
-          <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" @click="getTwoSelName(item)" :value="item.val" />
+          <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" @click="getTwoSelName(item)"
+            :value="item.val" />
         </el-select>
       </div>
     </div>
     <!-- 出荷表得选择 -->
     <div v-else style="padding-left: 23px;">
-      <el-checkbox v-model="isSelectChecked" >项目</el-checkbox>
+      <el-checkbox v-model="isSelectChecked">项目</el-checkbox>
       <div>
         <el-select v-model="shipValue" clearable placeholder="Select" style="width: 150px">
           <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
@@ -194,7 +195,7 @@ function lowerLimitInput(e) {
 
 // let  lastValidInput = ""
 function verifyInput(value) {
-let lastValidInput = '';
+  let lastValidInput = '';
 
   if (textChecked()) {
     return ""
@@ -263,7 +264,7 @@ function verifyTime() {
   }
   if (message !== "") {
     let TimeMessage = `${message}时间超过今天,已重置`
-    allterMessage(TimeMessage,"warning")
+    allterMessage(TimeMessage, "warning")
   }
 }
 //#endregion
@@ -272,7 +273,15 @@ function verifyTime() {
 function handleChange(e) {
   console.log(e);
   console.log("下拉");
-  selRequestData.selectName = e[1]
+  if (e == null) {
+    selRequestData.lowerLimit = ""
+    selRequestData.topLimit = ""
+    twoList.value = null
+
+  } else {
+    selRequestData.selectName = e[1]
+    selRequestData.selectNameZh = e[0]
+  }
 }
 
 function getCheacked() {
@@ -282,7 +291,7 @@ function getCheacked() {
   //判断是否为空值
   if (!selectName.includes("Date")) {
     parseInt(topLimit)
-    console.log( `上限${parseInt(topLimit)}`);
+    console.log(`上限${parseInt(topLimit)}`);
     console.log(parseInt(lowerLimit));
   }
   if (selectName === "") {
@@ -296,7 +305,7 @@ function getCheacked() {
     }
   });
 
-  
+
 
   emit('selColName', sendToBack)
 }
@@ -311,10 +320,23 @@ function allterMessage(message, type) {
     type: type,
   });
 }
-function getTwoSelName(e){
-  console.log("下拉");
-  console.log(e);
+
+//获取中文名
+function getTwoSelName(e) {
   selRequestData.selectNameZh = e["col"]
+}
+
+//清除第一列
+function clearFirstItem() {
+  //
+  selRequestData.selectName = ""
+  selRequestData.lowerLimit = ""
+  selRequestData.topLimit = ""
+  twoList.value = null
+  if (props.tableName == "全部履历") {
+    options.value = null
+    selectedOption.value = ""
+  }
 }
 
 //旧表名与新表名
@@ -326,12 +348,14 @@ watchEffect(() => {
   if (oldTableName.value != props.tableName) {
     getFirstColName()
     isSelectChecked.value = false
-    // selectChange(false)
+
+    //清空下拉
+    clearFirstItem()
+    firstValue.value = ""
+
     oldTableName.value = props.tableName
   }
-  // if (firstValue.value == "") {
-  //   clearItem()
-  // }
+
   if (props.tableName == "出荷履历") {
     selectName = shipValue.value
   }
@@ -339,17 +363,17 @@ watchEffect(() => {
   if (selectName.includes("Date")) {
     // console.log("时间");
     verifyTime()
-    
-    selRequestData.startDateTime =`${selStartDay.value} ${formattedEndTime}`;
-    selRequestData.endDateTime =`${selEndDay.value} ${formattedStartTime}`;
+
+    selRequestData.startDateTime = `${selStartDay.value} ${formattedEndTime}`;
+    selRequestData.endDateTime = `${selEndDay.value} ${formattedStartTime}`;
   }
-  // selRequestData.checked = isSelectChecked.value
+
   if (isSelectChecked.value) {
     getCheacked()
-  }else{
+  } else {
     emit('selColName', {})
   }
-  if (parseInt(topLimit)< parseInt(lowerLimit)) {
+  if (parseInt(topLimit) < parseInt(lowerLimit)) {
     allterMessage("下限大于上限", "error")
   }
 })

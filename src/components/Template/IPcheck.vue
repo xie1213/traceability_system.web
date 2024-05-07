@@ -1,6 +1,7 @@
 <template>
   <div style="display:inline-block;">
     <el-button  :type="pingStatusClass" disabled>{{ pingStatus }}</el-button>
+    <el-button  :type="backStatusClass" disabled>{{ backStatus }}</el-button>
   </div>
 </template>
 
@@ -8,6 +9,9 @@
 import { ref,onBeforeUnmount } from 'vue';
 import request from '@/service/request'
 const pingStatus = ref('出荷链接中');
+const backStatus = ref('后端链接中')
+
+const backStatusClass = ref('danger')
 const pingStatusClass = ref('danger');
 
 async function getPingStatus() {
@@ -22,15 +26,20 @@ async function getPingStatus() {
       pingStatus.value = "出荷已链接";
       pingStatusClass.value = 'success';
     }
+    backStatusClass.value ='success'
+    backStatus.value = "后端链接成功"
 
     // 根据Ping状态设置样式
   } catch (error) {
     console.error('Error:', error);
     pingStatus.value = '出荷未链接';
     pingStatusClass.value = 'danger';
+
+    backStatusClass.value ='danger'
+    backStatus.value = "后端未链接"
   }
 }
-const intervalId = setInterval(getPingStatus, 50000); // 每50秒发送一次请求
+const intervalId = setInterval(getPingStatus, 30000); // 每50秒发送一次请求
 
 onBeforeUnmount(() => {
   clearInterval(intervalId);

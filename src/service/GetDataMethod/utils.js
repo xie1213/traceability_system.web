@@ -55,40 +55,49 @@ export const realList = (requestData) => {
 //导出数据
 export const exportData = async (tableName) => {
   try {
-    ElMessageBox.confirm("确定导出吗")
-      .then(async () => {
-        const loadings = ElLoading.service({
-          lock: true,
-          text: "正在导出...",
-        });
-        const response = await apiClient.get(
-          `api/Excel/ExportData?tableName=${tableName}`,
-          {
-            responseType: "blob", // Set the responseType to 'blob' for binary data
-          }
-        );
-        const blob = new Blob([response.data], {
-          type: response.headers["content-type"],
-        });
-        const url = window.URL.createObjectURL(blob);
+    const response = await ElMessageBox.confirm("确定导出吗"); // 弹出确认对话框
+    if (response === "confirm") { // 如果用户点击了确认按钮
+      const loadings = ElLoading.service({ // 显示加载中的提示
+        lock: true,
+        text: "正在导出...",
+      });
+      const response = await apiClient.get( // 发起导出数据的请求
+        `api/Excel/ExportData?tableName=${tableName}`,
+        {
+          responseType: "blob", // 设置响应类型为'blob'，用于接收二进制数据
+        }
+      );
+      const blob = new Blob([response.data], { // 创建Blob对象，用于保存下载的文件
+        type: response.headers["content-type"],
+      });
+      const url = window.URL.createObjectURL(blob); // 创建临时URL
 
-        // Create an <a> tag, set the download link, simulate a click for download
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = `${tableName}.xlsx`;
-        document.body.appendChild(link);
-        link.click();
-        // Release resources
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(link);
-        loadings.close();
-      })
-      .catch(() => { });
+      // 创建<a>标签，设置下载链接，并模拟点击进行下载
+      const link = document.createElement("a");
+      let filename = `${tableName}.xlsx`;
+      let count = 1;
+
+      // 检查文件名是否已存在，如果存在则在文件名后添加数字区分
+      while (document.querySelectorAll(`[download="${filename}"]`).length > 0) {
+        filename = `${tableName}_${count}.xlsx`;
+        count++;
+      }
+
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      // 释放资源
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+      loadings.close(); // 关闭加载中的提示
+    }
   } catch (error) {
     console.error("导出失败:", error);
-    // Handle the error and provide feedback to the user
+    // 处理错误并向用户提供反馈
   }
 };
+
 
 //获取下拉列表
 export const GetTableColName = (tableName) => {
