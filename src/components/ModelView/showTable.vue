@@ -104,7 +104,7 @@ const serialNumberPattern = ref(/^[A-Za-z0-9#\s]+$/);
 const validateInput = (value, targetRef) => {
     if (!serialNumberPattern.value.test(value)) {
         // 输入不合法，清除输入内容
-        console.log("不合法");
+        //console.log("不合法");
         targetRef.value = '';
     }
 };
@@ -162,7 +162,7 @@ const searchCliced = () => {
     Object.entries(request).forEach(([key, value]) => {
         if (key == "selectFactor") {
             len = Object.keys(value).length
-            console.log(len);
+            //console.log(len);
         }
         let isValue = key == "selectFactor" ? len != 0 : value !== ""
         // console.log(isvalue);
@@ -214,15 +214,14 @@ function getExportName(sendToBack){
         let startExportTime = formatDateToCustomString(startDateTime)
         let endExportTime = formatDateToCustomString(endDateTime)
         exportTableName += `_${startExportTime}-${endExportTime}`
-        console.log("时间"+exportTableName);
+        //console.log("时间"+exportTableName);
     }
     
     //获取序列号
     if(serialDateNumber != undefined){
         exportTableName += `_${request.serialDateNumber}`
-        console.log("序列号");
+        //console.log("序列号");
     }
-    console.log(selectFactor);
     if (selectFactor != undefined) {
         const { selectNameZh, topLimit, lowerLimit } = selectFactor;
         exportTableName += `_${selectNameZh}`

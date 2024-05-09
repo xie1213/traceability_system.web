@@ -6,9 +6,8 @@
 <script setup>
 import { defineProps } from 'vue'
 // const colName = ""
-const props =  defineProps({
+ defineProps({
     colName:String,
     value:String
 })
-console.log(props);
 </script>

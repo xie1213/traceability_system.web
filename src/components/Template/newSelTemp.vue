@@ -252,7 +252,6 @@ const formattedEndTime = getTimeString(selEndTime.value)
 //时间限制
 function verifyTime() {
   let dateTime = new Date().toISOString().slice(0, 10)
-  console.log(dateTime);
   let message = "";
   if (selStartDay.value > dateTime) {
     selStartDay.value = dateTime
@@ -271,8 +270,6 @@ function verifyTime() {
 
 //全部下拉
 function handleChange(e) {
-  console.log(e);
-  console.log("下拉");
   if (e == null) {
     selRequestData.lowerLimit = ""
     selRequestData.topLimit = ""
@@ -287,13 +284,11 @@ function handleChange(e) {
 function getCheacked() {
   let sendToBack = {}
   // let isEmit = false
-  let { selectName, topLimit, lowerLimit } = selRequestData;
+  let { selectName } = selRequestData;
   //判断是否为空值
-  if (!selectName.includes("Date")) {
-    parseInt(topLimit)
-    console.log(`上限${parseInt(topLimit)}`);
-    console.log(parseInt(lowerLimit));
-  }
+  // if (!selectName.includes("Date")) {
+  //   parseInt(topLimit)
+  // }
   if (selectName === "") {
     allterMessage("条件未选择", "error")
   }

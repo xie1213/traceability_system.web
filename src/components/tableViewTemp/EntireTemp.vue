@@ -491,8 +491,6 @@ const handleCheckedCitiesChange = (value) => {
     //console.log(value);
     const checkedCount = value.length
     checkAll.value = checkedCount === columns.length
-    //console.log(111111111111);
-    //console.log(checkAll,checkedCount);
     isIndeterminate.value = checkedCount > 0 && checkedCount < columns.length
     // 设置所有控件状态为false
     cancelMoth(value)

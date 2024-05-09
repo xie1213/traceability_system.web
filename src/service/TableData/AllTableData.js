@@ -3,7 +3,7 @@
 // import NewTaTable from './NewTaTable'
 // import { MotorTable,GearTable,RotorTable,NewRRColNames } from '../Import'
 import { motorData,rotorData,rrData,gearData,basicData,taData } from "@/service/Import/tableData";
-console.log(taData);
+
 const AllTable = [
     "InterNo",
     "CaseDec",
@@ -1231,9 +1231,5 @@ function exportData(TableData, fieidData) {
     });
     return newObj;
 }
-// console.log("sssssssssss");
 const table = exportData(AllTableDataZh, AllTable)
-
-// console.log(table);
-// console.log(AllTable);
 export default {table,AllTableDataZh}

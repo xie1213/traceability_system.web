@@ -18,7 +18,6 @@ async function getPingStatus() {
   try {
     const response = await request.get('api/Ping/status');
     const data = await response.data;
-    //console.log(response.data);
     if (data !== '链接成功') {
       pingStatus.value = '出荷未链接';
       pingStatusClass.value = 'danger';

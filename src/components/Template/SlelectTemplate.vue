@@ -81,10 +81,8 @@ const handleChange = () => {
 const handleChangeClick = () => {
   selData = []
   if (selName.value.includes('Date')) {
-      // console.log(111);
       selData.push(selName.value, value2.value[0].toLocaleString(),value2.value[1].toLocaleString());
-      // console.log(selData);
-      //emit('selColName', selData);
+
     }else{
       selData.push(selName.value, input1.value, input2.value)
 

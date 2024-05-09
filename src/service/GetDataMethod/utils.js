@@ -1,5 +1,4 @@
-//real
-import { apiClient, MotorTable, RotorTable, GearTable } from "../Import";
+import apiClient from "../request";
 import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
 import { reactive, ref } from "vue";
 import { motorData, rotorData, rrData, gearData, taData,allTableData,shipmentData } from "@/service/Import/tableData";
@@ -99,26 +98,7 @@ export const exportData = async (tableName) => {
 };
 
 
-//获取下拉列表
-export const GetTableColName = (tableName) => {
-  //let firstName;
-  if (tableName !== null) {
-    switch (tableName) {
-      case "MotorTable":
-        tableData.value = MotorTable.AllMotorTable;
-        // console.log(tableData);
-        break;
-      case "RotorTable":
-        tableData.value = RotorTable.AllRotorTable;
-        break;
-      case "GearTable":
-        tableData.value = GearTable.AllGearTable;
-        break;
-      default:
-        break;
-    }
-  }
-};
+
 //表配置
 export const TableConfig = reactive({
   stripe: true,
@@ -224,10 +204,7 @@ export const loadColumnAndData = () => {
     mockColumns(),
     // realList()
   ]).then(rest => {
-    // console.log(rest[0]);
     const columns = rest[0]
-    // const data = rest[1]
-    // const startTime = Date.now()
     const $grid = gridRef.value
     // 使用函数式加载
     if ($grid) {
@@ -292,9 +269,7 @@ let tableNameList = {
 export const importTableData = (tableName) => {
 
   let tableImportData = tableNameList[tableName] || null;
-  // console.log(tableName);
-  // tableImportData.tableName = tableName
-  console.log(tableImportData);
+
   apiClient.post("api/Home/requestData", tableImportData)
     .then(() => {
       console.log("更新成功");

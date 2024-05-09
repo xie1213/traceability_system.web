@@ -25,7 +25,6 @@ const handleDateChange = (value) => {
 const checkBtn = () => {
   ElMessageBox.confirm('确定查询吗')
     .then(() => {
-      // console.log("成功");
       formattedDates.value.investigation = "手动";
       emit('childEvent', formattedDates.value)
     }).catch(() => {
