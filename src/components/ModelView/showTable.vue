@@ -83,8 +83,8 @@ const getTimeString = (date) => {
 };
 
 //格式化时间
-const formattedStartTime = getTimeString(startTime.value)
-const formattedEndTime = getTimeString(endTime.value)
+const formattedStartTime =ref("") 
+const formattedEndTime = ref("")
 
 //获取时间参数
 
@@ -262,10 +262,10 @@ const isChecked = () => {
     request.serialDateNumber = isSerialChecked.value ? serialNumber.value : ""
 
     //开始时间
-    request.startDateTime = isTimeChecked.value ? `${startDay.value} ${formattedEndTime}` : "";
+    request.startDateTime = isTimeChecked.value ? `${startDay.value} ${formattedEndTime.value}` : "";
 
     //结束时间
-    request.endDateTime = isTimeChecked.value ? `${endDay.value} ${formattedStartTime}` : "";
+    request.endDateTime = isTimeChecked.value ? `${endDay.value} ${formattedStartTime.value}` : "";
 
 }
 
@@ -305,7 +305,8 @@ watchEffect(() => {
 
         oldTableName.value = props.tableName
     }
-
+    formattedStartTime.value = getTimeString(startTime.value)
+    formattedEndTime.value = getTimeString(endTime.value)
     isChecked()
     // getSelName();
     // getIndex();
