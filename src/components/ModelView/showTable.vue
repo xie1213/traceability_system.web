@@ -44,12 +44,12 @@
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
     <component :is="selectedComponent" :tableData="tableData" />
-    <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+        <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
 import { getSeleName } from "@/service/GetDataMethod/getTaleColName"
-import { realList,exportData, importTableData, pagerConfig, getPageData, alertMess } from "@/service/GetDataMethod/utils"
+import { realList, exportData, importTableData, pagerConfig, getPageData, alertMess } from "@/service/GetDataMethod/utils"
 import { motorTemp, rotorTemp, gearTemp, rrTemp, taTemp, shipOut, entireTemp } from "@/service/Import/tableTemp"
 import NewSelTemp from '../Template/newSelTemp.vue';
 
@@ -83,7 +83,7 @@ const getTimeString = (date) => {
 };
 
 //格式化时间
-const formattedStartTime =ref("") 
+const formattedStartTime = ref("")
 const formattedEndTime = ref("")
 
 //获取时间参数
@@ -167,7 +167,7 @@ const searchCliced = () => {
         let isValue = key == "selectFactor" ? len != 0 : value !== ""
         // console.log(isvalue);
         if (isValue) {
-            
+
             sendToBack[key] = value;
         }
         if (isSerialChecked.value && key == "serialDateNumber" && value === "") {
@@ -180,7 +180,7 @@ const searchCliced = () => {
         return;
     }
     sendToBack.tableName = props.tableName
-    exportName.value =  getExportName(sendToBack)
+    exportName.value = getExportName(sendToBack)
     getTableData(sendToBack)
 }
 const getTableData = (sendToBack) => {
@@ -205,34 +205,34 @@ const getTableData = (sendToBack) => {
 }
 
 //获取导出得名字
-function getExportName(sendToBack){
-    const {startDateTime,endDateTime,serialDateNumber,selectFactor} = sendToBack
+function getExportName(sendToBack) {
+    const { startDateTime, endDateTime, serialDateNumber, selectFactor } = sendToBack
     let exportTableName = `${props.tableName}`
 
     //获取时间
-    if (startDateTime!=undefined && endDateTime!=undefined) {
+    if (startDateTime != undefined && endDateTime != undefined) {
         let startExportTime = formatDateToCustomString(startDateTime)
         let endExportTime = formatDateToCustomString(endDateTime)
         exportTableName += `_${startExportTime}-${endExportTime}`
         //console.log("时间"+exportTableName);
     }
-    
+
     //获取序列号
-    if(serialDateNumber != undefined){
+    if (serialDateNumber != undefined) {
         exportTableName += `_${request.serialDateNumber}`
         //console.log("序列号");
     }
     if (selectFactor != undefined) {
         const { selectNameZh, topLimit, lowerLimit } = selectFactor;
         exportTableName += `_${selectNameZh}`
-       
-       if (topLimit == undefined) {
-           exportTableName += `-${lowerLimit}`
-       }else if (lowerLimit == undefined) {
-           exportTableName += `-${topLimit}`
-       }else{
-           exportTableName +=`-${topLimit}-${lowerLimit}`
-       }
+
+        if (topLimit == undefined) {
+            exportTableName += `-${lowerLimit}`
+        } else if (lowerLimit == undefined) {
+            exportTableName += `-${topLimit}`
+        } else {
+            exportTableName += `-${topLimit}-${lowerLimit}`
+        }
 
     }
     return exportTableName;
@@ -240,7 +240,7 @@ function getExportName(sendToBack){
 
 //#endregion
 const exportDataBtn = () => {
-     exportData(exportName.value)
+    exportData(exportName.value)
 }
 
 function formatDateToCustomString(inputDate) {
@@ -284,7 +284,7 @@ function getSelName(e) {
         // console.log("空值");
         request.selectFactor = {}
         return;
-    } else{
+    } else {
         request.selectFactor = e
     }
 }

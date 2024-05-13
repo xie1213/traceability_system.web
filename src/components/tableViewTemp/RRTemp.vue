@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 600px;">
+    <div style="height: 580px;">
         <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-colgroup title="特定列" fixed="left">
                 <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" sortable :formatter="formatDate" />

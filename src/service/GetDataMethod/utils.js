@@ -106,7 +106,7 @@ export const TableConfig = reactive({
   autoRresize: true,
   showOverflow: true,
   // showHeaderOverflow: true, //超长省略
-  height: "600",
+  height: "580",
   headerAlign: "center",
   loading: false,
   rowConfig: {
@@ -127,15 +127,7 @@ export const TableConfig = reactive({
   },
   checkboxConfig: {
     labelField: "nickname",
-  },
-  // scrollY: {
-  //     enabled: true,
-  //     gt: 350
-  // },
-  // scrollX: {
-  //     enabled: true,
-  //     gt: 350
-  // },
+  }
 
 });
 
@@ -143,17 +135,17 @@ export const TableConfig = reactive({
 export const pagerConfig = reactive({
   autoHidden: true,
   currentPage: 1,
-  pageSize: 25,
+  pageSize: 30,
   total: 0,
   align: "center",
   background: true,
-  pageSizes: [15, 20, 25, 30],
+  pageSizes: [10, 30, 60, 90],
   layouts: ['PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'Sizes', 'FullJump', 'Total']
 })
 
 //表格配置
 export const gridOptions = reactive({
-  stripe: true,
+  // stripe: true,
   border: true,
   autoRresize: true,
   showOverflow: true,
@@ -189,11 +181,11 @@ export const gridOptions = reactive({
   },
   pagerConfig: {
     currentPage: 1,
-    pageSize: 25,
+    pageSize: 30,
     total: 0,
     align: 'center',
     background: true,
-    pageSizes: [15, 20, 25, 30]
+    pageSizes: [30, 60, 90, 120]
   }
 })
 
@@ -278,6 +270,7 @@ export const importTableData = (tableName) => {
     })
 }
 
+//获取数据分页
 export const getPageData = (e, tableName) => {
   return new Promise((resolve, reject) => {
     setTimeout(async () => {

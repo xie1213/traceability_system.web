@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%; width: 100%; ">
-    <div style="padding-left: 20px;">
+    <div style="padding-left: 20px; padding-right: 20px; ">
       <el-text style="padding-right: 50px; ">内存硬盘剩余容量
         <el-button style="background-color: #459cfb; color: white;" disabled>{{ AvailableSpaceGB }}</el-button>
       </el-text>
@@ -11,7 +11,7 @@
       <el-text style="padding-right: 50px;">通讯状态
         <btnIPCheck />
       </el-text>
-      <div class="outer-container">
+      <div class="outer-container" >
         <div class="inner-container">
           <div class="logo">
             <!-- <img src="Image//logo.png" alt="Logo"> -->
@@ -107,6 +107,7 @@ onMounted(() => {
 .inner-container {
   display: flex;
   align-items: center;
+  justify-content: center; /* 在水平方向上居中对齐 */
 }
 
 .logo {
@@ -114,7 +115,8 @@ onMounted(() => {
 }
 
 .title {
-  margin: 0;
-  margin-left:35%
+  display: inline-block; /* 或者 display: block; */
+  margin: 0 auto; 
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-    <div style="height: 600px;">
+    <div style="height: 580px;">
         <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-column field="SerialNo" title="序列号" sortable />
             <vxe-column field="ProductNo" title="品番" sortable />
