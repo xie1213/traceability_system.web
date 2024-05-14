@@ -246,8 +246,8 @@ const getTimeString = (date) => {
   return `${hours}:${minutes}:${seconds}`;
 };
 
-const formattedStartTime = getTimeString(selStartTime.value)
-const formattedEndTime = getTimeString(selEndTime.value)
+const formattedStartTime = ref("")
+const formattedEndTime = ref("")
 
 //时间限制
 function verifyTime() {
@@ -354,13 +354,14 @@ watchEffect(() => {
   if (props.tableName == "出荷履历") {
     selectName = shipValue.value
   }
-
+    formattedStartTime.value = getTimeString(selStartTime.value)
+    formattedEndTime.value = getTimeString(selEndTime.value)
   if (selectName.includes("Date")) {
     // console.log("时间");
     verifyTime()
 
-    selRequestData.startDateTime = `${selStartDay.value} ${formattedEndTime}`;
-    selRequestData.endDateTime = `${selEndDay.value} ${formattedStartTime}`;
+    selRequestData.startDateTime = `${selStartDay.value} ${formattedEndTime.value}`;
+    selRequestData.endDateTime = `${selEndDay.value} ${formattedStartTime.value}`;
   }
 
   if (isSelectChecked.value) {

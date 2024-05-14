@@ -3,7 +3,7 @@
         <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange" style="display: inline;">
             <el-checkbox v-for="city in columns" :key="city" :label="city" :value="city">{{ city }}</el-checkbox>
         </el-checkbox-group>
-        <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate"
+        <el-checkbox style="margin-left: 30px;" v-model="checkAll" :indeterminate="isIndeterminate"
             @change="handleCheckAllChange">展开全部</el-checkbox>
     </div>
 

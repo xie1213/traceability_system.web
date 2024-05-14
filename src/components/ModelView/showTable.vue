@@ -44,7 +44,7 @@
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
     <component :is="selectedComponent" :tableData="tableData" />
-        <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+    <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
@@ -163,6 +163,7 @@ const searchCliced = () => {
         if (key == "selectFactor") {
             len = Object.keys(value).length
             //console.log(len);
+            console.log(request[key]);
         }
         let isValue = key == "selectFactor" ? len != 0 : value !== ""
         // console.log(isvalue);
@@ -183,6 +184,8 @@ const searchCliced = () => {
     exportName.value = getExportName(sendToBack)
     getTableData(sendToBack)
 }
+
+//获取table数据
 const getTableData = (sendToBack) => {
     realList(sendToBack)
         .then((date) => {
@@ -223,17 +226,21 @@ function getExportName(sendToBack) {
         //console.log("序列号");
     }
     if (selectFactor != undefined) {
-        const { selectNameZh, topLimit, lowerLimit } = selectFactor;
+        const { selectNameZh, topLimit, lowerLimit, startDateTime, endDateTime, selectName } = selectFactor;
         exportTableName += `_${selectNameZh}`
-
-        if (topLimit == undefined) {
-            exportTableName += `-${lowerLimit}`
-        } else if (lowerLimit == undefined) {
-            exportTableName += `-${topLimit}`
+        if (selectName.includes("Date")) {
+            let selStartTime = formatDateToCustomString(startDateTime)
+            let selendTime = formatDateToCustomString(endDateTime)
+            exportTableName += `_${selStartTime}-${selendTime}`
         } else {
-            exportTableName += `-${topLimit}-${lowerLimit}`
+            if (topLimit == undefined) {
+                exportTableName += `-${lowerLimit}`
+            } else if (lowerLimit == undefined) {
+                exportTableName += `-${topLimit}`
+            } else {
+                exportTableName += `-${topLimit}-${lowerLimit}`
+            }
         }
-
     }
     return exportTableName;
 }
@@ -278,7 +285,7 @@ const handlePageChange = (e) => {
 
 //下拉框条件查询
 function getSelName(e) {
-    // console.log(e);
+    console.log(e);
     let len = Object.keys(e).length
     if (len === 0) {
         // console.log("空值");
