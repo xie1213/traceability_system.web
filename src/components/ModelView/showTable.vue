@@ -1,5 +1,5 @@
 <template>
-    <div style="display: flex;">
+    <div style="display: flex;" class="container" >
         <div style="width: 400px;border: 1px,red;">
             <el-checkbox v-model="isTimeChecked">日期</el-checkbox>
             <div class="demo-date-picker" style="display: inline; padding: 5px;">
@@ -44,7 +44,10 @@
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
     <component :is="selectedComponent" :tableData="tableData" />
-    <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+    <div class="pagination-wrapper">
+        <!-- 这里放置你的分页组件 -->
+        <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+    </div>
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
@@ -354,4 +357,18 @@ watchEffect(() => {
     left: 50%;
     transform: translateX(-50%);
 }
+/* .将分页组件固定在页面底部 */
+.pagination-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 确保分页组件占据整个页面宽度 */
+  background-color: #fff; /* 可选：设置背景颜色 */
+  z-index: 999; /* 可
+  选：设置分页组件的层级，确保它位于其他内容的上方 */
+}
+/* 隐藏垂直滚动条 */
+/* .container {
+  overflow-y: hidden;
+} */
 </style>

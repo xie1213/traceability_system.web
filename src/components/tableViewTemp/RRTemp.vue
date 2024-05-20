@@ -1,5 +1,4 @@
 <template>
-    <div style="height: 580px;">
         <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-colgroup title="特定列" fixed="left">
                 <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" sortable :formatter="formatDate" />
@@ -64,7 +63,6 @@
             <PokayokeDate :colName="'防错防误45计测日時'" :value="'PokayokeDate45'" />
             <PokayokeDate :colName="'拒绝计测日時'" :value="'RejectTimeDate'" />
         </vxe-table>
-    </div>
 
 </template>
 <script setup>

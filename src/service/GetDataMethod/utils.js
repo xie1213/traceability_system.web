@@ -150,7 +150,7 @@ export const gridOptions = reactive({
   autoRresize: true,
   showOverflow: true,
   showHeaderOverflow: true,
-  height: 'auto',
+  // height: 'auto',
   loading: false,
   rowConfig: {
     useKey: true,

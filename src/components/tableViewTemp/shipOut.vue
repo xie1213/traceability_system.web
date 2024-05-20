@@ -1,6 +1,4 @@
 <template>
-
-    <div style="height: 580px;">
         <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-column field="SerialNo" title="序列号" sortable />
             <vxe-column field="ProductNo" title="品番" sortable />
@@ -15,8 +13,6 @@
             <vxe-column field="PlineNo" title="Pline号" sortable />
             <vxe-column field="ReceivingNo" title="受领书编号" sortable />
         </vxe-table>
-    </div>
-
 </template>
 <script setup>
 import { defineProps } from 'vue';

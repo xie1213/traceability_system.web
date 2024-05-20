@@ -1,5 +1,4 @@
 <template>
-    <div style="height: 580px">
         <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-colgroup title="特定列" fixed="left">
                 <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" sortable
@@ -417,8 +416,6 @@
                 <vxe-column field="DtrayWeight" width="70px" title="托盘 No" sortable></vxe-column>
             </vxe-colgroup>
         </vxe-table>
-    </div>
-
 </template>
 <script setup>
 import { defineProps } from 'vue';

@@ -8,7 +8,7 @@
     </div>
 
     <div>
-        <vxe-table :data="tableData" v-bind="TableConfig" style="height: 560px;">
+        <vxe-table :data="tableData" v-bind="TableConfig">
             <vxe-colgroup title="特定列" fixed="left">
                 <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" sortable
                     :formatter="formatDate" />
