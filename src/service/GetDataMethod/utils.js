@@ -106,7 +106,7 @@ export const TableConfig = reactive({
   autoRresize: true,
   showOverflow: true,
   // showHeaderOverflow: true, //超长省略
-  height: "580",
+  height: "90%",
   headerAlign: "center",
   loading: false,
   rowConfig: {
@@ -143,77 +143,6 @@ export const pagerConfig = reactive({
   layouts: ['PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'Sizes', 'FullJump', 'Total']
 })
 
-//表格配置
-export const gridOptions = reactive({
-  // stripe: true,
-  border: true,
-  autoRresize: true,
-  showOverflow: true,
-  showHeaderOverflow: true,
-  // height: 'auto',
-  loading: false,
-  rowConfig: {
-    useKey: true,
-    isHover: true,
-    isCurrent: true,
-    height: 20
-  },
-  columnConfig: {
-    resizable: true,
-    minWidth: 120,
-    height: 20,
-    tooltip: true
-  },
-  tooltipConfig: {
-    showAll: true,
-    enterDelay: 100
-  },
-  checkboxConfig: {
-    labelField: 'nickname'
-  },
-  scrollY: {
-    enabled: true,
-    gt: 350
-  },
-  scrollX: {
-    enabled: true,
-    gt: 350
-  },
-  pagerConfig: {
-    currentPage: 1,
-    pageSize: 30,
-    total: 0,
-    align: 'center',
-    background: true,
-    pageSizes: [30, 60, 90, 120]
-  }
-})
-
-// 加载列和数据
-export const loadColumnAndData = () => {
-  gridOptions.loading = true
-  Promise.all([
-    mockColumns(),
-    // realList()
-  ]).then(rest => {
-    const columns = rest[0]
-    const $grid = gridRef.value
-    // 使用函数式加载
-    if ($grid) {
-      Promise.all([
-        $grid.reloadColumn(columns), // 传递第一行标题作为列配置
-        // $grid.reloadColumn(columns.firstRow), // Reload columns
-        // $grid.reloadData(dataList.value) // Reload data
-        // console.log(columns)
-      ]).then(() => {
-        //VXETable.modal.message({ content: `用时 ${Date.now() - startTime}毫秒`, status: 'info' })
-        gridOptions.loading = false
-      })
-    } else {
-      gridOptions.loading = false
-    }
-  })
-}
 
 
 export const mockColumns = () => {
@@ -279,7 +208,8 @@ export const getPageData = (e, tableName) => {
         TableConfig.loading = true
         let response;
         response = await apiClient.get(`api/DBTest/GetRedis?page=${e.currentPage}&limit=${e.pageSize}&tableName=${tableName}`);
-
+        // console.log(e);
+        pagerConfig.pageSize=e.pageSize
         //tableData.value = response.data.data; // Populate the dataList array with the retrieved data
         //gridRef.value.reloadData(dataList.value)
         TableConfig.loading = false

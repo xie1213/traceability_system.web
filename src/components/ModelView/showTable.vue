@@ -43,11 +43,15 @@
         <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
             @click="importTableData(tableName)" type="primary">导入配置</el-button>
     </div>
-    <component :is="selectedComponent" :tableData="tableData" />
-    <div class="pagination-wrapper">
+    <div class="media" >
+        <component :is="selectedComponent" :tableData="tableData" />
+
+        <div class="pagination-wrapper">
         <!-- 这里放置你的分页组件 -->
         <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
     </div>
+    </div>
+   
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
@@ -371,4 +375,20 @@ watchEffect(() => {
 /* .container {
   overflow-y: hidden;
 } */
+
+@media screen and (max-width: 787px) {
+  /* 在此添加要应用的样式 */
+  .media{
+    height: 500px;
+  }
+}
+
+/* 如果屏幕宽度大于或等于 600px，应用以下样式 */
+@media screen and (min-width: 788px) {
+  /* 在此添加要应用的样式 */
+  .media{
+
+    height: 600px;
+  }
+}
 </style>

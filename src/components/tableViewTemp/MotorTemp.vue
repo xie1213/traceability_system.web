@@ -1,5 +1,5 @@
 <template>
-    <vxe-table :data="tableData" v-bind="TableConfig" class="table">
+    <vxe-table :data="tableData" v-bind="TableConfig">
       <vxe-colgroup title="特定列" fixed="left">
         <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" :formatter="formatDate" sortable />
         <vxe-column field="ShipmentSerial" width="150px" title="出荷序列" fixed="left" sortable />
@@ -273,18 +273,3 @@ const formatDate = ({ cellValue }) => {
   return XEUtils.toDateString(cellValue, 'yyyy-MM-dd HH:mm:ss')
 }
 </script>
-<style>
-/* 当屏幕宽度小于等于768px时，设置组件高度为50% */
-@media (max-width: 768px) {
-  .table {
-    height: 500px;
-  }
-}
-
-/* 当屏幕宽度大于768px时，设置组件高度为80% */
-@media (min-width: 1081px) {
-  .table {
-    height: 580px;
-  }
-}
-</style>

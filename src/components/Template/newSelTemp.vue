@@ -101,11 +101,7 @@ const optionList = ref([]) //基础数据
 
 const shipValue = ref("");  //出荷数据
 
-// const emit = defineEmits(['selColName'])  //向父组件传值
-
-// const serialNumberPattern = ref(/^[A-Za-z0-9\b# ]+[A-Za-z0-9\b# ]*$/); //正则验证
-
-const serialNumberPattern = ref(/^[A-Za-z0-9#\s]+$/); //正则验证
+const serialNumberPattern = ref(/^[A-Za-z0-9#.\s]+$/); //正则验证
 
 
 
@@ -369,7 +365,7 @@ watchEffect(() => {
   } else {
     emit('selColName', {})
   }
-  if (parseInt(topLimit) < parseInt(lowerLimit)) {
+  if (parseFloat(topLimit) < parseFloat(lowerLimit)) {
     allterMessage("下限大于上限", "error")
   }
 })
