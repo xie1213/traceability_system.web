@@ -111,6 +111,8 @@ onMounted(() => {
 }
 
 .logo {
+  position: absolute;
+  left: 25px;
   margin-right: 10px; /* 调整 logo 和标题之间的间距 */
 }
 

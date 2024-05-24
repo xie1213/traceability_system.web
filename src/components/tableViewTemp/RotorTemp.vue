@@ -1,8 +1,8 @@
 <template>
     <vxe-table :data="tableData" v-bind="TableConfig">
-      <vxe-colgroup title="特定列" fixed="left">
+      <vxe-colgroup title="上传时间和序列号" fixed="left">
         <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" :formatter="formatDate" sortable />
-        <vxe-column field="Mg1rserial" width="150px" title="MG1转子序列" fixed="left" sortable />
+        <vxe-column field="Mg1rserial" width="150px" title="转子序列" fixed="left" sortable />
       </vxe-colgroup>
       <vxe-colgroup title="基本信息">
         <vxe-column field="InterNo" width="61px" title="接口No" sortable />

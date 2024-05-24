@@ -1,8 +1,9 @@
 <template>
-    <div style="display: flex;" class="container" >
-        <div style="width: 400px;border: 1px,red;">
-            <el-checkbox v-model="isTimeChecked">日期</el-checkbox>
-            <div class="demo-date-picker" style="display: inline; padding: 5px;">
+    <div class="container">
+        <div class="date_class">
+            <el-checkbox class="checked_class" v-model="isTimeChecked">
+            <span style="font-size: 14px;">日期</span></el-checkbox>
+            <div class="demo-date-picker" style="display: inline; padding: 5px 5px 5px 0px;">
                 <el-date-picker style="width: 160px;" v-model="startDay" type="date" placeholder="Pick a day"
                     format="YYYY/MM/DD" value-format="YYYY-MM-DD">
                     <template #default="cell">
@@ -13,7 +14,7 @@
                 </el-date-picker>
             </div>
             <el-time-picker v-model="endTime" style="width:160px" />
-            <div class="demo-date-picker" style="display: inline;padding: 5px 5px 5px 55px;">
+            <div class="demo-date-picker" style="display: inline;padding: 5px 5px 5px 50px;">
                 <el-date-picker style="width: 160px;" v-model="endDay" type="date" placeholder="Pick a day"
                     format="YYYY/MM/DD" value-format="YYYY-MM-DD">
                     <template #default="cell">
@@ -25,33 +26,34 @@
             </div>
             <el-time-picker v-model="startTime" style="width:160px" />
         </div>
-        <div style="display: inline;width: 200px;">
+        <div class="serial_calss">
             <el-checkbox v-model="isSerialChecked" @change="serialChange">产品序列</el-checkbox>
             <div style="padding-top: 3px;">
                 <el-input v-model="serialNumber" style="width: 160px" :pattern="serialNumberPattern"
                     @input="serialInput" placeholder="Please input" />
             </div>
         </div>
-        <div>
+        <div style="display: flex;">
             <NewSelTemp :tableName="tableName" @selColName="getSelName" />
         </div>
-        <el-button style="margin-top: 7px;margin-left:15px;height: 60px; width: 120px;" @click="searchCliced"
-            type="primary">搜索</el-button>
-        <el-button style="margin-top: 14px;margin-left:15px;height: 40px; width: 120px;"
-            @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
+        <div class="btn_class">
+            <el-button class="search_class" @click="searchCliced"
+                type="primary">搜索</el-button>
+            <el-button class="export_class"
+                @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
 
-        <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
-            @click="importTableData(tableName)" type="primary">导入配置</el-button>
+            <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
+                @click="importTableData(tableName)" type="primary">导入配置</el-button>
+        </div>
     </div>
-    <div class="media" >
+    <div class="media">
         <component :is="selectedComponent" :tableData="tableData" />
-
         <div class="pagination-wrapper">
-        <!-- 这里放置你的分页组件 -->
-        <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+            <!-- 这里放置你的分页组件 -->
+            <vxe-pager v-bind="pagerConfig" @page-change="handlePageChange"></vxe-pager>
+        </div>
     </div>
-    </div>
-   
+
 </template>
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
@@ -361,34 +363,71 @@ watchEffect(() => {
     left: 50%;
     transform: translateX(-50%);
 }
+
 /* .将分页组件固定在页面底部 */
 .pagination-wrapper {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%; /* 确保分页组件占据整个页面宽度 */
-  background-color: #fff; /* 可选：设置背景颜色 */
-  z-index: 999; /* 可
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 确保分页组件占据整个页面宽度 */
+    background-color: #fff;
+    /* 可选：设置背景颜色 */
+    z-index: 999;
+    /* 可
   选：设置分页组件的层级，确保它位于其他内容的上方 */
 }
-/* 隐藏垂直滚动条 */
-/* .container {
-  overflow-y: hidden;
-} */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    /* 可以根据需要调整对齐方式 */
+    justify-content: flex-start;
+    /* 可以根据需要调整对齐方式 */
+}
+
+.date_class {
+    width: 395px;
+}
+
+.serial_calss{
+    width: 180px;
+    
+}
+.search_class{
+   margin-top: 4px;
+   height: 60px; 
+   width: 120px;
+}
+hr{
+    position: absolute;
+    margin-top: 24px;
+    color: red;
+    width: 100%;
+}
+.export_class{
+    margin-top: 7px;
+    margin-left:20px;
+    height: 40px; 
+    width: 120px;
+}
 
 @media screen and (max-width: 787px) {
-  /* 在此添加要应用的样式 */
-  .media{
-    height: 500px;
-  }
+
+    /* 在此添加要应用的样式 */
+    .media {
+        height: 500px;
+    }
 }
 
 /* 如果屏幕宽度大于或等于 600px，应用以下样式 */
 @media screen and (min-width: 788px) {
-  /* 在此添加要应用的样式 */
-  .media{
 
-    height: 600px;
-  }
+    /* 在此添加要应用的样式 */
+    .media {
+
+        height: 600px;
+    }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
         <vxe-table :data="tableData" v-bind="TableConfig">
-            <vxe-colgroup title="特定列" fixed="left">
-                <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" :formatter="formatDate"
+            <vxe-colgroup title="上传时间和序列号" fixed="left">
+                <vxe-column field="CollectionDate" width="150px" title="上传时间" fixed="left" :formatter="formatDate"
                     sortable />
                 <vxe-column field="DorpinSerial" width="150px" title="差速器销序列" fixed="left" sortable></vxe-column>
 
