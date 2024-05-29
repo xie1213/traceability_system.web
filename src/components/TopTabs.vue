@@ -1,6 +1,6 @@
 <template>
-  <div style="height: 100%; width: 100%; ">
-    <div style="padding-left: 20px; padding-right: 20px; ">
+  <div style="height: 100%; width: 100%;">
+    <div style="padding-left: 20px; padding-right: 20px;">
       <el-text style="padding-right: 50px; ">内存硬盘剩余容量
         <el-button style="background-color: #459cfb; color: white;" disabled>{{ AvailableSpaceGB }}</el-button>
       </el-text>
@@ -120,5 +120,7 @@ onMounted(() => {
   display: inline-block; /* 或者 display: block; */
   margin: 0 auto; 
 }
-
+.el-tabs__header{
+  margin-bottom: 5px;
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="date_class">
+        <div class="date_class" :class="{date_temp:isTimeChecked}">
             <el-checkbox class="checked_class" v-model="isTimeChecked">
-            <span style="font-size: 14px;">日期</span></el-checkbox>
-            <div class="demo-date-picker" style="display: inline; padding: 5px 5px 5px 0px;">
-                <el-date-picker style="width: 160px;" v-model="startDay" type="date" placeholder="Pick a day"
+            <span class="span_word">日期</span></el-checkbox>
+            <div class="demo-date-picker"  style="display: inline; padding: 5px 5px 5px 0px;">
+                <el-date-picker style="width: 160px;" v-model="startDay" type="date"
                     format="YYYY/MM/DD" value-format="YYYY-MM-DD">
                     <template #default="cell">
                         <div class="cell" :class="{ current: cell.isCurrent }">
@@ -14,8 +14,8 @@
                 </el-date-picker>
             </div>
             <el-time-picker v-model="endTime" style="width:160px" />
-            <div class="demo-date-picker" style="display: inline;padding: 5px 5px 5px 50px;">
-                <el-date-picker style="width: 160px;" v-model="endDay" type="date" placeholder="Pick a day"
+            <div class="demo-date-picker" style="display: inline;padding: 5px 5px 5px 54px;">
+                <el-date-picker style="width: 160px;" v-model="endDay" type="date"
                     format="YYYY/MM/DD" value-format="YYYY-MM-DD">
                     <template #default="cell">
                         <div class="cell" :class="{ current: cell.isCurrent }">
@@ -27,14 +27,15 @@
             <el-time-picker v-model="startTime" style="width:160px" />
         </div>
         <div class="serial_calss">
-            <el-checkbox v-model="isSerialChecked" @change="serialChange">产品序列</el-checkbox>
-            <div style="padding-top: 3px;">
+            <el-checkbox v-model="isSerialChecked" @change="serialChange">
+            <span class="span_word">产品序列</span></el-checkbox>
+            <div style="padding-top: 3px;" :class="{date_temp:isSerialChecked}">
                 <el-input v-model="serialNumber" style="width: 160px" :pattern="serialNumberPattern"
                     @input="serialInput" placeholder="Please input" />
             </div>
         </div>
         <div style="display: flex;">
-            <NewSelTemp :tableName="tableName" @selColName="getSelName" />
+            <NewSelTemp :tableName="tableName" @selColName="getSelName"/>
         </div>
         <div class="btn_class">
             <el-button class="search_class" @click="searchCliced"
@@ -385,6 +386,7 @@ watchEffect(() => {
     /* 可以根据需要调整对齐方式 */
     justify-content: flex-start;
     /* 可以根据需要调整对齐方式 */
+    margin-bottom: 5px;
 }
 
 .date_class {
@@ -396,7 +398,7 @@ watchEffect(() => {
     
 }
 .search_class{
-   margin-top: 4px;
+   margin-top: 6px;
    height: 60px; 
    width: 120px;
 }
@@ -412,6 +414,26 @@ hr{
     height: 40px; 
     width: 120px;
 }
+.span_word{
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.brown{
+    border: #0c0d1f 1px solid;
+}
+:deep(.date_temp .el-input__wrapper){
+    /* color:rgb(8, 101, 172) ; */
+    background: white;
+
+}
+:deep(.el-input__wrapper){
+    /* background-color: #f9f8f2; 浅棕色 */
+    /* background-color: #f2f2f2; 灰色背景 */
+    background-color: #e1e1e5; /* 稍微更深的灰色背景 */
+
+}
+
 
 @media screen and (max-width: 787px) {
 

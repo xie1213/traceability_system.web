@@ -5,7 +5,7 @@ import axios from 'axios'
 const apiClient = axios.create({
   // baseURL: `${GlodPath}`
   // baseURL: 'http://172.31.13.200:5000'
-  baseURL: 'http://192.168.30.1:5000'
+  baseURL:'http://192.168.1.26:5000'
 
   
 })
