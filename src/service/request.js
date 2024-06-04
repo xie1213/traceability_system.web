@@ -1,14 +1,13 @@
 // request.js
 // import {GlodPath} from "../../public/static/config"
 
-import axios from 'axios'
-const apiClient = axios.create({
-  // baseURL: `${GlodPath}`
-  // baseURL: 'http://172.31.13.200:5000'
-  baseURL:'http://192.168.1.26:5000'
+import apiClient from 'axios'
+// const apiClient = axios.create({
+//   // baseURL: `${GlodPath}`
+//   // baseURL:"http://192.168.1.26:5000"
 
   
-})
+// })
 
 // 添加请求拦截器
 apiClient.interceptors.request.use(config => {

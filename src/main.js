@@ -10,8 +10,14 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // import router from "@/router"
 import 'vant/lib/index.css'; 
 import App from './App.vue';
-
-axios.defaults.baseURL="/api"
+let host = window.location.host // 主机
+let reg = /^localhost+/
+if (reg.test(host)) {
+  // 若本地项目调试使用
+  console.log("本地");
+  axios.defaults.baseURL = 'http://172.31.13.200:5000'
+} 
+// axios.defaults.baseURL = '/api'
 const app = createApp(App);
 app.use(ElementPlus,{locale:zhCn})
 app.use(VXETable)

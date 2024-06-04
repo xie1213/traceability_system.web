@@ -178,7 +178,6 @@ const searchCliced = () => {
         let isValue = key == "selectFactor" ? len != 0 : value !== ""
         // console.log(isvalue);
         if (isValue) {
-
             sendToBack[key] = value;
         }
         if (isSerialChecked.value && key == "serialDateNumber" && value === "") {

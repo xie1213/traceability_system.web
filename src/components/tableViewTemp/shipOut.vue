@@ -1,9 +1,9 @@
 <template>
         <vxe-table :data="tableData" v-bind="TableConfig">
+            <vxe-column field="LeadTimeDate" title="先行时间" sortable :formatter="formatDate"  />
             <vxe-column field="SerialNo" title="序列号" sortable />
             <vxe-column field="ProductNo" title="品番" sortable />
             <vxe-column field="Printing" title="印字标识" sortable />
-            <vxe-column field="LeadTimeDate" title="先行时间" sortable :formatter="formatDate" />
             <vxe-column field="ShippingTimeDate" title="出荷时间" sortable :formatter="formatDate" />
             <vxe-column field="Destination" title="出荷目的地" sortable />
             <vxe-column field="DestinationArea" title="目的地工区" sortable />

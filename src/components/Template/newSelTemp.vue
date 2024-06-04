@@ -11,13 +11,13 @@
     </el-select>
     <!-- 全部选择 -->
     <!-- {{ firstValue }} -->
-    <div v-if="tableName == '全部履历'" class="whole_calss" :class="{ IsChecked: isSelectChecked }" >
+    <div v-if="tableName == '全部履历'" class="whole_calss" :class="{ IsChecked: isSelectChecked }">
       <span>选择</span>
       <el-cascader v-model="selectedOption" :options="options" @change="handleChange" style="width: 150px" clearable
         :show-all-levels="false" />
     </div>
     <!-- 其他表的选择 -->
-    <div v-else style="padding-left: 22px; width: 190px;" :class="{ IsChecked: isSelectChecked }" >
+    <div v-else style="padding-left: 22px; width: 190px;" :class="{ IsChecked: isSelectChecked }">
       <span>选择</span>
       <el-select v-model="selRequestData.selectName" clearable placeholder="Select" style="width: 150px">
         <el-option v-for="(item, index) in twoList" :key="index" :label="item.col" @click="getTwoSelName(item)"
@@ -30,28 +30,29 @@
     <el-checkbox v-model="isSelectChecked">
       <span>项目</span>
     </el-checkbox>
-    <div >
-      <el-select class="ship_select" :class="{ IsChecked: isSelectChecked }" v-model="shipValue" clearable placeholder="Select">
-        <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName" />
+    <div>
+      <el-select class="ship_select" :class="{ IsChecked: isSelectChecked }" v-model="shipValue" clearable
+        placeholder="Select">
+        <el-option v-for="(item, index) in firstList" :key="index" :label="item.tableName" :value="item.colName"
+          @click="getTwoSelName(item)" />
       </el-select>
     </div>
-
   </div>
   <!-- 上下限制 -->
-  <div class="limit_class" v-if="!selRequestData.selectName.includes('Date')">
+  <div class="limit_class" v-if="showDate != true">
     <span class="top_span_text">上限</span>
-    <el-input v-model="selRequestData.topLimit"  :class="{ IsChecked: isSelectChecked }" style="width: 150px" @input="topLimitInput"
-      placeholder="Please input" />
+    <el-input v-model="selRequestData.topLimit" :class="{ IsChecked: isSelectChecked }" style="width: 150px"
+      @input="topLimitInput" placeholder="Please input" />
     <span class="lower_sapn">下限</span>
-    <el-input v-model="selRequestData.lowerLimit" :class="{ IsChecked: isSelectChecked }" style="width: 150px" @input="lowerLimitInput"
-      placeholder="Please input" />
+    <el-input v-model="selRequestData.lowerLimit" :class="{ IsChecked: isSelectChecked }" style="width: 150px"
+      @input="lowerLimitInput" placeholder="Please input" />
   </div>
   <!-- 时间控件 -->
   <div class="select_date_class" v-else>
-    <div class="demo-date-picker" style="display: inline;" >
+    <div class="demo-date-picker" style="display: inline;">
       <span>开始时间</span>
-      <el-date-picker style="width: 160px;" :class="{ IsChecked: isSelectChecked }" v-model="selStartDay" type="date" placeholder="Pick a day"
-        format="YYYY/MM/DD" value-format="YYYY-MM-DD">
+      <el-date-picker style="width: 160px;" :class="{ IsChecked: isSelectChecked }" v-model="selStartDay" type="date"
+        placeholder="Pick a day" format="YYYY/MM/DD" value-format="YYYY-MM-DD">
         <template #default="cell">
           <div class="cell" :class="{ current: cell.isCurrent }">
             <span class="text">{{ cell.text }}</span>
@@ -59,7 +60,8 @@
         </template>
       </el-date-picker>
     </div>
-    <el-time-picker v-model="selEndTime" :class="{ IsChecked: isSelectChecked }" style="width:160px; padding-left: 5px;" />
+    <el-time-picker v-model="selEndTime" :class="{ IsChecked: isSelectChecked }"
+      style="width:160px; padding-left: 5px;" />
     <div class="demo-date-picker" style="display: inline;" :class="{ IsChecked: isSelectChecked }">
       <span class="span_text" style="font-size: 14px;">结束时间</span>
       <el-date-picker style="width: 160px;" v-model="selEndDay" type="date" placeholder="Pick a day" format="YYYY/MM/DD"
@@ -71,7 +73,8 @@
         </template>
       </el-date-picker>
     </div>
-    <el-time-picker v-model="selStartTime" :class="{ IsChecked: isSelectChecked }" style="width:160px;padding-left: 5px;" />
+    <el-time-picker v-model="selStartTime" :class="{ IsChecked: isSelectChecked }"
+      style="width:160px;padding-left: 5px;" />
   </div>
 </template>
 
@@ -103,7 +106,7 @@ const shipValue = ref("");  //出荷数据
 
 const serialNumberPattern = ref(/^[A-Za-z0-9#.\s]+$/); //正则验证
 
-
+const showDate = ref(false)
 
 //时间格式化
 const selStartDay = ref(new Date().toISOString().slice(0, 10)),
@@ -280,24 +283,16 @@ function handleChange(e) {
 function getCheacked() {
   let sendToBack = {}
   // let isEmit = false
-  let { selectName } = selRequestData;
-  //判断是否为空值
-  // if (!selectName.includes("Date")) {
-  //   parseInt(topLimit)
-  // }
+  let { selectName, } = selRequestData;
+
   if (selectName === "") {
     allterMessage("条件未选择", "error")
   }
-
-
   Object.entries(selRequestData).forEach(([key, value]) => {
     if (value !== "") {
       sendToBack[key] = value;
     }
   });
-
-
-
   emit('selColName', sendToBack)
 }
 
@@ -314,7 +309,14 @@ function allterMessage(message, type) {
 
 //获取中文名
 function getTwoSelName(e) {
-  selRequestData.selectNameZh = e["col"]
+  let isName = props.tableName == "出荷履历"
+  if (isName) {
+    selRequestData.selectName = e["colName"]
+    selRequestData.selectNameZh = e["tableName"]
+  } else {
+    selRequestData.selectNameZh = e["col"];
+  }
+  console.log(selRequestData);
 }
 
 //清除第一列
@@ -335,7 +337,7 @@ const oldTableName = shallowRef(props.tableName);
 getFirstColName()
 
 watchEffect(() => {
-  let { selectName, topLimit, lowerLimit } = selRequestData;
+  let { selectName, topLimit, lowerLimit} = selRequestData;
   if (oldTableName.value != props.tableName) {
     getFirstColName()
     isSelectChecked.value = false
@@ -347,20 +349,26 @@ watchEffect(() => {
     oldTableName.value = props.tableName
   }
 
-  if (props.tableName == "出荷履历") {
-    selectName = shipValue.value
-  }
+  // if (props.tableName == "出荷履历") {
+  //   selectName = shipValue.value
+  // }
   formattedStartTime.value = getTimeString(selStartTime.value)
   formattedEndTime.value = getTimeString(selEndTime.value)
   if (selectName.includes("Date")) {
     // console.log("时间");
     verifyTime()
-
+    showDate.value = true;
     selRequestData.startDateTime = `${selStartDay.value} ${formattedEndTime.value}`;
     selRequestData.endDateTime = `${selEndDay.value} ${formattedStartTime.value}`;
+  } else {
+    showDate.value = false;
   }
-
   if (isSelectChecked.value) {
+    if (topLimit == "" && lowerLimit == "" ) {
+      return;
+    }
+
+
     getCheacked()
   } else {
     emit('selColName', {})
@@ -469,20 +477,21 @@ span {
   width: 220px;
 }
 
-:deep(.IsChecked .el-select__wrapper){
+:deep(.IsChecked .el-select__wrapper) {
   background: white;
 
 }
-:deep(.IsChecked .el-input__wrapper){
+
+:deep(.IsChecked .el-input__wrapper) {
   background: white;
 }
 
 
 
-:deep(.el-select__wrapper){
-    /* background-color: #f2f4e7ce; 浅棕色 */
-    /* background-color: #f6f5f5; 稍深的灰色背景 */
-    background-color: #e1e1e5; /* 稍微更深的灰色背景 */
+:deep(.el-select__wrapper) {
+  /* background-color: #f2f4e7ce; 浅棕色 */
+  /* background-color: #f6f5f5; 稍深的灰色背景 */
+  background-color: #e1e1e5;
+  /* 稍微更深的灰色背景 */
 }
-
 </style>
