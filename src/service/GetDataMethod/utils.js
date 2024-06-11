@@ -193,6 +193,7 @@ export const importTableData = (tableName) => {
 
   apiClient.post("api/Home/requestData", tableImportData)
     .then(() => {
+      
       console.log("更新成功");
     }).catch((error) => {
       console.log(error);

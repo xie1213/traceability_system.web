@@ -410,10 +410,10 @@
             <PokayokeDate :colName="'外観検査计测日時'" :value="'InspectionDate'" />
             <PokayokeDate :colName="'防错防误32计测日時'" :value="'PokayokeDate32'" />
             <PokayokeDate :colName="'HSG セット计测日時'" :value="'HsgSetDate'" />
-            <PokayokeDate :colName="'防错防误30计测日時'" :value="'PokayokeDate30'" />
 
             <vxe-colgroup title="D托盘重量">
-                <vxe-column field="DtrayWeight" width="70px" title="托盘 No" sortable></vxe-column>
+                <vxe-column field="Tray" width="70px" title="托盘 No" sortable></vxe-column>
+                <vxe-column field="Weight" width="70px" title="重量" sortable></vxe-column>
             </vxe-colgroup>
         </vxe-table>
 </template>

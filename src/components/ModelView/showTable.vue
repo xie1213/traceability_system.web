@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="date_class" :class="{date_temp:isTimeChecked}">
+        <div class="date_class" :class="{ date_temp: isTimeChecked }">
             <el-checkbox class="checked_class" v-model="isTimeChecked">
-            <span class="span_word">日期</span></el-checkbox>
-            <div class="demo-date-picker"  style="display: inline; padding: 5px 5px 5px 0px;">
-                <el-date-picker style="width: 160px;" v-model="startDay" type="date"
-                    format="YYYY/MM/DD" value-format="YYYY-MM-DD">
+                <span class="span_word">日期</span></el-checkbox>
+            <div class="demo-date-picker" style="display: inline; padding: 5px 5px 5px 0px;">
+                <el-date-picker style="width: 160px;" v-model="startDay" type="date" format="YYYY/MM/DD"
+                    value-format="YYYY-MM-DD">
                     <template #default="cell">
                         <div class="cell" :class="{ current: cell.isCurrent }">
                             <span class="text">{{ cell.text }}</span>
@@ -15,8 +15,8 @@
             </div>
             <el-time-picker v-model="endTime" style="width:160px" />
             <div class="demo-date-picker" style="display: inline;padding: 5px 5px 5px 54px;">
-                <el-date-picker style="width: 160px;" v-model="endDay" type="date"
-                    format="YYYY/MM/DD" value-format="YYYY-MM-DD">
+                <el-date-picker style="width: 160px;" v-model="endDay" type="date" format="YYYY/MM/DD"
+                    value-format="YYYY-MM-DD">
                     <template #default="cell">
                         <div class="cell" :class="{ current: cell.isCurrent }">
                             <span class="text">{{ cell.text }}</span>
@@ -28,20 +28,19 @@
         </div>
         <div class="serial_calss">
             <el-checkbox v-model="isSerialChecked" @change="serialChange">
-            <span class="span_word">产品序列</span></el-checkbox>
-            <div style="padding-top: 3px;" :class="{date_temp:isSerialChecked}">
+                <span class="span_word">产品序列</span></el-checkbox>
+            <div style="padding-top: 3px;" :class="{ date_temp: isSerialChecked }">
                 <el-input v-model="serialNumber" style="width: 160px" :pattern="serialNumberPattern"
                     @input="serialInput" placeholder="Please input" />
             </div>
         </div>
         <div style="display: flex;">
-            <NewSelTemp :tableName="tableName" @selColName="getSelName"/>
+            <NewSelTemp :tableName="tableName" @selColName="getSelName" />
         </div>
         <div class="btn_class">
-            <el-button class="search_class" @click="searchCliced"
-                type="primary">搜索</el-button>
-            <el-button class="export_class"
-                @click="exportDataBtn(tableName)" :disabled="disbtn" type="primary">导出</el-button>
+            <el-button class="search_class" @click="searchCliced" type="primary">搜索</el-button>
+            <el-button class="export_class" @click="exportDataBtn(tableName)" :disabled="disbtn"
+                type="primary">导出</el-button>
 
             <el-button style="display: none; margin-top: 7px;margin-left:15px;height: 60px; width: 120px;"
                 @click="importTableData(tableName)" type="primary">导入配置</el-button>
@@ -96,7 +95,6 @@ const getTimeString = (date) => {
 const formattedStartTime = ref("")
 const formattedEndTime = ref("")
 
-//获取时间参数
 
 
 //#endregion
@@ -324,7 +322,6 @@ watchEffect(() => {
     formattedStartTime.value = getTimeString(startTime.value)
     formattedEndTime.value = getTimeString(endTime.value)
     isChecked()
-    // getSelName();
     // getIndex();
 })
 
@@ -392,44 +389,51 @@ watchEffect(() => {
     width: 395px;
 }
 
-.serial_calss{
+.serial_calss {
     width: 180px;
-    
+
 }
-.search_class{
-   margin-top: 6px;
-   height: 60px; 
-   width: 120px;
+
+.search_class {
+    margin-top: 6px;
+    height: 60px;
+    width: 120px;
 }
-hr{
+
+hr {
     position: absolute;
     margin-top: 24px;
     color: red;
     width: 100%;
 }
-.export_class{
+
+.export_class {
     margin-top: 7px;
-    margin-left:20px;
-    height: 40px; 
+    margin-left: 20px;
+    height: 40px;
     width: 120px;
 }
-.span_word{
+
+.span_word {
     font-size: 14px;
     letter-spacing: 2px;
 }
 
-.brown{
+.brown {
     border: #0c0d1f 1px solid;
 }
-:deep(.date_temp .el-input__wrapper){
+
+:deep(.date_temp .el-input__wrapper) {
     /* color:rgb(8, 101, 172) ; */
     background: white;
 
 }
-:deep(.el-input__wrapper){
+
+:deep(.el-input__wrapper) {
     /* background-color: #f9f8f2; 浅棕色 */
     /* background-color: #f2f2f2; 灰色背景 */
-    background-color: #e1e1e5; /* 稍微更深的灰色背景 */
+    background-color: #e1e1e5;
+    /* 稍微更深的灰色背景 */
 
 }
 
