@@ -65,7 +65,7 @@
     <div class="demo-date-picker" style="display: inline;" :class="{ IsChecked: isSelectChecked }">
       <span class="span_text" style="font-size: 14px;">结束时间</span>
       <el-date-picker style="width: 160px;" v-model="selEndDay" type="date" placeholder="Pick a day" format="YYYY/MM/DD"
-        value-format="YYYY-MM-DD">
+        value-format="YY-MM-DD">
         <template #default="cell">
           <div class="cell" :class="{ current: cell.isCurrent }">
             <span class="text">{{ cell.text }}</span>
@@ -137,6 +137,16 @@ const selectName = {
   "Ta履历": taData.AllTatable,
   "全部履历": allTableData.table,
   "出荷履历": shipmentData
+}
+
+// 将日期格式化为 24-06-13 格式的函数
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = String(date.getFullYear()).slice(-2); // 获取年份的后两位
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // 获取月份并补零
+  const day = String(date.getDate()).padStart(2, '0'); // 获取日期并补零
+
+  return `${year}-${month}-${day}`;
 }
 
 //获取原始下拉数据
@@ -337,7 +347,7 @@ const oldTableName = shallowRef(props.tableName);
 getFirstColName()
 
 watchEffect(() => {
-  let { selectName, topLimit, lowerLimit} = selRequestData;
+  let { selectName, topLimit, lowerLimit } = selRequestData;
   if (oldTableName.value != props.tableName) {
     getFirstColName()
     isSelectChecked.value = false
@@ -358,16 +368,18 @@ watchEffect(() => {
     // console.log("时间");
     verifyTime()
     showDate.value = true;
-    selRequestData.startDateTime = `${selStartDay.value} ${formattedEndTime.value}`;
-    selRequestData.endDateTime = `${selEndDay.value} ${formattedStartTime.value}`;
+    
+    selRequestData.startDateTime = `${formatDate(selStartDay.value)} ${formattedEndTime.value}`;
+    selRequestData.endDateTime = `${formatDate(selEndDay.value)} ${formattedStartTime.value}`;
   } else {
     showDate.value = false;
   }
   if (isSelectChecked.value) {
-    if (topLimit == "" && lowerLimit == "" ) {
-      return;
+    if (!selectName.includes("Date")) {
+      if (topLimit == "" && lowerLimit == "") {
+        return;
+      }
     }
-
 
     getCheacked()
   } else {
