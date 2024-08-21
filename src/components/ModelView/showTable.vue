@@ -58,7 +58,7 @@
 <script setup>
 import { ref, watchEffect, reactive, defineProps, shallowRef, computed } from 'vue';
 import { getSeleName } from "@/service/GetDataMethod/getTaleColName"
-import { realList, exportData, importTableData, pagerConfig, getPageData, alertMess } from "@/service/GetDataMethod/utils"
+import { realList, startExport, importTableData, pagerConfig, getPageData, alertMess } from "@/service/GetDataMethod/utils"
 import { motorTemp, rotorTemp, gearTemp, rrTemp, taTemp, shipOut, entireTemp } from "@/service/Import/tableTemp"
 import NewSelTemp from '../Template/newSelTemp.vue';
 
@@ -254,7 +254,7 @@ function getExportName(sendToBack) {
 
 //#endregion
 const exportDataBtn = () => {
-    exportData(exportName.value)
+    startExport(exportName.value,pagerConfig.total)
 }
 
 function formatDateToCustomString(inputDate) {

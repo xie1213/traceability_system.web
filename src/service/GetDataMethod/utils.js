@@ -1,7 +1,7 @@
 import apiClient from "../request";
-import { ElMessageBox, ElMessage, ElLoading } from "element-plus";
+import { ElMessageBox, ElMessage,ElNotification } from "element-plus";
 import { reactive, ref } from "vue";
-import { motorData, rotorData, rrData, gearData, taData,allTableData,shipmentData } from "@/service/Import/tableData";
+import { motorData, rotorData, rrData, gearData, taData, allTableData, shipmentData } from "@/service/Import/tableData";
 
 
 //获取数据
@@ -50,54 +50,6 @@ export const realList = (requestData) => {
     }, 100);
   });
 };
-
-//导出数据
-export const exportData = async (tableName) => {
-  try {
-    const response = await ElMessageBox.confirm("确定导出吗"); // 弹出确认对话框
-    if (response === "confirm") { // 如果用户点击了确认按钮
-      const loadings = ElLoading.service({ // 显示加载中的提示
-        lock: true,
-        text: "正在导出...",
-      });
-      const response = await apiClient.get( // 发起导出数据的请求
-        `api/Excel/ExportData?tableName=${tableName}`,
-        {
-          responseType: "blob", // 设置响应类型为'blob'，用于接收二进制数据
-        }
-      );
-      const blob = new Blob([response.data], { // 创建Blob对象，用于保存下载的文件
-        type: response.headers["content-type"],
-      });
-      const url = window.URL.createObjectURL(blob); // 创建临时URL
-
-      // 创建<a>标签，设置下载链接，并模拟点击进行下载
-      const link = document.createElement("a");
-      let filename = `${tableName}.xlsx`;
-      let count = 1;
-
-      // 检查文件名是否已存在，如果存在则在文件名后添加数字区分
-      while (document.querySelectorAll(`[download="${filename}"]`).length > 0) {
-        filename = `${tableName}_${count}.xlsx`;
-        count++;
-      }
-
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      // 释放资源
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(link);
-      loadings.close(); // 关闭加载中的提示
-    }
-  } catch (error) {
-    console.error("导出失败:", error);
-    // 处理错误并向用户提供反馈
-  }
-};
-
-
 
 //表配置
 export const TableConfig = reactive({
@@ -182,8 +134,8 @@ let tableNameList = {
   "Gear履历": gearData.AllGearTable,
   "Rr履历": rrData.AllRRTable,
   "Ta履历": taData.AllTatable,
-  "全部履历":allTableData.table,
-  "出荷履历":shipmentData
+  "全部履历": allTableData.table,
+  "出荷履历": shipmentData
 }
 
 //导入表配置
@@ -193,7 +145,7 @@ export const importTableData = (tableName) => {
 
   apiClient.post("api/Home/requestData", tableImportData)
     .then(() => {
-      
+
       console.log("更新成功");
     }).catch((error) => {
       console.log(error);
@@ -210,7 +162,7 @@ export const getPageData = (e, tableName) => {
         let response;
         response = await apiClient.get(`api/DBTest/GetRedis?page=${e.currentPage}&limit=${e.pageSize}&tableName=${tableName}`);
         // console.log(e);
-        pagerConfig.pageSize=e.pageSize
+        pagerConfig.pageSize = e.pageSize
         //tableData.value = response.data.data; // Populate the dataList array with the retrieved data
         //gridRef.value.reloadData(dataList.value)
         TableConfig.loading = false
@@ -222,6 +174,171 @@ export const getPageData = (e, tableName) => {
     }, 100);
   })
 }
+
+//#region  导出代码
+// const messParams = reactive({
+//   message:"",
+//   tyep:"info",
+
+// })
+
+
+
+//启动数据导出
+export const startExport = (tableName, count) => {
+
+  let taskId = ""
+  let text = count >= 10000 ? "数据超过1w条需要稍微等待" : ""
+  text += "确认导出吗"
+
+  ElMessageBox.confirm(
+    text,
+    '提示',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'Info',
+    }
+  )
+    .then(() => {
+      ElMessage.info("正在发送请求,请稍等...")
+
+      startExportAndPoll(tableName, count, taskId)
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消导出',
+      })
+    })
+}
+
+let timeoutId = null;
+async function startExportAndPoll(tableName, count, taskId) {
+  try {
+    console.log("创建任务并返回taskId");
+    ElMessage.info("正在发送请求,请稍等...")
+    ElNotification.success({
+      title: 'Info',
+      message: 'This is a message with a custom icon',
+      showClose: false,
+      iconClass: 'el-icon-Loading' // 你可以使用 Element Plus 提供的图标类名
+    });
+
+
+    // 启动导出任务
+    const response = await apiClient.post('api/Export/StartExport', { tableName, count, taskId });
+    const { TaskId } = response.data;
+    
+    pollAndCheckExportStatus(TaskId,tableName);
+
+  } catch (error) {
+    console.error('Error starting export:', error);
+    // 如果出错，可能需要根据实际情况决定是否重试
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+    }
+  }
+}
+let isPolling = false;
+async function pollAndCheckExportStatus(taskId,tableName) {
+  if (isPolling) return; // 防止重复启动
+  console.log(isPolling);
+  
+  isPolling = true;
+  const interval = 2000; // 5秒轮询一次
+  let pollInterval;
+  console.log("轮询");
+  ElMessage.info("数据获取成功,正准备下载...")
+  const checkStatus = async () => {
+    try {
+      const response = await apiClient.get(`/api/Export/CheckExportStatus?taskId=${taskId}`)
+     
+      const { Status } = response.data
+      console.log(Status);
+      
+      if (Status == "Completed") {
+        console.log("数据以获取");
+        
+        clearInterval(pollInterval);
+        isPolling = false; // 轮询完成后重置标志位
+        downloadExportedData(taskId,tableName)
+      }
+      else if(Status == "InProgress"){
+        console.log(Status);
+        
+      }
+
+    } catch (error) {
+      console.error('Error checking status:', error);
+      isPolling = false; // 轮询完成后重置标志位
+      // 停止轮询
+      clearInterval(pollInterval);
+    }
+  };
+
+  // 启动轮询
+  pollInterval = setInterval(checkStatus, interval);
+
+    // 处理页面刷新
+    window.onbeforeunload = () => {
+      clearInterval(pollInterval);
+      isPolling = false;
+    };
+}
+
+
+
+// 下载文件的函数
+async function downloadExportedData(taskId,tableName) {
+  try {
+    const response = await apiClient.get(`/api/Export/DownloadExportedData?taskId=${taskId}`, {
+      responseType: 'blob' // 处理 Blob 数据用于文件下载
+    });
+    console.log("开始下载");
+
+    const contentType = response.headers['content-type'];
+    if (contentType && contentType.startsWith('application/')) {
+      // 创建 Blob 对象并下载文件
+      const blob = new Blob([response.data], { type: contentType });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = tableName+'.xlsx'; // 指定文件名称
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      console.error('Unexpected content type for file download:', contentType);
+    }
+    ElMessage.success(tableName+".xlsx 下载成功")
+  } catch (error) {
+    console.error('Error downloading file:', error);
+  }
+}
+
+
+// //导出下载数据
+// function createDownloadLink(blob, fileName) {
+//   // 创建下载链接
+//   console.log(blob,fileName);
+
+//   const url = window.URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.href = url;
+//   a.download = fileName || 'exported_data'; // 设置下载文件名
+//   a.innerText = 'Click here to download your file'; // 设置链接文本
+//   a.style.display = 'block'; // 使链接显示为块元素
+
+//   // 将链接添加到页面上
+//   document.body.appendChild(a);
+
+//   // 清理 URL 对象以释放内存
+//   return () => window.URL.revokeObjectURL(url);
+// }
+
+
+
+//#endregion
 
 //消息提示
 export function alertMess(message, type) {
