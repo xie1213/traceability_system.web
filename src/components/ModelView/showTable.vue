@@ -254,7 +254,9 @@ function getExportName(sendToBack) {
 
 //#endregion
 const exportDataBtn = () => {
+    disbtn.value = true
     startExport(exportName.value,pagerConfig.total)
+
 }
 
 function formatDateToCustomString(inputDate) {

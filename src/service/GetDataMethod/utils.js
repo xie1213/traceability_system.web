@@ -239,7 +239,7 @@ async function pollAndCheckExportStatus(taskId, tableName) {
 
   isPolling = true;
 
-  const interval = 2000; // 5秒轮询一次
+  const interval = 5000; // 5秒轮询一次
   let pollInterval;
 
   const checkStatus = async () => {
@@ -263,7 +263,7 @@ async function pollAndCheckExportStatus(taskId, tableName) {
         isPolling = false; // 轮询完成后重置标志位
         downloadExportedData(taskId, tableName)
       }
-      else if (Status == "InProgress") {
+      else if (Status == "NotStarted") {
         Notification("数据获取成功,正准备下载...")
       }
 
