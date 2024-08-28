@@ -264,7 +264,7 @@ async function pollAndCheckExportStatus(taskId, tableName) {
         downloadExportedData(taskId, tableName)
       }
       else if (Status == "NotStarted") {
-        Notification("数据获取成功,正准备下载...")
+        Notification("正在获取数据,稍后下载...")
       }
 
     } catch (error) {
