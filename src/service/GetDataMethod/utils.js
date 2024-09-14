@@ -187,7 +187,7 @@ export const getPageData = (e, tableName) => {
 //启动数据导出
 export const startExport = (tableName, count) => {
 
-  let taskId = ""
+  // let taskId = ""
   let text = count >= 10000 ? "数据超过1w条需要稍微等待" : ""
   text += "确认导出吗"
 
@@ -203,7 +203,8 @@ export const startExport = (tableName, count) => {
     .then(() => {
       ElMessage.info("正在发送请求,请稍等...")
       TableConfig.loading = true;
-      startExportAndPoll(tableName, count, taskId)
+      downloadExportedData(tableName)
+      // startExportAndPoll(tableName, count, taskId)
     })
     .catch(() => {
       ElMessage({
@@ -213,116 +214,158 @@ export const startExport = (tableName, count) => {
     })
 }
 
-let timeoutId = null;
-async function startExportAndPoll(tableName, count, taskId) {
-  try {
+//#region  导出
+// let timeoutId = null;
+// // async function startExportAndPoll(tableName, count, taskId) {
+// //   try {
 
-    // 启动导出任务
-    const response = await apiClient.post('api/Export/StartExport', { tableName, count, taskId });
-    const TaskId  = response.data;
+// //     // 启动导出任务
+// //     const response = await apiClient.post('api/Export/StartExport', { tableName, count, taskId });
+// //     const TaskId  = response.data;
 
-    Notification("创建导出请求,请稍等...")
-    pollAndCheckExportStatus(TaskId, tableName);
+// //     Notification("创建导出请求,请稍等...")
+// //     pollAndCheckExportStatus(TaskId, tableName);
 
-  } catch (error) {
-    TableConfig.loading = false
-    console.error('Error starting export:', error);
-    // 如果出错，可能需要根据实际情况决定是否重试
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
-  }
-}
-let isPolling = false;
-async function pollAndCheckExportStatus(taskId, tableName) {
-  if (isPolling) return; // 防止重复启动
+// //   } catch (error) {
+// //     TableConfig.loading = false
+// //     console.error('Error starting export:', error);
+// //     // 如果出错，可能需要根据实际情况决定是否重试
+// //     if (timeoutId !== null) {
+// //       clearTimeout(timeoutId);
+// //     }
+// //   }
+// // }
+// let isPolling = false;
+// async function pollAndCheckExportStatus(taskId, tableName) {
+//   if (isPolling) return; // 防止重复启动
 
-  isPolling = true;
+//   isPolling = true;
 
-  const interval = 5000; // 5秒轮询一次
-  let pollInterval;
+//   const interval = 5000; // 5秒轮询一次
+//   let pollInterval;
 
-  const checkStatus = async () => {
-    try {
-      const response = await apiClient.get(`/api/Export/CheckExportStatus?taskId=${taskId}`)
+//   const checkStatus = async () => {
+//     try {
+//       const response = await apiClient.get(`/api/Export/DownloadTable?tablename=${tableName}`)
 
-      const { Status } = response.data
-      console.log(Status);
+//       const { Status } = response.data
+//       console.log(Status);
 
-      if(Status == "Failed"){
-        TableConfig.loading = false
-        isPolling = false; 
-        clearInterval(pollInterval);
-        errorNotification("数据导出失败"+response.data.error)
-      }
+//       if(Status == "Failed"){
+//         TableConfig.loading = false
+//         isPolling = false; 
+//         clearInterval(pollInterval);
+//         errorNotification("数据导出失败"+response.data.error)
+//       }
 
-      if (Status == "Completed") {
-        Notification("后端数据获取成功,前端下载...")
+//       if (Status == "Completed") {
+//         Notification("后端数据获取成功,前端下载...")
 
-        clearInterval(pollInterval);
-        isPolling = false; // 轮询完成后重置标志位
-        downloadExportedData(taskId, tableName)
-      }
-      else if (Status == "NotStarted") {
-        Notification("正在获取数据,稍后下载...")
-      }
+//         clearInterval(pollInterval);
+//         isPolling = false; // 轮询完成后重置标志位
+//         downloadExportedData(taskId, tableName)
+//       }
+//       else if (Status == "NotStarted") {
+//         Notification("正在获取数据,稍后下载...")
+//       }
 
-    } catch (error) {
-      TableConfig.loading = false
-      console.error('Error checking status:', error);
-      isPolling = false; // 轮询完成后重置标志位
-      // 停止轮询
-      clearInterval(pollInterval);
-    }
-  };
+//     } catch (error) {
+//       TableConfig.loading = false
+//       console.error('Error checking status:', error);
+//       isPolling = false; // 轮询完成后重置标志位
+//       // 停止轮询
+//       clearInterval(pollInterval);
+//     }
+//   };
 
-  // 启动轮询
-  pollInterval = setInterval(checkStatus, interval);
+// //   // 启动轮询
+//   pollInterval = setInterval(checkStatus, interval);
 
-  // 处理页面刷新
-  window.onbeforeunload = () => {
-    TableConfig.loading = false
-    Notification("页面刷新导出任务暂停")
-    clearInterval(pollInterval);
-    isPolling = false;
-  };
-}
+// //   // 处理页面刷新
+//   window.onbeforeunload = () => {
+//     TableConfig.loading = false
+//     Notification("页面刷新导出任务暂停")
+//     clearInterval(pollInterval);
+//     isPolling = false;
+//   };
+// // }
 
-
+//#endregion
 
 // 下载文件的函数
-async function downloadExportedData(taskId, tableName) {
-  try {
-    const response = await apiClient.get(`/api/Export/DownloadExportedData?taskId=${taskId}&tableName=${tableName}`, {
-      responseType: 'blob' // 处理 Blob 数据用于文件下载
-    });
-    console.log(response);
+async function downloadExportedData(tableName) {
+  TableConfig.loading = true; // 启动加载状态
+  const abortController = new AbortController(); // 用于中断请求
+  const { signal } = abortController; // 获取信号对象
 
-    const contentType = response.headers['content-type'];
-    if (contentType && contentType.startsWith('application/')) {
-      // 创建 Blob 对象并下载文件
-      const blob = new Blob([response.data], { type: contentType });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = tableName + '.xlsx'; // 指定文件名称
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      Notification("下载成功")
-      TableConfig.loading = false;
-    } else {
-      console.error('Unexpected content type for file download:', contentType);
+  // 状态检查函数
+  async function checkStatus() {
+    try {
+      const response = await apiClient.get(`/api/Export/DownloadTable?tablename=${tableName}`, { signal });
+      return response.data === 'InProgress';
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log('状态检查请求被中断');
+      } else {
+        console.error('Error checking status:', error);
+      }
+      throw error;
     }
-    ElMessage.success(tableName + ".xlsx 下载成功")
-    TableConfig.loading = false
+  }
+
+  // 文件下载函数
+  async function downloadFile() {
+    try {
+      const response = await apiClient.get(`/api/Export/DownloadTable?tablename=${tableName}`, {
+        responseType: 'blob',
+        signal
+      });
+      const contentType = response.headers['content-type'];
+
+      if (contentType && contentType.startsWith('application/')) {
+        const blob = new Blob([response.data], { type: contentType });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `${tableName}.xlsx`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        ElMessage.success(`${tableName}.xlsx 下载成功`);
+      } else {
+        console.error('Unexpected content type for file download:', contentType);
+      }
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log('文件下载请求被中断');
+      } else {
+        console.error('Error downloading file:', error);
+      }
+      throw error;
+    }
+  }
+
+  window.onbeforeunload = () => {
+    abortController.abort(); // 中断所有请求
+    TableConfig.loading = false;
+    Notification("页面刷新或离开会暂停导出任务");
+  };
+
+  // 主逻辑
+  try {
+    while (await checkStatus()) {
+      Notification("正在获取数据...");
+      await new Promise(resolve => setTimeout(resolve, 3000)); // 等待 3 秒
+    }
+    await downloadFile();
   } catch (error) {
-    TableConfig.loading = false
-    console.error('Error downloading file:', error);
+    errorNotification(error);
+  } finally {
+    TableConfig.loading = false; // 停止加载状态
   }
 }
 
 
-const errorNotification = (message)=>{
+const errorNotification = (message) => {
   ElNotification.error({
     title: '警告',
     message: message,
