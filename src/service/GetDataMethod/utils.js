@@ -1,7 +1,7 @@
 import apiClient from "../request";
 import { ElMessageBox, ElMessage, ElNotification } from "element-plus";
 import { reactive, ref } from "vue";
-import { motorData, rotorData, rrData, gearData, taData, allTableData, shipmentData } from "@/service/Import/tableData";
+// import { motorData, rotorData, rrData, gearData, taData, allTableData, shipmentData } from "@/service/Import/tableData";
 
 
 //获取数据
@@ -128,29 +128,82 @@ export const mockColumns = () => {
   });
 }
 
-let tableNameList = {
-  "Motor履历": motorData.AllMotorTable,
-  "Rotor履历": rotorData.AllRotorTable,
-  "Gear履历": gearData.AllGearTable,
-  "Rr履历": rrData.AllRRTable,
-  "Ta履历": taData.AllTatable,
-  "全部履历": allTableData.table,
-  "出荷履历": shipmentData
-}
+// let tableNameList = {
+//   "Motor履历": motorData.AllMotorTable,
+//   "Rotor履历": rotorData.AllRotorTable,
+//   "Gear履历": gearData.AllGearTable,
+//   "Rr履历": rrData.AllRRTable,
+//   "Ta履历": taData.AllTatable,
+//   "全部履历": allTableData.table,
+//   "出荷履历": shipmentData
+// }
 
 //导入表配置
-export const importTableData = (tableName) => {
+export const expotTest = async () => {
+  try {
+    const response = await apiClient.post(
+      `/api/Export/testexpot`,
+      null,  // 如果没有请求体，可以传入 null
+      { responseType: 'blob' }
+    );
 
-  let tableImportData = tableNameList[tableName] || null;
+    const contentType = response.headers['content-type']; // 这里会返回内容类型
 
-  apiClient.post("api/Home/requestData", tableImportData)
-    .then(() => {
-
-      console.log("更新成功");
-    }).catch((error) => {
-      console.log(error);
-    })
+    if (contentType && contentType.startsWith('application/')) {
+      const blob = new Blob([response.data], { type: contentType });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Test.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      ElMessage.success(`Test.xlsx 下载成功`);
+    } else {
+      console.error('Unexpected content type for file download:', contentType);
+    }
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log('文件下载请求被中断');
+    } else {
+      console.error('Error downloading file:', error);
+    }
+    throw error;
+  }
 }
+
+
+export const expotArrayTest = async () => {
+  try {
+    const response = await apiClient.post(
+      `/api/Export/testexpot`,
+      null,
+      { responseType: 'arraybuffer' }  // 获取 ArrayBuffer
+    );
+
+    console.log(response);
+    
+    const contentType = response.headers['content-type'];
+
+    if (contentType && contentType.startsWith('application/')) {
+      const arrayBuffer = response.data;  // 直接使用 ArrayBuffer
+      const blob = new Blob([arrayBuffer], { type: contentType });
+      console.log("下载");
+      
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Test.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      ElMessage.success(`Test.xlsx 下载成功`);
+    } else {
+      console.error('Unexpected content type for file download:', contentType);
+    }
+  } catch (error) {
+    console.error('Error downloading file:', error);
+  }
+}
+
 
 //获取数据分页
 export const getPageData = (e, tableName) => {
@@ -301,7 +354,9 @@ async function downloadExportedData(tableName) {
   // 状态检查函数
   async function checkStatus() {
     try {
-      const response = await apiClient.get(`/api/Export/DownloadTable?tablename=${tableName}`, { signal });
+      const response = await apiClient.get(`/api/Export/GetPath?tablename=${tableName}`, { signal });
+      console.log(response.data);
+      
       return response.data === 'InProgress';
     } catch (error) {
       if (error.name === 'AbortError') {
@@ -316,10 +371,11 @@ async function downloadExportedData(tableName) {
   // 文件下载函数
   async function downloadFile() {
     try {
-      const response = await apiClient.get(`/api/Export/DownloadTable?tablename=${tableName}`, {
-        responseType: 'blob',
-        signal
-      });
+      const response = await apiClient.post(
+        `/api/Export/DownloadTable?tablename=${tableName}`,
+        { signal },
+        { responseType: 'blob' }
+      );
       const contentType = response.headers['content-type'];
 
       if (contentType && contentType.startsWith('application/')) {
@@ -358,6 +414,8 @@ async function downloadExportedData(tableName) {
     }
     await downloadFile();
   } catch (error) {
+    console.log("e");
+    
     errorNotification(error);
   } finally {
     TableConfig.loading = false; // 停止加载状态
@@ -380,27 +438,6 @@ const Notification = (message) => {
     showClose: false,
   });
 }
-
-// //导出下载数据
-// function createDownloadLink(blob, fileName) {
-//   // 创建下载链接
-//   console.log(blob,fileName);
-
-//   const url = window.URL.createObjectURL(blob);
-//   const a = document.createElement('a');
-//   a.href = url;
-//   a.download = fileName || 'exported_data'; // 设置下载文件名
-//   a.innerText = 'Click here to download your file'; // 设置链接文本
-//   a.style.display = 'block'; // 使链接显示为块元素
-
-//   // 将链接添加到页面上
-//   document.body.appendChild(a);
-
-//   // 清理 URL 对象以释放内存
-//   return () => window.URL.revokeObjectURL(url);
-// }
-
-
 
 //#endregion
 

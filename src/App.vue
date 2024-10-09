@@ -14,7 +14,7 @@ return function () {
   let context = this;
 
   let args = arguments;
-
+  
   clearTimeout(timer);
 
   timer = setTimeout(function () {
