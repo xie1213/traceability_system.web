@@ -94,7 +94,7 @@
                 type="date"
                 placeholder="Pick a day"
                 format="YYYY/MM/DD"
-                value-format="YY-MM-DD">
+                value-format="YYYY-MM-DD">
                 <template #default="cell">
                     <div class="cell" :class="{ current: cell.isCurrent }">
                         <span class="text">{{ cell.text }}</span>

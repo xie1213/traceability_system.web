@@ -15,8 +15,8 @@ let reg = /^localhost+/;
 if (reg.test(host)) {
     // 若本地项目调试使用
     console.log("本地");
-    // axios.defaults.baseURL = 'http://172.31.13.200:5000'
-    axios.defaults.baseURL = "http://192.168.1.29:5000";
+    axios.defaults.baseURL = "http://172.31.13.200:5000";
+    // axios.defaults.baseURL = "http://192.168.1.29:5000";
 }
 const app = createApp(App);
 app.use(ElementPlus, { locale: zhCn });
