@@ -131,7 +131,7 @@
 
     const shipValue = ref(""); //出荷数据
 
-    const serialNumberPattern = ref(/^[A-Za-z0-9#.\s]+$/); //正则验证
+    const serialNumberPattern = ref(/^[A-Za-z0-9#.-\s]+$/); //正则验证
 
     const showDate = ref(false);
 
