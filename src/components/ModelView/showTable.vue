@@ -103,7 +103,7 @@
 
     //序列号值及序列号验证
     const serialNumber = ref("");
-    const serialNumberPattern = ref(/^[A-Za-z0-9#\s]+$/);
+    const serialNumberPattern = ref(/^[A-Za-z0-9#.-\s]+$/);
 
     // 检查输入是否合法的函数
     const validateInput = (value, targetRef) => {
@@ -236,6 +236,8 @@
                     exportTableName += `-${lowerLimit}`;
                 } else if (lowerLimit == undefined) {
                     exportTableName += `-${topLimit}`;
+                } else if (lowerLimit == topLimit) {
+                    exportTableName += `-${lowerLimit}`;
                 } else {
                     exportTableName += `-${topLimit}-${lowerLimit}`;
                 }

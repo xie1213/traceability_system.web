@@ -80,7 +80,8 @@
             <vxe-colgroup title="差动齿轮测量">
                 <vxe-column field="DgmmeasDate" width="165px" title="计测日时" sortable></vxe-column>
                 <vxe-column field="Dgmdagjudge" width="85px" title="作齿轮判定" sortable></vxe-column>
-                <vxe-column field="DgmlhRh" title="変位量" sortable></vxe-column>
+                <vxe-column field="DgmlhRh" title="左変位量" sortable></vxe-column>
+                <vxe-column field="Dgmrh" title="右変位量" sortable></vxe-column>
                 <vxe-column field="DgmmaxTorque" width="70px" title="上限扭矩" sortable></vxe-column>
                 <vxe-column field="DgmminTorque" width="70px" title="下限扭矩" sortable></vxe-column>
             </vxe-colgroup>
