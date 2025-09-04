@@ -111,47 +111,47 @@
             </vxe-colgroup>
 
             <vxe-colgroup title="齿轮压入2">
-                <vxe-column field=Gear2Date width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=Gear2Stroke width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Gear2Load width="75px" title=変曲点负重 sortable></vxe-column>
-                <vxe-column field=Gear2FinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=Gear2FinalLoad width="75px" title=最終荷负重 sortable></vxe-column>
-                <vxe-column field=Gear2StrokeSec width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Gear2LoadSec width="75px" title=変曲点负重 sortable></vxe-column>
-                <vxe-column field=Gear2FinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=Gear2FinalLoadSec width="75px" title=最終荷负重 sortable></vxe-column>
-                <vxe-column field=Gear2MainStroke title=主行程 sortable></vxe-column>
-                <vxe-column field=Gear2Abvalue width="70px" title=A/B sortable></vxe-column>
+                <vxe-column field="Gear2Date" width="165px" title="计测日时" sortable></vxe-column>
+                <vxe-column field="Gear2Stroke" width="70px" title="拐点行程" sortable></vxe-column>
+                <vxe-column field=Gear2Load width="75px" title="変曲点负重" sortable></vxe-column>
+                <vxe-column field="Gear2FinalStroke" width="70px" title="最终行程" sortable></vxe-column>
+                <vxe-column field="Gear2FinalLoad" width="75px" title="最終荷负重" sortable></vxe-column>
+                <vxe-column field="Gear2StrokeSec" width="70px" title='拐点行程' sortable></vxe-column>
+                <vxe-column field="Gear2LoadSec" width="75px" title='変曲点负重' sortable></vxe-column>
+                <vxe-column field="Gear2FinalStrokeSec" width="70px" title='最终行程' sortable></vxe-column>
+                <vxe-column field='Gear2FinalLoadSec' width="75px" title='最終荷负重' sortable></vxe-column>
+                <vxe-column field="Gear2MainStroke" title='主行程' sortable></vxe-column>
+                <vxe-column field='Gear2Abvalue' width="70px" title=A/B sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="差速器销l螺母紧固">
-                <vxe-column field=DpntDate width="165px" title="计测日时" sortable></vxe-column>
-                <vxe-column field=DpntTorqueAxis1 width="80px" title="紧固扭矩1軸" sortable></vxe-column>
-                <vxe-column field=DpntAngleAxis1 width="80px" title="紧固角度1軸" sortable></vxe-column>
-                <vxe-column field=DpntJudgment width="70px" title="判定代码" sortable></vxe-column>
-                <vxe-column field=DpntSeating width="80px" title="着座扭矩1軸" sortable></vxe-column>
-                <vxe-column field=DpntDrop width="80px" title="下降角度1軸" sortable></vxe-column>
-                <vxe-column field=DpntSlack width="100px" title="松弛监视器扭矩1軸" sortable></vxe-column>
+                <vxe-column field='DpntDate' width="165px" title="计测日时" sortable></vxe-column>
+                <vxe-column field='DpntTorqueAxis1' width="80px" title="紧固扭矩1軸" sortable></vxe-column>
+                <vxe-column field='DpntAngleAxis1' width="80px" title="紧固角度1軸" sortable></vxe-column>
+                <vxe-column field='DpntJudgment' width="70px" title="判定代码" sortable></vxe-column>
+                <vxe-column field='DpntSeating' width="80px" title="着座扭矩1軸" sortable></vxe-column>
+                <vxe-column field='DpntDrop' width="80px" title="下降角度1軸" sortable></vxe-column>
+                <vxe-column field='DpntSlack' width="100px" title="松弛监视器扭矩1軸" sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="差速器销螺母铆接">
-                <vxe-column field=DpnfMeasDate width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=DpnfFinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DpnfFinalLoad width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DpnfMainStroke title=主行程 sortable></vxe-column>
+                <vxe-column field='DpnfMeasDate' width="165px" title='计测日时' sortable></vxe-column>
+                <vxe-column field='DpnfFinalStroke' width="70px" title='最终行程' sortable></vxe-column>
+                <vxe-column field='DpnfFinalLoad' width="70px" title='最终负重' sortable></vxe-column>
+                <vxe-column field='DpnfMainStroke' title='主行程' sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="DF BRG＋环圧入">
-                <vxe-column field=DfbrgDate width="165px" title=计测日时 sortable></vxe-column>
-                <vxe-column field=Dfbrgstroke width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=Dfbrgload width="70px" title=拐点负重 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalStroke width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalLoad width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DfbrgstrokeSec width="70px" title=拐点行程 sortable></vxe-column>
-                <vxe-column field=DfbrgloadSec width="70px" title=拐点负重 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalStrokeSec width="70px" title=最终行程 sortable></vxe-column>
-                <vxe-column field=DfbrgfinalLoadSec width="70px" title=最终负重 sortable></vxe-column>
-                <vxe-column field=DfbrgmainStroke title=主行程 sortable></vxe-column>
+                <vxe-column field='DfbrgDate' width="165px" title='计测日时' sortable></vxe-column>
+                <vxe-column field='Dfbrgstroke' width="70px" title='拐点行程' sortable></vxe-column>
+                <vxe-column field='Dfbrgload' width="70px" title='拐点负重' sortable></vxe-column>
+                <vxe-column field='DfbrgfinalStroke' width="70px" title='最终行程' sortable></vxe-column>
+                <vxe-column field='DfbrgfinalLoad' width="70px" title='最终负重' sortable></vxe-column>
+                <vxe-column field='DfbrgstrokeSec' width="70px" title='拐点行程' sortable></vxe-column>
+                <vxe-column field='DfbrgloadSec' width="70px" title='拐点负重' sortable></vxe-column>
+                <vxe-column field='DfbrgfinalStrokeSec' width="70px" title='最终行程' sortable></vxe-column>
+                <vxe-column field='DfbrgfinalLoadSec' width="70px" title='最终负重' sortable></vxe-column>
+                <vxe-column field='DfbrgmainStroke' title='主行程' sortable></vxe-column>
             </vxe-colgroup>
 
             <vxe-colgroup title="DF紧固1">

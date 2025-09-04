@@ -1,7 +1,7 @@
 <template>
   <vxe-table :data="tableData" v-bind="TableConfig">
     <vxe-colgroup title="上传时间和序列号" fixed="left">
-      <vxe-column field="CollectionDate" width="150px" title="上传时间" fixed="left" sortable :formatter="formatDate" />
+      <vxe-column field="CollectionDate" width="150px" title="采集时间" fixed="left" sortable :formatter="formatDate" />
       <vxe-column field="ShipmentSerial" width="150px" title="出荷序列" fixed="left" sortable />
     </vxe-colgroup>
     <vxe-colgroup title="基本信息">
@@ -47,7 +47,7 @@
     <PokayokeDate :colName="'防错防误19计测日時'" :value="'PokayokeDate19'" />
 
     <vxe-colgroup title="シム選択">
-      <vxe-column field="ShimMeas" width="165px" title="计测日时" sortable></vxe-column>
+      <vxe-column field="ShimMeasDate" width="165px" title="计测日时" sortable></vxe-column>
       <vxe-column field="ShimHsgt7" width="110px" title="Hsg侧差速器轴深度t7" sortable></vxe-column>
       <vxe-column field="ShimHsgt5" width="110px" title="Hsg侧转向销轴深度t5" sortable></vxe-column>
       <vxe-column field="ShimHsgt3" width="120px" title="Hsg侧马达计数器轴深度t3" sortable></vxe-column>
@@ -94,7 +94,7 @@
     </vxe-colgroup>
 
     <vxe-colgroup title="Hsg圧入2">
-      <vxe-column field="Hsg2MeasDate" width="165px" title="计测日时" sortable></vxe-column>
+      <vxe-column field="Hsg2Date" width="165px" title="计测日时" sortable></vxe-column>
       <vxe-column field="Hsg2Stroke" width="70px" title="拐点行程" sortable></vxe-column>
       <vxe-column field="Hsg2PtLoad" width="80px" title="変曲点负重" sortable></vxe-column>
       <vxe-column field="Hsg2FinalStroke" width="70px" title="最终行程" sortable></vxe-column>
@@ -117,57 +117,57 @@
     <PokayokeDate :colName="'HSG合体'" :value="'HsgFitDate'" />
 
     <vxe-colgroup title="HSG合体紧固①">
-      <vxe-column field="Hsg1Date" width="165px" title="计测日時" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis1" width="80px" title="紧固角度1軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis1" width="85px" title="第1軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis2" width="80px" title="紧固角度2軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis2" width="85px" title="第2軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis3" width="80px" title="紧固角度3軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis3" width="85px" title="第3軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis4" width="80px" title="紧固角度4軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis4" width="85px" title="第4軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis5" width="80px" title="紧固角度5軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis5" width="85px" title="第5軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis6" width="80px" title="紧固角度6軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis6" width="85px" title="第6軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis7" width="80px" title="紧固角度7軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis7" width="85px" title="第7軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis8" width="80px" title="紧固角度8軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis8" width="85px" title="第8軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis9" width="80px" title="紧固角度9軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis9" width="85px" title="第9軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis10" width="80px" title="紧固角度10軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis10" width="85px" title="第10軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1AngleAxis11" width="80px" title="紧固角度11軸" sortable></vxe-column>
-      <vxe-column field="Hsg1CodeAxis11" width="85px" title="第11軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg1Ab" width="70px" title="A/B" sortable></vxe-column>
+      <vxe-column field="Hsg1Date" width="165px" title="HSG合体紧固①计测日時" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis1" width="80px" title="HSG合体紧固①紧固角度1軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis1" width="85px" title="HSG合体紧固①第1轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis2" width="80px" title="HSG合体紧固①紧固角度2軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis2" width="85px" title="HSG合体紧固①第2轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis3" width="80px" title="HSG合体紧固①紧固角度3軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis3" width="85px" title="HSG合体紧固①第3轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis4" width="80px" title="HSG合体紧固①紧固角度4軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis4" width="85px" title="HSG合体紧固①第4轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis5" width="80px" title="HSG合体紧固①紧固角度5軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis5" width="85px" title="HSG合体紧固①第5轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis6" width="80px" title="HSG合体紧固①紧固角度6軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis6" width="85px" title="HSG合体紧固①第6轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis7" width="80px" title="HSG合体紧固①紧固角度7軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis7" width="85px" title="HSG合体紧固①第7轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis8" width="80px" title="HSG合体紧固①紧固角度8軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis8" width="85px" title="HSG合体紧固①第8轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis9" width="80px" title="HSG合体紧固①紧固角度9軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis9" width="85px" title="HSG合体紧固①第9轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis10" width="80px" title="HSG合体紧固①紧固角度10軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis10" width="85px" title="HSG合体紧固①第10轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1AngleAxis11" width="80px" title="HSG合体紧固①紧固角度11軸" sortable></vxe-column>
+      <vxe-column field="Hsg1CodeAxis11" width="85px" title="HSG合体紧固①第11轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg1Ab" width="70px" title="HSG合体紧固①A/B" sortable></vxe-column>
     </vxe-colgroup>
 
     <vxe-colgroup title="HSG合体紧固①">
-      <vxe-column field="Hsg2Date" width="165px" title="计测日時" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis1" width="80px" title="紧固角度1軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis1" width="85px" title="第1軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis2" width="80px" title="紧固角度2軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis2" width="85px" title="第2軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis3" width="80px" title="紧固角度3軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis3" width="85px" title="第3軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis4" width="80px" title="紧固角度4軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis4" width="85px" title="第4軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis5" width="80px" title="紧固角度5軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis5" width="85px" title="第5軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis6" width="80px" title="紧固角度6軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis6" width="85px" title="第6軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis7" width="80px" title="紧固角度7軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis7" width="85px" title="第7軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis8" width="80px" title="紧固角度8軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis8" width="85px" title="第8軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis9" width="80px" title="紧固角度9軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis9" width="85px" title="第9軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis10" width="80px" title="紧固角度10軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis10" width="85px" title="第10軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2AngleAxis11" width="80px" title="紧固角度11軸" sortable></vxe-column>
-      <vxe-column field="Hsg2CodeAxis11" width="85px" title="第11軸判定代码" sortable></vxe-column>
-      <vxe-column field="Hsg2Ab" width="70px" title="A/B" sortable></vxe-column>
+      <vxe-column field="Hsg2Date" width="165px" title="计测日时" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis1" width="80px" title="HSG合体紧固②紧固角度1軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis1" width="85px" title="HSG合体紧固②第1轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis2" width="80px" title="HSG合体紧固②紧固角度2軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis2" width="85px" title="HSG合体紧固②第2轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis3" width="80px" title="HSG合体紧固②紧固角度3軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis3" width="85px" title="HSG合体紧固②第3轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis4" width="80px" title="HSG合体紧固②紧固角度4軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis4" width="85px" title="HSG合体紧固②第4轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis5" width="80px" title="HSG合体紧固②紧固角度5軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis5" width="85px" title="HSG合体紧固②第5轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis6" width="80px" title="HSG合体紧固②紧固角度6軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis6" width="85px" title="HSG合体紧固②第6轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis7" width="80px" title="HSG合体紧固②紧固角度7軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis7" width="85px" title="HSG合体紧固②第7轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis8" width="80px" title="HSG合体紧固②紧固角度8軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis8" width="85px" title="HSG合体紧固②第8轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis9" width="80px" title="HSG合体紧固②紧固角度9軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis9" width="85px" title="HSG合体紧固②第9轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis10" width="80px" title="HSG合体紧固②紧固角度10軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis10" width="85px" title="HSG合体紧固②第10轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2AngleAxis11" width="80px" title="HSG合体紧固②紧固角度11軸" sortable></vxe-column>
+      <vxe-column field="Hsg2CodeAxis11" width="85px" title="HSG合体紧固②第11轴 判定代码" sortable></vxe-column>
+      <vxe-column field="Hsg2Ab" width="70px" title="HSG合体紧固②A/B" sortable></vxe-column>
     </vxe-colgroup>
 
     <PokayokeDate :colName="'防错防误27计测日時'" :value="'PokayokeDate27'" />
@@ -227,34 +227,34 @@
       <vxe-column field="LeakThermistorDec" width="105px" title="热敏电阻絶縁电阻判定" sortable></vxe-column>
       <vxe-column field="LeakResolver" width="110px" title="旋转变压器絶縁电阻 Ω" sortable></vxe-column>
       <vxe-column field="LeakResolverDec" width="115px" title="旋转变压器絶縁电阻判定" sortable></vxe-column>
-      <vxe-column field="LeakOilTempMohmDec" width="110px" title="油温传感器絶縁电阻 Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg1uv" width="115px" title="油温传感器絶縁电阻判定" sortable></vxe-column>
-      <vxe-column field="LeakMg1uvdec" width="115px" title="线间电阻MG1U-V Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg1uw" width="115px" title="线间电阻MG1U-V判定" sortable></vxe-column>
-      <vxe-column field="LeakMg1uwdec" width="115px" title="线间电阻MG1V-W Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg1wu" width="115px" title="线间电阻MG1V-W判定" sortable></vxe-column>
-      <vxe-column field="LeakMg1wudec" width="115px" title="线间电阻MG1W-U Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg2uv" width="115px" title="线间电阻MG1W-U判定" sortable></vxe-column>
-      <vxe-column field="LeakMg2uvdec" width="115px" title="线间电阻MG2U-V Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg2uw" width="115px" title="线间电阻MG2U-V判定" sortable></vxe-column>
-      <vxe-column field="LeakMg2uwdec" width="115px" title="线间电阻MG2V-W Ω" sortable></vxe-column>
-      <vxe-column field="LeakMg2wu" width="115px" title="线间电阻MG2V-W判定" sortable></vxe-column>
-      <vxe-column field="LeakMg2wudec" width="115px" title="线间电阻MG2W-U Ω" sortable></vxe-column>
-      <vxe-column field="LeakThermistorMg1" width="115px" title="线间电阻MG2W-U判定" sortable></vxe-column>
-      <vxe-column field="LeakThermistorMg1dec" width="115px" title="热敏电阻线间电阻MG1 Ω" sortable></vxe-column>
-      <vxe-column field="LeakThermistorMg2" width="120px" title="热敏电阻线间电阻MG1判定" sortable></vxe-column>
-      <vxe-column field="LeakThermistorMg2dec" width="115px" title="热敏电阻线间电阻MG2 Ω" sortable></vxe-column>
+      <vxe-column field="LeakOilTempMohmDec" width="110px" title="油温传感器絶縁电阻判定" sortable></vxe-column>
+      <vxe-column field="LeakMg1uv" width="115px" title="线间电阻MG1U-V Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg1uvdec" width="115px" title="线间电阻MG1U-V判定" sortable></vxe-column>
+      <vxe-column field="LeakMg1uw" width="115px" title="线间电阻MG1V-W Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg1uwdec" width="115px" title="线间电阻MG1V-W判定" sortable></vxe-column>
+      <vxe-column field="LeakMg1wu" width="115px" title="线间电阻MG1W-U Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg1wudec" width="115px" title="线间电阻MG1W-U判定" sortable></vxe-column>
+      <vxe-column field="LeakMg2uv" width="115px" title="线间电阻MG2U-V Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg2uvdec" width="115px" title="线间电阻MG2U-V判定" sortable></vxe-column>
+      <vxe-column field="LeakMg2uw" width="115px" title="线间电阻MG2V-W Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg2uwdec" width="115px" title="线间电阻MG2V-W判定" sortable></vxe-column>
+      <vxe-column field="LeakMg2wu" width="115px" title="线间电阻MG2W-U Ω" sortable></vxe-column>
+      <vxe-column field="LeakMg2wudec" width="115px" title="线间电阻MG2W-U判定" sortable></vxe-column>
+      <vxe-column field="LeakThermistorMg1" width="115px" title="热敏电阻线间电阻MG1 Ω" sortable></vxe-column>
+      <vxe-column field="LeakThermistorMg1dec" width="115px" title="热敏电阻线间电阻MG1判定" sortable></vxe-column>
+      <vxe-column field="LeakThermistorMg2" width="120px" title="热敏电阻线间电阻MG2 Ω" sortable></vxe-column>
+      <vxe-column field="LeakThermistorMg2dec" width="115px" title="热敏电阻线间电阻MG2判定" sortable></vxe-column>
       <vxe-column field="LeakOilLine" width="120px" title="油温传感器线间电阻" sortable></vxe-column>
-      <vxe-column field="LeakOilLineDec" width="115px" title="油温传感器线间电阻判定" sortable></vxe-column>
+      <vxe-column field="LeakOilLineDec" width="115px" title="油温传感器絶縁电阻判定" sortable></vxe-column>
       <vxe-column field="LeakMg1rotateDec" width="155px" title="MG1旋转变压器连接器内相关短路判定" sortable></vxe-column>
       <vxe-column field="LeakMg2rotateDec" width="155px" title="MG2旋转变压器连接器内相关短路判定" sortable></vxe-column>
       <vxe-column field="LeakMg1wmg2v" width="125px" title="MG1W相×MG2V相短路判定" sortable></vxe-column>
       <vxe-column field="LeakOil" width="100px" title="油温传感器絶縁电阻" sortable></vxe-column>
-      <vxe-column field="LeakMg196" width="195px" title="旋转变压器线间电阻MG1 GSN-GSNG(13-5間)（Ω）" sortable></vxe-column>
+      <vxe-column field="LeakMg196" width="195px" title="旋转变压器线间电阻MG1 GRFG-GRF(9-6間)（Ω）" sortable></vxe-column>
       <vxe-column field="LeakMg196dec" width="195px" title="旋转变压器线间电阻MG1 GRFG-GRF(9-6間)判定" sortable></vxe-column>
       <vxe-column field="LeakMg11410" width="200px" title="旋转变压器线间电阻MG1 GCSG-GCS(14-10間)（Ω）" sortable></vxe-column>
       <vxe-column field="LeakMg11410dec" width="195px" title="旋转变压器线间电阻MG1 GCSG-GCS(14-10間)判定" sortable></vxe-column>
-      <vxe-column field="LeakMg1135" width="200px" title="旋转变压器线间电阻MG1 GRFG-GRF(9-6間)（Ω）" sortable></vxe-column>
+      <vxe-column field="LeakMg1135" width="200px" title="旋转变压器线间电阻MG1 GSN-GSNG(13-5間)（Ω）" sortable></vxe-column>
       <vxe-column field="LeakMg1135dec" width="195px" title="旋转变压器线间电阻MG1 GSN-GSNG(13-5間)判定" sortable></vxe-column>
       <vxe-column field="LeakMg281" width="195px" title="旋转变压器线间电阻MG2 MSN-MSNG(3-2間)（Ω）" sortable></vxe-column>
       <vxe-column field="LeakMg281dec" width="195px" title="旋转变压器线间电阻MG2 MRFG-MRF(8-1間)判定" sortable></vxe-column>
@@ -266,7 +266,7 @@
     </vxe-colgroup>
 
     <vxe-colgroup title="ISS">
-      <vxe-column field="IssDate" width="165px" title="计测日时" sortable></vxe-column>
+      <vxe-column field="IssDate" width="165px" title="Iss计测日时" sortable></vxe-column>
       <vxe-column field="IssP" width="70px" title="P锁定判定" sortable></vxe-column>
       <vxe-column field="IssnotP" width="70px" title="notP判定" sortable></vxe-column>
       <vxe-column field="IssFunction" width="70px" title="官能判定" sortable></vxe-column>
@@ -403,7 +403,7 @@
     <PokayokeDate :colName="'防错防误26计测日時'" :value="'PokayokeDate26'" />
     <PokayokeDate :colName="'防错防误28计测日時'" :value="'PokayokeDate28'" />
     <PokayokeDate :colName="'防错防误29计测日時'" :value="'PokayokeDate29'" />
-    <PokayokeDate :colName="'刻印计测日時'" :value="'EngravingDate'" />
+    <PokayokeDate :colName="'刻印计测日時'" :value="'EngravingData'" />
     <PokayokeDate :colName="'防错防误30计测日時'" :value="'PokayokeDate30'" />
     <PokayokeDate :colName="'防错防误31计测日時'" :value="'PokayokeDate31'" />
     <PokayokeDate :colName="'外観検査计测日時'" :value="'InspectionDate'" />
