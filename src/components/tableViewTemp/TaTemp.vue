@@ -60,8 +60,8 @@
       <vxe-column field="ShimGrade" width="110px" title="垫片等级（转向销轴）" sortable></vxe-column>
       <vxe-column field="ShimGradeCo" width="110px" title="垫片等级（马达Co轴)" sortable></vxe-column>
       <vxe-column field="ShimGradeIn" width="110px" title="垫片等级（输入轴）" sortable></vxe-column>
-      <vxe-column field="ShimValueDiff" width="120px" title="垫片实测值（差速器轴）" sortable></vxe-column>
-      <vxe-column field="ShimValuePin" width="120px" title="垫片实测值（多拉销轴）" sortable></vxe-column>
+      <vxe-column field="ShimValueDiff" width="120px" title="垫片实测值（多拉销轴）" sortable></vxe-column>
+      <vxe-column field="ShimValuePin" width="120px" title="垫片实测值（差速器轴）" sortable></vxe-column>
       <vxe-column field="ShimValueCo" width="120px" title="垫片实测值（马达Co轴）" sortable></vxe-column>
       <vxe-column field="ShimValueIn" width="120px" title="垫片实测值（输入轴）" sortable></vxe-column>
       <vxe-column field="ShimGear" width="90px" title="齿轮直径判定" sortable></vxe-column>
